@@ -1,0 +1,123 @@
+﻿@using MovieLibrary.Common
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@using MovieLibrary.Data.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="~/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="https://fontawesome.com/releases/v5.8.2/css/all.css" />
+    @*<link rel="stylesheet" href="~/css/mycss.css" asp-append-version="true">*@
+
+</head>
+<body>
+
+    <div class="container-fluid">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="site-logo">
+                    <img src="/logo/8dce962d-ab4b-49e9-b5ba-c8d9276ea42c_200x200.png" alt="logo" style="width:150px;height:120px;">
+                    
+                </div>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <partial name="_LoginPartial" />
+            </nav>
+            @RenderSection("Path", false)
+            <!--<div class="jumbotron-fluid">
+                <div class="row ">
+                    <div class="col-sm-2">
+                        <img src="~/pnghut_photographic-film-photography-roll-movie-camera-viewfinder-clipart.png" alt="logo" width="150" height="150">
+                    </div>
+                    <div class="col-sm-10">
+                        <h1>
+                            <i>
+                                <b>
+                                    <br />
+                                    Welcome to Movie's Library
+                                </b>
+                            </i>
+                        </h1>
+
+                        <p class="h5"><i>Find your movies. Engoy and fun. </i></p>-->
+                        @*<video controls="controls"><source src="~/video (2).mp4">
+                            <type="video/mp4"/>Your browser does not support the HTML 5 video.
+                            </video>*@
+                    <!--</div>
+                </div>
+            </div>-->
+        </header>
+
+        <div class="row">
+            <div class="col-sm-10 border border-white">
+                <div class="container">
+                    <partial name="_CookieConsentPartial" />
+                    <main role="main" class="pb-3">
+                        @this.RenderBody()
+                    </main>
+                </div>
+                @*@if (this.SignInManager.IsSignedIn(this.User))
+                    {
+                        <ul class="pagination justify-content-center" style="margin:20px 0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item "><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    }*@
+
+            </div>
+            @if (this.SignInManager.IsSignedIn(this.User))
+            {
+                <div class="col-sm-2 text-center border border-white" style="background-color:black">
+                    <br />
+                    <h4><b>Top 5 newest movies</b></h4>
+                    <br />
+                    <vc:newest-movies-view-components>
+                    </vc:newest-movies-view-components>
+
+                    <hr class="bg-white" /><br />
+                    <h4><b>Top 5 most rated movies</b></h4>
+                    <br />
+                    <vc:top-rated-movies-view-components>
+                    </vc:top-rated-movies-view-components>
+                </div>
+            }
+
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        @await this.RenderSectionAsync("Scripts", required: false)
+    </div>
+
+</body>
+</html>

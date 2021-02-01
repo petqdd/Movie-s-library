@@ -1,0 +1,50 @@
+﻿@model MovieLibrary.Web.ViewModels.Artists.InputCreateArtistViewModel
+@{ this.ViewData["Title"] = "Edit artist";
+    //var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
+
+}
+<div class="container text-center">
+    <fieldset class="border border-white">
+        <legend style="width:auto;padding:10px;">
+            Edit artist
+        </legend>
+        <form class="form-horizontal" method="post">
+            <div class="mb-3 row">
+                <label asp-for="Name" class="col-form-label col-sm-2">Name:</label>
+                <div class="col-sm-8">
+                    <input asp-for="Name" type="text" class="form-control" id="name" placeholder="@(Model.Name)">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label asp-for="BiographyUrl" class="col-form-label col-sm-2">Biography:</label>
+                <div class="col-sm-8">
+                    <input asp-for="BiographyUrl" type="text" class="form-control" id="biographyUrl" placeholder="@(Model.BiographyUrl)">
+                    <span asp-validation-for="BiographyUrl" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label asp-for="PhotoUrl" class="col-form-label col-sm-2">Photo:</label>
+                <div class="col-sm-8">
+                    <input asp-for="PhotoUrl" type="text" class="form-control" id="photoUrl" placeholder="@(Model.PhotoUrl)">
+                    <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
+                    <a class="btn btn-primary rounded-pill" href="/Artists/All" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Artists/All">Artists</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Artist</li>
+        </ol>
+    </nav>
+}

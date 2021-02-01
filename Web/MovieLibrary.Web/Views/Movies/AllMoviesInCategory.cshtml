@@ -1,0 +1,78 @@
+﻿
+@using MovieLibrary.Common
+
+@model MovieLibrary.Web.ViewModels.Movies.AllMoviesViewModel
+
+<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+
+<div class="container text-center">
+    <br />
+    <h1>All Movies</h1>
+
+    @if (Model.Movies.Count() == 0)
+    {
+        <br />
+        <h4><i> There are no movies in this category. </i></h4>
+        <br />
+    }
+
+    @{
+        var sortedMovies = Model.Movies.OrderByDescending(x => x.ImdbRating).ToList();
+    }
+    <div class="row gx-5">
+        @foreach (var movie in sortedMovies)
+        {
+            <div class="card-group p-1">
+                <div class="card text-center border border-white" style="width:200px;background-color:black">
+                    <div class="img-fluid img-thumbnail">
+                        <img class="card-img-top" src=@movie.PosterPath alt="Film image" style="height:220px;width:190px">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="/Movies/Details?movieId=@movie.Id" class="stretched-link text-white" style="position:relative;">@movie.Name (@movie.Year)</a>
+                        </p>
+                    </div>
+                    <div class="card-footer" style="background-color: black">
+                        <div class="row justify-content-center">
+                            <p class="text-success">@movie.Category | @movie.Runtime min</p>
+                            <p class="text-warning">Imdb Rating: @movie.ImdbRating <i class="fas fa-star"></i> </p>
+                            <p class="text-warning">Users Rating: @movie.UserRating <i class="fas fa-star"></i></p>
+                        </div>
+                        <div class="row justify-content-between">
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                            {
+                                <a href="/Movies/Edit?movieId=@movie.Id" class="btn btn-primary rounded-pill">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="/Movies/Delete?movieId=@movie.Id" class="btn btn-primary rounded-pill">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@movie.TrailerUrl" class="btn btn-primary rounded-pill">
+                                    <i class="fas fa-video"></i>Trailer
+                                </a>
+                                @if (movie.CollectIsNotAvailable == false)
+                                {
+                                    <a href="/Movies/AddToCollection?movieId=@movie.Id" class="btn btn-primary rounded-pill">
+                                        <i class="fas fa-plus"></i> Collect
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Movies/All">Movies</a></li>
+            <li class="breadcrumb-item active" aria-current="page">All movies in @Model.Category category</li>
+        </ol>
+    </nav>
+}

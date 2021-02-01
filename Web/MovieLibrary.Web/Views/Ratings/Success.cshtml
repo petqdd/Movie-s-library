@@ -1,0 +1,14 @@
+﻿@model int
+<div class="alert alert-success" role="alert">
+    Thank you for your vote!
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Movies/All">Movies</a></li>
+            <li class="breadcrumb-item"><a href="/Movies/Details?movieId=@(Model)">Detail</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Rating</li>
+        </ol>
+    </nav>
+}

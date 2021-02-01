@@ -1,0 +1,70 @@
+﻿@using MovieLibrary.Common
+
+@model MovieLibrary.Web.ViewModels.Movies.AllMoviesViewModel
+
+<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+
+<div class="container text-center">
+    <h1>Results</h1>
+    <hr />
+    @if (Model.Movies.Count == 0)
+    {
+        <br />
+        <h4><i>There are no movies by these criteria!</i></h4>
+        <br />
+    }
+    <div class="row">
+        @{
+            var sortedMovies = Model.Movies.OrderByDescending(x => x.ImdbRating).ToList();
+        }
+
+        @foreach (var movie in sortedMovies)
+        {
+            <div class="card text-center" style="width:240px">
+                <div class="img-fluid img-thumbnail">
+                    <img class="card-img-top" src=@movie.PosterPath alt="Film image" style="height:280px;width:220px">
+                </div>
+                <div class="film-body">
+                    <p class="card-text">
+                        <a href="/Movies/Details?movieId=@movie.Id" class="stretched-link text-white" style="position:relative; height:50px;width: 180px">@movie.Name (@movie.Year)</a>
+                    </p>
+                    <p class="text-success">@movie.Category | @movie.Runtime min</p>
+                    <p class="text-warning">Imdb Rating: @movie.ImdbRating <i class="fas fa-star"></i> </p>
+                    @*<p class="text-warning">Users Rating: @movie.UserRating <i class="fas fa-star"></i></p>*@
+                </div>
+                <div class="container">
+                    <div class="row justify-content-between">
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <a href="/Movies/Edit?movieId=@movie.Id" class="btn btn-primary">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="/Movies/Delete?movieId=@movie.Id" class="btn btn-primary">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@movie.TrailerUrl" class="btn btn-primary">
+                                <i class="fas fa-video"></i> Trailer
+                            </a>
+                            <a href="/Movies/AddToCollection?movieId=@movie.Id" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> My Collection
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Movies/All">Movies</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Searching Results</li>
+        </ol>
+    </nav>
+}
+

@@ -1,0 +1,46 @@
+﻿@model MovieLibrary.Web.ViewModels.Categories.AllCategoriesViewModel
+@using MovieLibrary.Common
+<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+<div class="container text-center">
+    <fieldset class="border border-white">
+        <legend style="width:auto;padding:10px;">
+            All Categories
+        </legend>
+        <table class="table table-bordered" style="background-color:black;">
+            <thead>
+                <tr class="table-dark table-bordered ">
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Film's count</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @foreach (var model in Model.Categories)
+            {
+                <tbody class="table-bordered border-white">
+                    <tr>
+                        <th scope="row"><i class="fab fa-slack"></i></th>
+                        <td>@(model.Name)</td>
+                        <td>@(model.FilmCount)</td>
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <td>
+                                <a href="/Categories/Edit?category=@(model.Name)" class="btn btn-primary rounded-pill">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </fieldset>
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+        </ol>
+    </nav>
+}

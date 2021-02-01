@@ -1,0 +1,68 @@
+﻿@model MovieLibrary.Web.ViewModels.Comments.OutputAllComentsAndMoviesViewModel
+@using MovieLibrary.Common
+<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+<div class="container text-center">
+    <fieldset class="border border-white" style="background-color:black;">
+        <legend style="width:auto;padding:10px;">
+            All Comments
+        </legend>
+        @if (@Model.Comments.Count() == 0)
+        {
+            <br />
+            <h4><i>There are no comments yet. Be the first to comment! </i></h4>
+            <br />
+        }
+        @foreach (var model in Model.Comments)
+        {
+            <div class="row style="width:1000px; height:10px;">
+                <div class="col-sm-12 text-left">
+                    On  @(model.CreatedDate.ToString("dd-MM-yyyy")) - @(model.UserEmail)  posted comment for Movie : @(model.MovieName)
+                </div>
+            </div>
+            <div class="row style="width:1000px; height:80px;">
+                @{
+                    var userPhoto = string.Empty;
+                    if (model.UserPhoto == null)
+                    {
+                        userPhoto = "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
+                    }
+                    else
+                    {
+                        userPhoto = model.UserPhoto;
+                    }
+                }
+                <div class="col-sm-2 text-left">
+                    <img class="img rounded-0" style="width:100px; height:100px" src="@userPhoto" alt="User Photo">
+                </div>
+                <div class="col-sm-6 text-left">
+
+                    @(model.CommentContent)
+                </div>
+
+                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                    <div class="col-sm-2">
+                        <a href="/Comments/Delete?commentId=@(model.CommentId)&movieId=@(model.MovieId)" class="btn btn-primary rounded-pill">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                    </div>
+                }
+
+            </div>
+            <hr />
+        }
+    </fieldset>
+    <br />
+    @*<a href="/Comments/CreateComment?movieId=@Model.MovieId" class="btn btn-primary rounded-pill">
+            <i class="far fa-comment-dots"></i> Add Comment
+        </a>*@
+
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+           <li class="breadcrumb-item active" aria-current="page">All Comments for all movies</li>
+        </ol>
+    </nav>
+}

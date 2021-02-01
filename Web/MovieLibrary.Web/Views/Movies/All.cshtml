@@ -1,0 +1,93 @@
+﻿@using System.Security.Claims;
+@using MovieLibrary.Common
+
+@model MovieLibrary.Web.ViewModels.Movies.AllMoviesViewModel
+
+<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+@if (User.Identity.IsAuthenticated == false)
+{
+    <br />
+    <h2 class="text-white">
+        <i>
+            <b>
+                Your movie is here!
+                <br />
+                <br /> Register and view the last movies
+                <br />with comments, short resumes and ratings.
+            </b>
+        </i>
+    </h2>
+
+    @*<h3 class="text-white"><a href="/Identity/Account/Login">Login</a> if you have an account.</h3>
+        <h3 class="text-white"><a href="/Identity/Account/Register">Register</a> if you don't.</h3>*@
+}
+else
+{
+    <div class="container text-center px-4">
+        <br />
+        <h1>All Movies</h1>
+        <br />
+        <div class="row gx-5">
+            @{
+                var sortedMovies = Model.Movies.OrderByDescending(x => x.ImdbRating).ToList();
+            }
+
+            @foreach (var movie in sortedMovies)
+            {
+                <div class="card-group p-1">
+                    <div class="card text-center border border-white" style="width:200px;background-color:black">
+
+                        <div class="img-fluid img-thumbnail">
+                            <img class="card-img-top" src=@movie.PosterPath alt="Film image" style="height:220px;width:190px;">
+                        </div>
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <h6 class="card-text">
+                                    <a href="/Movies/Details?movieId=@movie.Id" class="stretched-link text-white" style="position:relative;">@movie.Name (@movie.Year)</a>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="background-color: black">
+                            <h6 class="text-success">@movie.Category | @movie.Runtime min</h6>
+                            <br />
+                            <h6 class="text-warning">Imdb Rating: @movie.ImdbRating <i class="fas fa-star"></i> </h6>
+                            <h6 class="text-warning">Users Rating: @movie.UserRating <i class="fas fa-star"></i></h6>
+                            <div class="row justify-content-between">
+                                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                                {
+                                    <a href="/Movies/Edit?movieId=@movie.Id" class="btn btn-primary rounded-pill">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="/Movies/Delete?movieId=@movie.Id" class="btn btn-primary rounded-pill">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@movie.TrailerUrl" class="btn btn-primary rounded-pill">
+                                        <i class="fas fa-video"></i>Trailer
+                                    </a>
+                                    @if (movie.CollectIsNotAvailable == false)
+                                    {
+                                        <a href="/Movies/AddToCollection?movieId=@movie.Id" class="btn btn-primary rounded-pill">
+                                            <i class="fas fa-plus"></i> Collect
+                                        </a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>'; " aria-label="breadcrumb" >
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Movies</li>
+        </ol>
+    </nav>
+}
+

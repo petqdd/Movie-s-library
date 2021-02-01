@@ -1,0 +1,23 @@
+﻿@using System.Security.Claims;
+@{
+    this.ViewData["Title"] = "Home Page";
+}
+
+
+
+@if (User.Identity.IsAuthenticated == false)
+{
+    <h2 class="text-info"><i>Your movie is here!
+        Register and view the last movies with comments and rating.
+        Enjoy and fun!</i></h2>
+    <hr class="bg-white hr-2" />
+    @*<h3 class="text-white"><a href="/Identity/Account/Login">Login</a> if you have an account.</h3>
+    <h3 class="text-white"><a href="/Identity/Account/Register">Register</a> if you don't.</h3>
+*@
+}
+else
+{
+    //TODO vie component for all Movies
+    <h1>Hello, @User.FindFirstValue(ClaimTypes.Email)</h1>
+}
+

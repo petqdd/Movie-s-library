@@ -1,0 +1,36 @@
+﻿@model MovieLibrary.Web.ViewModels.Users.InputUsersViewModel
+<div class="container text-center">
+    <fieldset class="border border-white">
+        <legend style="width:auto;padding:10px;">
+            Add profile picture
+        </legend>
+        <form class="form-horizontal" method="post" entype="multipart/form-data">
+            <div class="mb-3 row">
+                <label asp-for="PhotoPath" class="col-form-label col-sm-2">Photo:</label>
+                    <div class="col-sm-8">
+                        <input asp-for="PhotoPath" type="text" class="form-control" id="name" placeholder="Enter your photo here...">
+                        <span asp-validation-for="PhotoPath" class="text-danger"></span>
+                    </div>
+                @*<label asp-for="Image" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-8">
+                    <input asp-for="Image" class="form-control" id="name" placeholder="Enter your photo here...">
+                    <span asp-validation-for="Image" class="text-danger"></span> >
+                </div>*@
+            </div>
+            <div class="form-group">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
+                    <a class="btn btn-primary rounded-pill" href="/" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Profile Picture</li>
+        </ol>
+    </nav>
+}

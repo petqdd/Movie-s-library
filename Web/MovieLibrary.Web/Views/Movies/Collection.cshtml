@@ -1,0 +1,55 @@
+﻿@model MovieLibrary.Web.ViewModels.Movies.AllMoviesViewModel
+<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+<div class="container text-center">
+    </br>
+    <h1>My Collection</h1>
+
+    @if (Model.Movies.Count() == 0)
+    {
+        <br />
+        <h4><i> There are no movies in my collection. </i></h4>
+        <br />
+    }
+    <div class="row gx-5">
+        @foreach (var movie in Model.Movies)
+        {
+            <div class="card-group p-1">
+                <div class="card text-center border border-white" style="width:200px;background-color:black">
+                    <div class="img-fluid img-thumbnail">
+                        <img class="card-img-top" src=@movie.PosterPath alt="Film image" style="height:220px;width:190px">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="/Movies/Details?movieId=@movie.Id" class="stretched-link text-white" style="position:relative;">@movie.Name (@movie.Year)</a>
+                        </p>
+                    </div>
+                    <div class="card-footer" style="background-color: black">
+                        <div class="row justify-content-center">
+                            <p class="text-success">@movie.Category | @movie.Runtime min</p>
+                            <p class="text-warning">Imdb Rating: @movie.ImdbRating <i class="fas fa-star"></i> </p>
+                            <p class="text-warning">Users Rating: @movie.UserRating <i class="fas fa-star"></i></p>
+                        </div>
+                        <div class="row justify-content-between">
+                            <a href="@movie.TrailerUrl" class="btn btn-primary rounded-pill">
+                                <i class="fas fa-video"></i>Trailer
+                            </a>
+                            <a href="/Movies/RemoveFromCollection?movieId=@movie.Id" class="btn btn-primary rounded-pill">
+                                <i class="fas fa-trash-alt"></i>Remove
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Movies/All">Movies</a></li>
+            <li class="breadcrumb-item active" aria-current="page">My Collection</li>
+        </ol>
+    </nav>
+}
+

@@ -1,0 +1,27 @@
+﻿@model MovieLibrary.Web.Views.ViewModels.CategoriesOfMovieViewModel
+@{
+    var totalCount = 0;
+    @foreach (var category in Model.CategoriesMovies)
+    {
+        totalCount += category.FilmCount;
+    }
+}
+<ul>
+    <li>
+        <h6>
+            <a href="/Movies/AllMoviesInCategory?category=all" class="stretched-link text-white" style="position:relative;">
+                All (@totalCount)
+            </a>
+        </h6>
+    </li>
+    @foreach (var category in Model.CategoriesMovies)
+    {
+        <li>
+            <h6>
+                <a href="/Movies/AllMoviesInCategory?category=@category.Name" class="stretched-link text-white" style="position:relative;">
+                    @category.Name (@category.FilmCount)
+                </a>
+            </h6>
+        </li>
+    }
+</ul>

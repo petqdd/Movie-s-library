@@ -1,0 +1,51 @@
+﻿@model MovieLibrary.Web.ViewModels.Artists.AllArtistsViewModel
+@using MovieLibrary.Common
+<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+
+<div class="container text-center">
+    <br />
+    <h1>All Artists</h1>
+    <br />
+    <div class="row gx-5">
+        @{
+            var sortedArtists = Model.Artists.OrderBy(x => x.Name).ToList();
+        }
+
+        @foreach (var artist in sortedArtists)
+        {
+            <div class="card-group p-1">
+                <div class="card text-center" style="width:200px;background-color:black;">
+                    <div class="img-fluid img-thumbnail">
+                        <img class="card-img-top" src=@artist.PhotoUrl alt="Photo image" style="height:220px;width:190px;">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <h5>@artist.Name</h5>
+                        </p>
+                        <p class="card-text">
+                            <a href="@artist.BiographyUrl" class="stretched-link text-success" style="position:relative; height:50px;width: 180px">Biography</a>
+                        </p>
+                    </div>
+                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <div class="card-footer" style="background-color:black;">
+                            <div class="row justify-content-center">
+                                <a href="/Artists/Edit?artist=@(artist.Name)" class="btn btn-primary rounded-pill">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Path{
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Artists</li>
+        </ol>
+    </nav>
+}
