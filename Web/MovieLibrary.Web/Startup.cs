@@ -17,6 +17,7 @@
     using MovieLibrary.Data.Models;
     using MovieLibrary.Data.Repositories;
     using MovieLibrary.Data.Seeding;
+    using MovieLibrary.Services;
     using MovieLibrary.Services.Data;
     using MovieLibrary.Services.Mapping;
     using MovieLibrary.Services.Messaging;
@@ -68,10 +69,11 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMoviesService, MoviesService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
-            services.AddTransient<ICommentsService, CommentService>();
-            services.AddTransient<IUsersService, UsersService>();
-            services.AddTransient<IRatingsService, RatingsService>();
-            services.AddTransient<IArtistService, ArtistService>();
+            //services.AddTransient<ICommentsService, CommentService>();
+            //services.AddTransient<IUsersService, UsersService>();
+            //services.AddTransient<IRatingsService, RatingsService>();
+            //services.AddTransient<IArtistService, ArtistService>();
+            services.AddTransient<IImdbScraperService, ImdbScraperService>();
             //services.AddTransient<ISearchService, SearchService>();
         }
 
@@ -85,6 +87,8 @@
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
+                //dbContext.Database.EnsureDeleted();
+                //dbContext.Database.EnsureCreated();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 

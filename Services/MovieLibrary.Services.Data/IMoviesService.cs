@@ -9,28 +9,28 @@
     {
         Task CreateMovieAsync(InputCreateMovieViewModel model);
 
-        ICollection<OutputMovieViewModel> GetAllMovies();
+        //ICollection<OutputMovieViewModel> GetAllMovies();
 
-        double CalculateTotalUserRating(int movieId);
+        //double CalculateTotalUserRating(int movieId);
 
-        bool IsMovieExisting(string movieName);
+        //bool IsMovieExisting(string movieName);
 
-        bool IsMovieCollected(int movieId, string userId);
+        //bool IsMovieCollected(int movieId, string userId);
 
-        DetailsMovieViewModel Details(int movieId);
+        //DetailsMovieViewModel Details(int movieId);
 
-        Task AddFilmToUserCollectionAsync(string userId, int movieId);
+        //Task AddFilmToUserCollectionAsync(string userId, int movieId);
 
-        Task RemoveFromCollectionAsync(string userId, int movieId);
+        //Task RemoveFromCollectionAsync(string userId, int movieId);
 
-        Task DeleteMovieAsync(int movieId);
+        //Task DeleteMovieAsync(int movieId);
 
-        Task EditMovieAsync(int movieId, InputCreateMovieViewModel model);
+        //Task EditMovieAsync(int movieId, InputCreateMovieViewModel model);
 
-        InputCreateMovieViewModel GetMovieForEdit(int movieId);
+        //InputCreateMovieViewModel GetMovieForEdit(int movieId);
 
-        ICollection<OutputMovieViewModel> GetAllMoviesInMyCollection(string userId);
+        //ICollection<OutputMovieViewModel> GetAllMoviesInMyCollection(string userId);
 
-        ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category);
+        //ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category);
     }
 }

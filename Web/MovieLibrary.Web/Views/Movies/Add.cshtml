@@ -1,13 +1,15 @@
 ﻿@model MovieLibrary.Web.ViewModels.Movies.InputCreateMovieViewModel
 @{ this.ViewData["Title"] = "Add new movie";
-  var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 
 }
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">*@
 <div class="container text-center">
     <fieldset class="border border-white">
         <legend style="width:auto;padding:10px;">
             Add new movie
-           </legend>
+        </legend>
         <form class="form-horizontal" method="post">
             @*<div asp-validation-summary="All" class="text-danger"></div>*@
             <div class="mb-3 row">
@@ -32,12 +34,12 @@
                 </div>
             </div>
             <div class="mb-3 row">
-            <label asp-for="CategoryId" class="col-form-label col-sm-2"></label>
-            <div class="col-sm-8">
-                <select asp-for="CategoryId" class="form-control" asp-items="categoryItems"></select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                <label asp-for="Director" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-8">
+                    <input asp-for="Director" type="text" class="form-control" id="runtime" placeholder="Enter director's name">
+                    <span asp-validation-for="Director" class="text-danger"></span>
+                </div>
             </div>
-        </div>
             <div class="mb-3 row">
                 <label asp-for="Storyline" class="col-form-label col-sm-2"></label>
                 <div class="col-sm-8">
@@ -60,12 +62,35 @@
                 </div>
             </div>
             <div class="mb-3 row">
+                <label asp-for="SecondPosterPath" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-8">
+                    <input asp-for="SecondPosterPath" type="text" class="form-control" id="posterPath" placeholder="https://...">
+                    <span asp-validation-for="SecondPosterPath" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
                 <label asp-for="TrailerUrl" class="col-form-label col-sm-2"></label>
                 <div class="col-sm-8">
                     <input asp-for="TrailerUrl" type="text" class="form-control" id="trailerUrl" placeholder="https://...">
                     <span asp-validation-for="TrailerUrl" class="text-danger"></span>
                 </div>
             </div>
+            <div class="mb-3 row">
+                    <label asp-for="Categories" class="col-form-label col-sm-2"></label>
+                    <div class="col-sm-8">
+                        <select id="multiple-checkboxes" class="form-control selectpicker col-form-label col-sm-12" multiple>
+                            <optgroup label ="Categories:">
+                                @foreach (var item in categoryItems)
+                                {
+                                    var value = item.Value;
+                                    var label = item.Text;
+                                    <option value="@value">@label</option>
+                                }
+                            </optgroup>
+                        </select>
+                        <span asp-validation-for="Categories" class="text-danger"></span>
+                    </div>
+                </div>
             <div id="ArtistsContainer">
                 <label asp-for="Artists">Add Artists</label>
                 <a class="btn btn-success" onclick="AddMoreArtists()">+</a>
@@ -79,7 +104,7 @@
             </div>
 
         </form>
-        </fieldset>
+    </fieldset>
 </div>
 
 @section Scripts {
@@ -94,13 +119,24 @@
 }
 
 
-@section Path{ 
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="/Movies/All">Movies</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add New Movie</li>
-        </ol>
-    </nav>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>*@
+@*<script>
+        $(document).ready(function () {
+            $('#multiple-checkboxes').multiselect({
+                includeSelectAllOption: true,
+            });
+        });
+    </script>*@
 
+
+
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/Movies/All">Movies</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add New Movie</li>
+    </ol>
 }
+

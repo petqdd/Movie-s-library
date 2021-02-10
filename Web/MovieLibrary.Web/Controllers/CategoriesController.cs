@@ -16,12 +16,6 @@
             this.categoriesService = categoriesService;
         }
 
-        public IActionResult All()
-        {
-            var categoryViewModel = this.categoriesService.GetAllCategories();
-            return this.View(categoryViewModel);
-        }
-
         public IActionResult Add()
         {
             return this.View();
@@ -39,10 +33,22 @@
                 if (!this.categoriesService.IsExisting(category.Name))
                 {
                     await this.categoriesService.CreateCategoryAsync(category);
+                    return this.Redirect("/");
                 }
 
-                return this.Redirect("/Categories/All");
+                return this.Redirect("/Categories/Error");
             }
+        }
+
+        public IActionResult Error()
+        {
+            return this.View();
+        }
+
+        public IActionResult All()
+        {
+            var categoryViewModel = this.categoriesService.GetAllCategories();
+            return this.View(categoryViewModel);
         }
 
         [HttpGet]
@@ -67,13 +73,8 @@
                     return this.Redirect("/Categories/All");
                 }
 
-                return this.Redirect("/Categories/WrongEdit");
+                return this.Redirect("/Categories/Error");
             }
-        }
-
-        public IActionResult WrongEdit()
-        {
-            return this.View();
         }
     }
 }

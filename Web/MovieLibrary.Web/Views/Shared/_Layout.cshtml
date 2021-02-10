@@ -18,106 +18,90 @@
 
     <link rel="stylesheet" href="~/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/lazy.css">
 
-    <link rel="stylesheet" href="https://fontawesome.com/releases/v5.8.2/css/all.css" />
-    @*<link rel="stylesheet" href="~/css/mycss.css" asp-append-version="true">*@
+
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">*@
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
+
+
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" />*@
 
 </head>
 <body>
+    <div id="main">
+        <nav>
+            <img src="/logo/1.png" alt="logo" style="width:180px;height:120px;">
 
-    <div class="container-fluid">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="site-logo">
-                    <img src="/logo/8dce962d-ab4b-49e9-b5ba-c8d9276ea42c_200x200.png" alt="logo" style="width:150px;height:120px;">
-                    
-                </div>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <partial name="_LoginPartial" />
-            </nav>
-            @RenderSection("Path", false)
-            <!--<div class="jumbotron-fluid">
-                <div class="row ">
-                    <div class="col-sm-2">
-                        <img src="~/pnghut_photographic-film-photography-roll-movie-camera-viewfinder-clipart.png" alt="logo" width="150" height="150">
-                    </div>
-                    <div class="col-sm-10">
-                        <h1>
-                            <i>
-                                <b>
-                                    <br />
-                                    Welcome to Movie's Library
-                                </b>
-                            </i>
-                        </h1>
+            <a class="navbar-brand" asp-area="" asp-action="Index" asp-controller="Home">Home</a>
 
-                        <p class="h5"><i>Find your movies. Engoy and fun. </i></p>-->
-                        @*<video controls="controls"><source src="~/video (2).mp4">
-                            <type="video/mp4"/>Your browser does not support the HTML 5 video.
-                            </video>*@
-                    <!--</div>
-                </div>
-            </div>-->
-        </header>
-
-        <div class="row">
-            <div class="col-sm-10 border border-white">
-                <div class="container">
-                    <partial name="_CookieConsentPartial" />
-                    <main role="main" class="pb-3">
-                        @this.RenderBody()
-                    </main>
-                </div>
-                @*@if (this.SignInManager.IsSignedIn(this.User))
-                    {
-                        <ul class="pagination justify-content-center" style="margin:20px 0">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item "><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    }*@
-
-            </div>
-            @if (this.SignInManager.IsSignedIn(this.User))
-            {
-                <div class="col-sm-2 text-center border border-white" style="background-color:black">
-                    <br />
-                    <h4><b>Top 5 newest movies</b></h4>
-                    <br />
-                    <vc:newest-movies-view-components>
-                    </vc:newest-movies-view-components>
-
-                    <hr class="bg-white" /><br />
-                    <h4><b>Top 5 most rated movies</b></h4>
-                    <br />
-                    <vc:top-rated-movies-view-components>
-                    </vc:top-rated-movies-view-components>
-                </div>
-            }
-
+            <button class="navbar-toggler collapsed"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNavDropdown-7"
+                    aria-controls="navbarNavDropdown-7"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+            @*<ul>*@
+            <partial name="_LoginPartial" />
+            @*@RenderSection("Register", required: false)
+            @RenderSection("Login", required: false)*@
+            @*</ul>*@
+             
+        </nav>
+        
+        @RenderSection("Path", false)
+        <div class="container">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @this.RenderBody()
+            </main>
         </div>
 
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        @*@if (this.SignInManager.IsSignedIn(this.User))
+        {
+            <div class="col-sm-2 text-center border border-white" style="background-color:black">
+                <br />
+                <h4><b>Top 5 newest movies</b></h4>
+                <br />
+                <vc:newest-movies-view-components>
+                </vc:newest-movies-view-components>
+
+                <hr class="bg-white" /><br />
+                <h4><b>Top 5 most rated movies</b></h4>
+                <br />
+                <vc:top-rated-movies-view-components>
+                </vc:top-rated-movies-view-components>
             </div>
-        </footer>
+        }*@
+
+        @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; @DateTime.Now.Year - Petya Dankova made with <i class="fas fa-heart text-danger"></i>
+            </div>
+        </footer>*@
+
+
 
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+        <script src="~/lib/popper/popper.min.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-        @await this.RenderSectionAsync("Scripts", required: false)
-    </div>
+        
+        <script src="~/js/lazy.js" asp-append-version="true"></script>
 
+
+
+
+
+        @await this.RenderSectionAsync("Scripts", required: false)
+
+    </div>
 </body>
 </html>

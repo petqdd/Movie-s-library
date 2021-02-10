@@ -345,15 +345,43 @@ namespace MovieLibrary.Data.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("MovieLibrary.Data.Models.Movie", b =>
+            modelBuilder.Entity("MovieLibrary.Data.Models.Director", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Directors");
+                });
+
+            modelBuilder.Entity("MovieLibrary.Data.Models.Movie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -363,6 +391,9 @@ namespace MovieLibrary.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("DirectorId")
+                        .HasColumnType("int");
 
                     b.Property<double>("ImdbRating")
                         .HasColumnType("float");
@@ -386,6 +417,9 @@ namespace MovieLibrary.Data.Migrations
                     b.Property<int>("Runtime")
                         .HasColumnType("int");
 
+                    b.Property<string>("SecondPosterPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Storyline")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -403,7 +437,7 @@ namespace MovieLibrary.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("DirectorId");
 
                     b.HasIndex("IsDeleted");
 
@@ -436,6 +470,34 @@ namespace MovieLibrary.Data.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("MoviesArtists");
+                });
+
+            modelBuilder.Entity("MovieLibrary.Data.Models.MoviesCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("MoviesCategories");
                 });
 
             modelBuilder.Entity("MovieLibrary.Data.Models.MoviesComment", b =>
@@ -596,15 +658,6 @@ namespace MovieLibrary.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsInCollection")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -615,8 +668,6 @@ namespace MovieLibrary.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("MovieId");
 
@@ -706,13 +757,13 @@ namespace MovieLibrary.Data.Migrations
 
             modelBuilder.Entity("MovieLibrary.Data.Models.Movie", b =>
                 {
-                    b.HasOne("MovieLibrary.Data.Models.Category", "Category")
+                    b.HasOne("MovieLibrary.Data.Models.Director", "Director")
                         .WithMany("Movies")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("DirectorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Director");
                 });
 
             modelBuilder.Entity("MovieLibrary.Data.Models.MoviesArtist", b =>
@@ -730,6 +781,25 @@ namespace MovieLibrary.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Artist");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("MovieLibrary.Data.Models.MoviesCategory", b =>
+                {
+                    b.HasOne("MovieLibrary.Data.Models.Category", "Category")
+                        .WithMany("Movies")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MovieLibrary.Data.Models.Movie", "Movie")
+                        .WithMany("Categories")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Movie");
                 });
@@ -849,9 +919,16 @@ namespace MovieLibrary.Data.Migrations
                     b.Navigation("Users");
                 });
 
+            modelBuilder.Entity("MovieLibrary.Data.Models.Director", b =>
+                {
+                    b.Navigation("Movies");
+                });
+
             modelBuilder.Entity("MovieLibrary.Data.Models.Movie", b =>
                 {
                     b.Navigation("Artists");
+
+                    b.Navigation("Categories");
 
                     b.Navigation("Comments");
 

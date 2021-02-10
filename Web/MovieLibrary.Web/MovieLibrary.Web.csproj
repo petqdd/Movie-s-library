@@ -9,12 +9,41 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Artists\**" />
+    <Compile Remove="Views\Comments\**" />
+    <Compile Remove="Views\Ratings\**" />
+    <Compile Remove="Views\Search\**" />
+    <Compile Remove="Views\Users\**" />
+    <Content Remove="Views\Artists\**" />
+    <Content Remove="Views\Comments\**" />
+    <Content Remove="Views\Ratings\**" />
+    <Content Remove="Views\Search\**" />
+    <Content Remove="Views\Users\**" />
+    <EmbeddedResource Remove="Views\Artists\**" />
+    <EmbeddedResource Remove="Views\Comments\**" />
+    <EmbeddedResource Remove="Views\Ratings\**" />
+    <EmbeddedResource Remove="Views\Search\**" />
+    <EmbeddedResource Remove="Views\Users\**" />
+    <None Remove="Views\Artists\**" />
+    <None Remove="Views\Comments\**" />
+    <None Remove="Views\Ratings\**" />
+    <None Remove="Views\Search\**" />
+    <None Remove="Views\Users\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\GatherMovies\Index.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\GatherMovies\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Components\CategoriesOfMovie\Default.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />

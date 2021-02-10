@@ -13,10 +13,10 @@
 
         bool IsExisting(string name);
 
-        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+        InputCreateCategoryViewModel GetCategoryForEdit(string category);
 
         Task EditCategoryAsync(string category, InputCreateCategoryViewModel model);
 
-        InputCreateCategoryViewModel GetCategoryForEdit(string category);
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }
 }

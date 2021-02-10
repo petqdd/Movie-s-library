@@ -24,10 +24,10 @@
             {
                 CategoriesMovies = this.db.Categories
                                .Select(x => new OutputCategoriesViewModel
-                                            {
-                                              Name = x.Name,
-                                              FilmCount = x.Movies.Count,
-                                            })
+                               {
+                                   Name = x.Name,
+                                   FilmCount = x.Movies.Count,
+                               })
                                .ToList(),
             };
             return this.View(viewModel);

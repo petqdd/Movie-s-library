@@ -25,6 +25,17 @@
     {
         public static int Main(string[] args)
         {
+            int value = 1234;
+            string id = value.ToString("D" + 7.ToString());
+            string test = "2344".PadLeft(7, '0');
+            string test2 = "4".PadLeft(7, '0');
+            string test3 = "43334".PadLeft(7, '0');
+            string test4 = "423444".PadLeft(7, '0');
+            string test5 = "44".PadLeft(7, '0');
+            string test6 = "1234567".PadLeft(7, '0');
+
+            
+
             Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);

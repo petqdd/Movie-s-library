@@ -6,11 +6,11 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using MovieLibrary.Data.Common.Models;
-    using MovieLibrary.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+
+    using MovieLibrary.Data.Common.Models;
+    using MovieLibrary.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -28,6 +28,8 @@
 
         public DbSet<Movie> Movies { get; set; }
 
+        public DbSet<Director> Directors { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Artist> Artists { get; set; }
@@ -42,12 +44,13 @@
 
         public DbSet<UsersMovie> UsersMovies { get; set; }
 
+        public DbSet<MoviesCategory> MoviesCategories { get; set; }
+
         public DbSet<Rating> Ratings { get; set; }
 
         public DbSet<UsersRatings> UsersRatings { get; set; }
 
         public DbSet<MoviesRatings> MoviesRatings { get; set; }
-
 
         public override int SaveChanges() => this.SaveChanges(true);
 

@@ -9,15 +9,13 @@
     {
         public Category()
         {
-            this.Movies = new HashSet<Movie>();
+            this.Movies = new HashSet<MoviesCategory>();
         }
 
         [Required]
         [MaxLength(25)]
         public string Name { get; set; }
 
-        public virtual ICollection<Movie> Movies { get; set; }
-
-        public int CountOfMovie => this.Movies.Count;
+        public virtual ICollection<MoviesCategory> Movies { get; set; }
     }
 }

@@ -12,13 +12,16 @@
     {
         private readonly IDeletableEntityRepository<Category> categoriesRepository;
         private readonly IDeletableEntityRepository<Movie> moviesRepository;
+        private readonly IRepository<MoviesCategory> moviesCategoriesRepository;
 
         public CategoriesService(
             IDeletableEntityRepository<Category> categoriesRepository,
-            IDeletableEntityRepository<Movie> moviesRepository)
+            IDeletableEntityRepository<Movie> moviesRepository,
+            IRepository<MoviesCategory> moviesCategoriesRepository)
         {
             this.categoriesRepository = categoriesRepository;
             this.moviesRepository = moviesRepository;
+            this.moviesCategoriesRepository = moviesCategoriesRepository;
         }
 
         public async Task CreateCategoryAsync(InputCreateCategoryViewModel category)
@@ -32,19 +35,6 @@
             await this.categoriesRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
-        {
-            return this.categoriesRepository.All()
-                .Select(x => new
-                {
-                    x.Id,
-                    x.Name,
-                })
-                .OrderBy(x => x.Name)
-                .ToList()
-                .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
-        }
-
         public AllCategoriesViewModel GetAllCategories()
         {
             var categories = new AllCategoriesViewModel
@@ -54,8 +44,10 @@
                                  .Select(x => new OutputCategoriesViewModel
                                  {
                                      Name = x.Name,
-                                     FilmCount = this.moviesRepository.All()
-                                                                      .Count(y => y.Category.Name == x.Name),
+                                     FilmCount = this.moviesCategoriesRepository
+                                                      .AllAsNoTracking()
+                                                      .Where(y => y.Category.Name == x.Name)
+                                                      .Count(),
                                  })
                                  .ToList(),
             };
@@ -88,6 +80,19 @@
                                        .FirstOrDefault();
             currentCategory.Name = model.Name;
             await this.categoriesRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+        {
+            return this.categoriesRepository.All()
+                                            .Select(x => new
+                                            {
+                                                x.Id,
+                                                x.Name,
+                                            })
+                                            .OrderBy(x => x.Name)
+                                            .ToList()
+                                            .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
         }
     }
 }
