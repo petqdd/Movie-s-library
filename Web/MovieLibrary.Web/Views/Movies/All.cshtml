@@ -1,5 +1,50 @@
-﻿@using System.Security.Claims;
+﻿
 @using MovieLibrary.Common
+@model MovieLibrary.Web.Views.ViewModels.AllMoviesViewModel
+@{
+    this.ViewData["Title"] = $"All movies page {Model.PageNumber}";
+}
+<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
 
-<vc:newest-movies-view-components>
-</vc:newest-movies-view-components>
+<div class="container text-center">
+    <br />
+    <h1>@ViewData["Title"]</h1>
+
+    @*@if (Model.Movies.Count() == 0)
+        {
+            <br />
+            <h4><i> There are no movies in this category. </i></h4>
+            <br />
+        }*@
+
+    <div class="row gx-5">
+        @foreach (var movie in Model.Movies)
+        {
+            List<string> categories = movie.Categories.ToList();
+            string categoriesAsString = string.Join(", ", categories);
+
+            <div class="card-group p-1">
+                <div class="card text-center border border-white" style="width:200px;background-color:black">
+                    <div class="img-fluid img-thumbnail">
+                        <img class="card-img-top" src=@movie.PosterPath alt="Film image" style="height:220px;width:190px">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id" class="stretched-link text-white" style="position:relative;">@movie.Name (@movie.Year)</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+    <hr />
+    <partial name="_PagingPartial" model="@Model" />
+</div>
+
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Movies</li>
+    </ol>
+}

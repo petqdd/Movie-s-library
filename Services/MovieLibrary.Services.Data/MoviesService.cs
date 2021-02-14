@@ -7,6 +7,7 @@
 
     using MovieLibrary.Data.Common.Repositories;
     using MovieLibrary.Data.Models;
+    using MovieLibrary.Services.Mapping;
     using MovieLibrary.Web.ViewModels.Movies;
 
     public class MoviesService : IMoviesService
@@ -16,6 +17,7 @@
         private readonly IDeletableEntityRepository<Category> categoriesRepository;
         private readonly IDeletableEntityRepository<Director> directorsRepository;
         private readonly IRepository<UsersMovie> usersMoviesRepository;
+        private readonly IRepository<MoviesArtist> moviesArtistsRepository;
         private readonly IRepository<MoviesRatings> moviesRatingsRepository;
         private readonly IRepository<MoviesCategory> moviesCategoriesRepository;
         private readonly IRepository<MoviesArtist> moviesArtisRepository;
@@ -26,6 +28,7 @@
             IDeletableEntityRepository<Category> categoriesRepository,
             IDeletableEntityRepository<Director> directorsRepository,
             IRepository<UsersMovie> usersMoviesRepository,
+            IRepository<MoviesArtist> moviesArtistsRepository,
             IRepository<MoviesRatings> moviesRatingsRepository,
             IRepository<MoviesCategory> moviesCategoriesRepository,
             IRepository<MoviesArtist> moviesArtisRepository)
@@ -35,6 +38,7 @@
             this.categoriesRepository = categoriesRepository;
             this.directorsRepository = directorsRepository;
             this.usersMoviesRepository = usersMoviesRepository;
+            this.moviesArtistsRepository = moviesArtistsRepository;
             this.moviesRatingsRepository = moviesRatingsRepository;
             this.moviesCategoriesRepository = moviesCategoriesRepository;
             this.moviesArtisRepository = moviesArtisRepository;
@@ -42,89 +46,129 @@
 
         public async Task CreateMovieAsync(InputCreateMovieViewModel model)
         {
-            var movie = new Movie
+            var movieExists = this.moviesRepository
+                    .AllAsNoTracking()
+                    .Any(x => x.Name == model.Name && x.IsDeleted == false);
+            if (!movieExists)
             {
-                Name = model.Name,
-                Year = model.Year,
-                Runtime = model.Runtime,
-                Storyline = model.Storyline,
-                PosterPath = model.PosterPath,
-                SecondPosterPath = model.SecondPosterPath,
-                TrailerUrl = model.TrailerUrl,
-                ImdbRating = model.ImdbRating,
-                CreatedDate = DateTime.UtcNow,
-                UserRating = 0,
-            };
-            movie.Director.Name = model.Director;
-            foreach (var artist in model.Artists)
-            {
-                var currentArtist = this.artistsRepository
-                                        .AllAsNoTracking()
-                                        .FirstOrDefault(x => x.Name == artist.Name);
-                if (currentArtist == null)
+                var movie = new Movie
                 {
-                    currentArtist = new Artist { Name = artist.Name };
+                    Name = model.Name,
+                    Year = model.Year,
+                    Runtime = model.Runtime,
+                    Storyline = model.Storyline,
+                    PosterPath = model.PosterPath,
+                    SecondPosterPath = model.SecondPosterPath,
+                    TrailerUrl = model.TrailerUrl,
+                    ImdbRating = model.ImdbRating,
+                    CreatedDate = DateTime.UtcNow,
+                    UserRating = 0,
+                };
+
+                var currentDirector = this.directorsRepository.AllAsNoTracking().Where(x => x.Name == model.Director).FirstOrDefault();
+                if (currentDirector == null)
+                {
+                    var newDirector = new Director { Name = model.Director };
+                    await this.directorsRepository.AddAsync(newDirector);
+                    await this.directorsRepository.SaveChangesAsync();
+                    movie.Director.Id = newDirector.Id;
+                    //movie.Director = this.directorsRepository.AllAsNoTracking().Where(x => x.Name == model.Director).FirstOrDefault();
+                }
+                else
+                {
+                    movie.DirectorId = currentDirector.Id;
                 }
 
-                movie.Artists.Add(new MoviesArtist
-                {
-                    Artist = currentArtist,
-                });
-            }
+                await this.moviesRepository.AddAsync(movie);
+                await this.moviesRepository.SaveChangesAsync();
 
-            foreach (var category in model.Categories)
-            {
-                var currentCategory = this.categoriesRepository
-                                        .AllAsNoTracking()
-                                        .FirstOrDefault(x => x.Name == category.CategoryName);
-                if (currentCategory == null)
+                foreach (var artist in model.Artists)
                 {
-                    currentCategory = new Category { Name = category.CategoryName };
+                    var currentArtist = this.artistsRepository
+                                            .AllAsNoTracking()
+                                            .FirstOrDefault(x => x.Name == artist.Name);
+                    if (currentArtist == null)
+                    {
+                        currentArtist = new Artist { Name = artist.Name };
+                        await this.artistsRepository.AddAsync(currentArtist);
+                        await this.artistsRepository.SaveChangesAsync();
+                    }
+                    var movieArtist = new MoviesArtist
+                    {
+                        ArtistId = currentArtist.Id,
+                        MovieId = movie.Id,
+                    };
+                    await this.moviesArtistsRepository.AddAsync(movieArtist);
+                    await this.moviesArtistsRepository.SaveChangesAsync();
+                    var id = movieArtist.Id;
                 }
-
-                movie.Categories.Add(new MoviesCategory
+                //TODO To understand why model.Categories=0
+                foreach (var category in model.Categories)
                 {
-                    Category = currentCategory,
-                });
-            }
+                    var currentCategory = this.categoriesRepository
+                                            .AllAsNoTracking()
+                                            .FirstOrDefault(x => x.Name == category.CategoryName);
+                    if (currentCategory == null)
+                    {
+                        currentCategory = new Category { Name = category.CategoryName };
+                        await this.categoriesRepository.AddAsync(currentCategory);
+                        await this.categoriesRepository.SaveChangesAsync();
+                        var categoryId = currentCategory.Id;
+                    }
 
-            await this.moviesRepository.AddAsync(movie);
-            await this.moviesRepository.SaveChangesAsync();
+                    var movieCategory = new MoviesCategory
+                    {
+                        MovieId = movie.Id,
+                        CategoryId = currentCategory.Id,
+                    };
+                    await this.moviesCategoriesRepository.AddAsync(movieCategory);
+                    await this.moviesCategoriesRepository.SaveChangesAsync();
+                }
+            }
         }
 
-        //public ICollection<OutputMovieViewModel> GetAllMovies()
-        //{
-        //    var movies = this.moviesRepository
-        //                     .AllAsNoTracking()
-        //                     .Where(x => x.IsDeleted == false)
-        //                     .Select(x => new OutputMovieViewModel
-        //                     {
-        //                         Id = x.Id,
-        //                         Name = x.Name,
-        //                         Year = x.Year,
-        //                         PosterPath = x.PosterPath,
-        //                         //Runtime = x.Runtime,
-        //                         //ImdbRating = x.ImdbRating,
-        //                         //TrailerUrl = x.TrailerUrl,
-        //                         //PosterPath = x.PosterPath,
-        //                         //Storyline = x.Storyline,
-        //                         //UserRating = CalculateUserRating(x.Id, this.moviesRatingsRepository),
-        //                         Categories = x.Categories.Select(x => x.Category.Name).ToList(),
-        //                     })
-        //                     .ToList();
-        //    //foreach (var movie in movies)
-        //    //{
-        //    //    var currentMovie = this.moviesRepository
-        //    //                           .AllAsNoTracking()
-        //    //                           .Where(x => x.Id == movie.Id)
-        //    //                           .FirstOrDefault();
+        public IEnumerable<T> GetAllMovies<T>(int page, int itemPerPage)
+        {
+            var movies = this.moviesRepository
+                             .AllAsNoTracking()
+                             .OrderByDescending(x => x.Id)
+                             .Skip((page - 1) * itemPerPage)
+                             .Take(itemPerPage)
+                             .Where(x => x.IsDeleted == false)
+                             .To<T>()
+                             //.Select(x => new OutputMovieViewModel
+                             //{
+                             //    Id = x.Id,
+                             //    Name = x.Name,
+                             //    Year = x.Year,
+                             //    PosterPath = x.PosterPath,
+                             //    //Runtime = x.Runtime,
+                             //    //ImdbRating = x.ImdbRating,
+                             //    //TrailerUrl = x.TrailerUrl,
+                             //    //PosterPath = x.PosterPath,
+                             //    //Storyline = x.Storyline,
+                             //    //UserRating = CalculateUserRating(x.Id, this.moviesRatingsRepository),
+                             //    Categories = x.Categories.Select(x => x.Category.Name).ToList(),
+                             //})
+                             .ToList();
+            //foreach (var movie in movies)
+            //{
+            //    var currentMovie = this.moviesRepository
+            //                           .AllAsNoTracking()
+            //                           .Where(x => x.Id == movie.Id)
+            //                           .FirstOrDefault();
 
-        //    //    currentMovie.UserRating = movie.UserRating;
-        //    //}
+            //    currentMovie.UserRating = movie.UserRating;
+            //}
 
-        //    this.moviesRepository.SaveChangesAsync();
-        //    return movies;
-        //}
+            this.moviesRepository.SaveChangesAsync();
+            return movies;
+        }
+
+        public int GetCount()
+        {
+           return this.moviesRepository.All().Count();
+        }
 
         //public bool IsMovieCollected(int movieId, string userId)
         //{

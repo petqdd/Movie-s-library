@@ -18,19 +18,19 @@ for details on configuring this project to bundle and minify static web assets. 
     /*background-color: rgba(0, 0, 0, 0.5);*/
     line-height: 60px;
 }
-nav {
+#navigationBar {
     width: 100%;
     height: 100px;
     background-color: rgba(0, 0, 0, 0.5);
     line-height: 100px;
 }
 
-    nav ul {
+    #navigationBar ul {
         float: right;
         margin-right: 30px;
     }
 
-        nav ul li {
+        #navigationBar ul li {
             list-style-type: none;
             display: inline-block;
             transition: 0.8s all;
@@ -42,11 +42,11 @@ nav-item dropdown {
     transition: 0.8s all;
 }
 
-nav ul li:hover {
+#navigationBar ul li:hover {
     background-color: #f39d1a;
 }
 
-nav ul li a {
+#navigationBarul li a {
     text-decoration: none;
     color: #ffffff;
     padding: 30px;

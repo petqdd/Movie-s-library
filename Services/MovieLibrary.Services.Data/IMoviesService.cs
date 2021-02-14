@@ -9,13 +9,15 @@
     {
         Task CreateMovieAsync(InputCreateMovieViewModel model);
 
-        //ICollection<OutputMovieViewModel> GetAllMovies();
+        IEnumerable<T> GetAllMovies<T>(int page, int itemPerPage = 15);
+
+        int GetCount();
 
         //double CalculateTotalUserRating(int movieId);
 
-        //bool IsMovieExisting(string movieName);
+        // bool IsMovieExisting(string movieName);
 
-        //bool IsMovieCollected(int movieId, string userId);
+       // bool IsMovieCollected(int movieId, string userId);
 
         //DetailsMovieViewModel Details(int movieId);
 

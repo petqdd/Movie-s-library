@@ -2,18 +2,13 @@
 {
     using System.Collections.Generic;
 
+    using MovieLibrary.Web.ViewModels;
     using MovieLibrary.Web.ViewModels.Movies;
 
-    public class AllMoviesViewModel
+    public class AllMoviesViewModel : PagingViewModel
     {
-        public AllMoviesViewModel()
-        {
-            this.Movies = new HashSet<OutputMovieViewModel>();
+        public IEnumerable<OutputMovieViewModel> Movies { get; set; }
 
-        }
-
-        public ICollection<OutputMovieViewModel> Movies { get; set; }
-
-        public string Category { get; set; }
+        //public string Category { get; set; }
     }
 }

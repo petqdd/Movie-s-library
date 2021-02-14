@@ -3,6 +3,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using MovieLibrary.Web.Services;
@@ -22,6 +23,7 @@
             //this.usersService = usersService;
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult Add()
         {
@@ -30,6 +32,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<IActionResult> Add(InputCreateMovieViewModel model)
         {
@@ -45,23 +48,27 @@
             }
         }
 
-        //public IActionResult All()
-        //{
-        //    //var viewModel = new AllMoviesViewModel
-        //    //{
-        //    //    Movies = this.moviesService.GetAllMovies(),
-        //    //};
+        [Authorize]
+        public IActionResult All(int id = 1)
+        {
+            const int ItemPerPage = 15;
+            var viewModel = new AllMoviesViewModel
+            {
+                Movies = this.moviesService.GetAllMovies<OutputMovieViewModel>(id, ItemPerPage),
+                MoviesCount = this.moviesService.GetCount(),
+                ItemsPerPage = ItemPerPage,
+                PageNumber = id,
+            };
+            return this.View(viewModel);
+            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //foreach (var model in viewModel.Movies)
+            //{
+            //    model.CollectIsNotAvailable = this.moviesService.IsMovieCollected(model.Id, userId);
+            //    //model.UserRating = this.moviesService.CalculateTotalUserRating(model.Id);
+            //}
+        }
 
-        //    //var userId = this.GetUserId();
-        //    //foreach (var model in viewModel.Movies)
-        //    //{
-        //    //    model.CollectIsNotAvailable = this.moviesService.IsMovieCollected(model.Id, userId);
-        //    //    //model.UserRating = this.moviesService.CalculateTotalUserRating(model.Id);
-        //    //}
-
-        //    return this.View();
-        //}
-
+        // [Authorize]
         //public IActionResult Details(int movieId)
         //{
         //    var userId = this.GetUserId();

@@ -35,6 +35,13 @@
         "dist/jquery.validate.unobtrusive.js",
         "dist/jquery.validate.unobtrusive.min.js"
       ]
+    },
+    {
+      "provider": "unpkg",
+      "library": "fontawesome@5.6.3",
+      "destination": "wwwroot/lib/fontawesome/"
     }
+
+    
   ]
 }
