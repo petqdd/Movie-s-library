@@ -18,10 +18,11 @@
 
 
     <link rel="stylesheet" href="~/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/lazy.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/css/lazy.css">
+
 
 </head>
 <body>
@@ -48,55 +49,55 @@
             @*</ul>*@
 
         </nav>
-
-        @RenderSection("Path", false)
-        <div class="container">
-            <partial name="_CookieConsentPartial" />
-            <main role="main" class="pb-3">
-                @this.RenderBody()
-            </main>
-        </div>
-
-        @*@if (this.SignInManager.IsSignedIn(this.User))
-            {
-                <div class="col-sm-2 text-center border border-white" style="background-color:black">
-                    <br />
-                    <h4><b>Top 5 newest movies</b></h4>
-                    <br />
-                    <vc:newest-movies-view-components>
-                    </vc:newest-movies-view-components>
-
-                    <hr class="bg-white" /><br />
-                    <h4><b>Top 5 most rated movies</b></h4>
-                    <br />
-                    <vc:top-rated-movies-view-components>
-                    </vc:top-rated-movies-view-components>
-                </div>
-            }*@
-
-        @*<footer class="border-top footer text-muted">
-                <div class="container">
-                    &copy; @DateTime.Now.Year - Petya Dankova made with <i class="fas fa-heart text-danger"></i>
-                </div>
-            </footer>*@
-
-
-
-        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
-        <script src="~/lib/popper/popper.min.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-
-        <script src="~/js/lazy.js" asp-append-version="true"></script>
-
-
-
-
-
-        @await this.RenderSectionAsync("Scripts", required: false)
-
     </div>
+    @RenderSection("Path", false)
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
+    </div>
+
+    @*@if (this.SignInManager.IsSignedIn(this.User))
+        {
+            <div class="col-sm-2 text-center border border-white" style="background-color:black">
+                <br />
+                <h4><b>Top 5 newest movies</b></h4>
+                <br />
+                <vc:newest-movies-view-components>
+                </vc:newest-movies-view-components>
+
+                <hr class="bg-white" /><br />
+                <h4><b>Top 5 most rated movies</b></h4>
+                <br />
+                <vc:top-rated-movies-view-components>
+                </vc:top-rated-movies-view-components>
+            </div>
+        }*@
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.Now.Year - Petya Dankova made with <i class="fas fa-heart text-danger"></i>
+        </div>
+    </footer>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+    <script src="~/lib/popper/popper.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+
+    <script src="~/js/lazy.js" asp-append-version="true"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+
+
+
+
+
+    @await this.RenderSectionAsync("Scripts", required: false)
+
+
 </body>
 </html>

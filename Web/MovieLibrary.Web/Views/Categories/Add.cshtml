@@ -1,9 +1,12 @@
 ﻿@model MovieLibrary.Web.ViewModels.Categories.InputCreateCategoryViewModel
+@{
+    this.ViewData["Title"] = "Add new category";
+}
 <div class="container text-center">
     <br />
     <fieldset class="border border-white">
         <legend style="width:auto;padding:10px;">
-            Add new category
+            @this.ViewData["itle"]
         </legend>
         <hr />
         <form class="form-horizontal" method="post">
@@ -18,7 +21,7 @@
             <div class="form-group">
                 <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
-                    <a class="btn btn-primary rounded-pill" href="/Categories/All" role="button">Cancel</a>
+                    <a class="btn btn-primary rounded-pill" asp-controller="Categories" asp-action="All" role="button">Cancel</a>
                 </div>
             </div>
         </form>
@@ -29,8 +32,8 @@
 </vc:categories-of-movie>
 @section Path{
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="/Categories/All">Categories</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Categories" asp-action="All">Categories</a></li>
         <li class="breadcrumb-item active" aria-current="page">Add New Category</li>
     </ol>
 

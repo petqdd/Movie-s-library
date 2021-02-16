@@ -25,7 +25,7 @@
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
                             <td>
-                                <a href="/Categories/Edit?category=@(model.Name)" class="btn btn-primary rounded-pill">
+                                <a asp-controller="Categories" asp-action="Edit" asp-route-id="@(model.Name)" class="btn btn-primary rounded-pill">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                             </td>
@@ -38,7 +38,7 @@
 </div>
 @section Path{
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/Movies/All">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Categories</li>
     </ol>
 }

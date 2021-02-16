@@ -68,15 +68,15 @@
             //}
         }
 
-        // [Authorize]
-        //public IActionResult Details(int movieId)
-        //{
-        //    var userId = this.GetUserId();
-        //    var viewModel = this.moviesService.Details(movieId);
-        //    viewModel.CollectIsNotAvailable = this.moviesService.IsMovieCollected(viewModel.Id, userId);
+        [Authorize]
+        public IActionResult Details(int movieId)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var viewModel = this.moviesService.Details(movieId);
+            viewModel.CollectIsNotAvailable = this.moviesService.IsMovieCollected(viewModel.Id, userId);
 
-        //    return this.View(viewModel);
-        //}
+            return this.View(viewModel);
+        }
 
         //public async Task<IActionResult> AddToCollection(int movieId)
         //{

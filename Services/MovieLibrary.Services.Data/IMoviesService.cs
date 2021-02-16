@@ -17,9 +17,9 @@
 
         // bool IsMovieExisting(string movieName);
 
-       // bool IsMovieCollected(int movieId, string userId);
+        bool IsMovieCollected(int movieId, string userId);
 
-        //DetailsMovieViewModel Details(int movieId);
+        DetailsMovieViewModel Details(int movieId);
 
         //Task AddFilmToUserCollectionAsync(string userId, int movieId);
 

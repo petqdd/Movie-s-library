@@ -4,7 +4,7 @@
 @{
     this.ViewData["Title"] = $"All movies page {Model.PageNumber}";
 }
-<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+@*<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>*@
 
 <div class="container text-center">
     <br />
@@ -26,11 +26,13 @@
             <div class="card-group p-1">
                 <div class="card text-center border border-white" style="width:200px;background-color:black">
                     <div class="img-fluid img-thumbnail">
-                        <img class="card-img-top" src=@movie.PosterPath alt="Film image" style="height:220px;width:190px">
+                        <a href="/Movies/Details?movieId=@movie.Id">
+                            <img class="card-img-top" src=@movie.PosterPath alt="Film image" style="height:220px;width:190px">
+                            </a>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-white">
                         <p class="card-text">
-                            <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id" class="stretched-link text-white" style="position:relative;">@movie.Name (@movie.Year)</a>
+                         @movie.Name (@movie.Year)
                         </p>
                     </div>
 
@@ -44,7 +46,7 @@
 
 @section Path{
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Movies</li>
     </ol>
 }

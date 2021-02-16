@@ -17,7 +17,7 @@
             <div class="form-group">
                 <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
-                    <a class="btn btn-primary rounded-pill" href="/Categories/All" role="button">Cancel</a>
+                    <a class="btn btn-primary rounded-pill" asp-controller="Categories" asp-action="All" role="button">Cancel</a>
                 </div>
             </div>
         </form>
@@ -25,8 +25,8 @@
 </div>
 @section Path{
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="/Categories/All">Categories</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Categories" asp-action="All">Categories</a></li>
         <li class="breadcrumb-item active" aria-current="page">Edit Category</li>
     </ol>
 }

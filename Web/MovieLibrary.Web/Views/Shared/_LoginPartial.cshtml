@@ -4,7 +4,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>
+@*<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>*@
 @*<div class="collapse navbar-collapse" id="navbarNavDropdown-7">*@
 <ul>
     @if (this.SignInManager.IsSignedIn(this.User))
@@ -38,7 +38,7 @@
                 <ul class="dropdown-menu ">
                     <li>
                         <h6>
-                            <a class="nav-link " asp-controller="Movies" asp-action="Add" title="AddMovie"><b>Add Movie</b></a>
+                            <a class="nav-link " asp-controller="Movies" asp-action="Add" title="AddMovie" target="_blank"><b>Add Movie</b></a>
                         </h6>
                     </li>
                     <li>
