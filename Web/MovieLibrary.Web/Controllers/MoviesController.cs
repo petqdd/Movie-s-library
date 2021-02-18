@@ -5,7 +5,7 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
+    using MovieLibrary.Common;
     using MovieLibrary.Web.Services;
     using MovieLibrary.Web.ViewModels.Movies;
     using MovieLibrary.Web.Views.ViewModels;
@@ -23,7 +23,7 @@
             //this.usersService = usersService;
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
         public IActionResult Add()
         {
@@ -32,7 +32,7 @@
             return this.View(viewModel);
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpPost]
         public async Task<IActionResult> Add(InputCreateMovieViewModel model)
         {
@@ -55,17 +55,11 @@
             var viewModel = new AllMoviesViewModel
             {
                 Movies = this.moviesService.GetAllMovies<OutputMovieViewModel>(id, ItemPerPage),
-                MoviesCount = this.moviesService.GetCount(),
+                MoviesCount = this.moviesService.GetMoviesCount(),
                 ItemsPerPage = ItemPerPage,
                 PageNumber = id,
             };
             return this.View(viewModel);
-            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //foreach (var model in viewModel.Movies)
-            //{
-            //    model.CollectIsNotAvailable = this.moviesService.IsMovieCollected(model.Id, userId);
-            //    //model.UserRating = this.moviesService.CalculateTotalUserRating(model.Id);
-            //}
         }
 
         [Authorize]
@@ -78,45 +72,56 @@
             return this.View(viewModel);
         }
 
-        //public async Task<IActionResult> AddToCollection(int movieId)
-        //{
-        //    string userId = this.GetUserId();
+        [Authorize]
+        //ToDo Administrator can not add to collection
+        public async Task<IActionResult> AddToCollection(int movieId)
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-        //    await this.moviesService.AddFilmToUserCollectionAsync(userId, movieId);
-        //    return this.Redirect("/Movies/All");
-        //}
+            await this.moviesService.AddFilmToUserCollectionAsync(userId, movieId);
+            return this.Redirect("/Movies/All");
+        }
 
-        //public IActionResult Collection()
-        //{
-        //    string userId = this.GetUserId();
-        //    var viewModel = new AllMoviesViewModel
-        //    {
-        //        Movies = this.moviesService.GetAllMoviesInMyCollection(userId),
-        //    };
-        //    return this.View(viewModel);
-        //}
+        [Authorize]
+        public IActionResult Collection(int id = 1)
+        {
+            const int ItemPerPage = 15;
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var viewModel = new AllMoviesViewModel
+            {
+                Movies = this.moviesService.GetAllMoviesInMyCollection(userId, id, ItemPerPage),
+                MoviesCount = this.moviesService.GetMoviesCountInCollection(userId),
+                ItemsPerPage = ItemPerPage,
+                PageNumber = id,
+            };
+            return this.View(viewModel);
+        }
 
-        //public async Task<IActionResult> RemoveFromCollection(int movieId)
-        //{
-        //    //var test = this.HttpContext.User.Identity.Name;
-        //    var userId = this.GetUserId();
-        //    await this.moviesService.RemoveFromCollectionAsync(userId, movieId);
-        //    return this.Redirect("/Movies/Collection");
-        //}
+        [Authorize]
+        public async Task<IActionResult> RemoveFromCollection(int movieId)
+        {
+            //var test = this.HttpContext.User.Identity.Name;
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            await this.moviesService.RemoveFromCollectionAsync(userId, movieId);
+            return this.Redirect("/Movies/Collection");
+        }
 
-        //public async Task<IActionResult> Delete(int movieId)
-        //{
-        //    await this.moviesService.DeleteMovieAsync(movieId);
-        //    return this.Redirect("/Movies/All");
-        //}
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Delete(int movieId)
+        {
+            await this.moviesService.DeleteMovieAsync(movieId);
+            return this.Redirect("/Movies/All");
+        }
 
-        //[HttpGet]
-        //public IActionResult Edit(int movieId)
-        //{
-        //    var viewModel = this.moviesService.GetMovieForEdit(movieId);
-        //    return this.View(viewModel);
-        //}
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpGet]
+        public IActionResult Edit(int movieId)
+        {
+            var viewModel = this.moviesService.GetMovieForEdit(movieId);
+            return this.View(viewModel);
+        }
 
+        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         //[HttpPost]
         //public async Task<IActionResult> Edit(int movieId, InputCreateMovieViewModel model)
         //{
@@ -141,11 +146,6 @@
         //    return this.View(viewModel);
         //}
 
-        //private string GetUserId()
-        //{
-        //    var userEmail = this.User.FindFirstValue(ClaimTypes.Email);
-        //    var userId = this.usersService.GetUserId(userEmail);
-        //    return userId;
-        //}
+
     }
 }

@@ -11,6 +11,7 @@
         public InputEditMovieViewModel()
         {
             this.Artists = new HashSet<string>();
+            this.Categories = new HashSet<string>();
         }
 
         [Required]
@@ -20,12 +21,13 @@
         [CurrentYearMaxValue(1800)]
         public int Year { get; set; }
 
-        [Display(Name = "Category")]
-        public int CategoryId { get; set; }
-
-
         [Range(1, 10 * 60)]
         public int Runtime { get; set; }
+
+        [Required]
+        [MaxLength(200)]
+        [Url]
+        public string SecondPosterPath { get; set; }
 
         [Required]
         [MaxLength(200)]
@@ -38,6 +40,10 @@
         public string TrailerUrl { get; set; }
 
         [Required]
+        [MaxLength(100)]
+        public string Director { get; set; }
+
+        [Required]
         public string Storyline { get; set; }
 
         [Range(1, 10.0)]
@@ -45,5 +51,7 @@
         public double ImdbRating { get; set; }
 
         public ICollection<string> Artists { get; set; }
+
+        public ICollection<string> Categories { get; set; }
     }
 }

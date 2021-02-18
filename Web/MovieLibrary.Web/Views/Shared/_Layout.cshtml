@@ -32,7 +32,7 @@
 
             <a class="navbar-brand" asp-area="" asp-action="Index" asp-controller="Home">Home</a>
 
-            <button class="navbar-toggler collapsed"
+            @*<button class="navbar-toggler collapsed"
                     type="button"
                     data-toggle="collapse"
                     data-target="#navbarNavDropdown-7"
@@ -40,7 +40,7 @@
                     aria-expanded="false"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button>*@
 
             @*<ul>*@
             <partial name="_LoginPartial" />
@@ -51,7 +51,7 @@
         </nav>
     </div>
     @RenderSection("Path", false)
-    <div class="container">
+    <div class="container" id="body">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()

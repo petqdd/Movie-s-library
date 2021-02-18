@@ -6,22 +6,19 @@
         totalCount += category.FilmCount;
     }
 }
+
 <ul>
     <li>
-        <h6>
-            <a href="/Movies/AllMoviesInCategory?category=all" class="stretched-link text-white" style="position:relative;">
-                All (@totalCount)
-            </a>
-        </h6>
+        <a href="/Movies/AllMoviesInCategory?category=all" class="stretched-link " style="position:relative;">
+           <b>All (@totalCount)</b>
+        </a>
     </li>
     @foreach (var category in Model.CategoriesMovies)
     {
         <li>
-            <h6>
-                <a href="/Movies/AllMoviesInCategory?category=@category.Name" class="stretched-link text-white" style="position:relative;">
-                    @category.Name (@category.FilmCount)
-                </a>
-            </h6>
+            <a href="/Movies/AllMoviesInCategory?category=@category.Name" class="stretched-link" style="position:relative;">
+              <b>  @category.Name (@category.FilmCount)</b>
+            </a>
         </li>
     }
 </ul>
