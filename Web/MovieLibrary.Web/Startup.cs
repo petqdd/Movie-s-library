@@ -69,10 +69,10 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMoviesService, MoviesService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
-            //services.AddTransient<ICommentsService, CommentService>();
+            services.AddTransient<ICommentsService, CommentService>();
             //services.AddTransient<IUsersService, UsersService>();
             //services.AddTransient<IRatingsService, RatingsService>();
-            //services.AddTransient<IArtistService, ArtistService>();
+            services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IImdbScraperService, ImdbScraperService>();
             //services.AddTransient<ISearchService, SearchService>();
         }

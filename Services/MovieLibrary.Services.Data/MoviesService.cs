@@ -95,6 +95,7 @@
                         await this.artistsRepository.AddAsync(currentArtist);
                         await this.artistsRepository.SaveChangesAsync();
                     }
+
                     var movieArtist = new MoviesArtist
                     {
                         ArtistId = currentArtist.Id,
@@ -217,12 +218,17 @@
 
             var currentArtists = this.moviesArtisRepository.AllAsNoTracking()
                             .Where(x => x.MovieId == details.Id)
-                            .Select(x => x.Artist.Name)
+                            .Select(x => x.Artist)
                             .ToList();
 
             foreach (var artist in currentArtists)
             {
-                details.Artists.Add(new Artist { Name = artist });
+                details.Artists.Add(new Artist
+                {
+                    Name = artist.Name,
+                    BiographyUrl = artist.BiographyUrl,
+                    PhotoUrl = artist.PhotoUrl,
+                });
             }
 
             var currentCategories = this.moviesCategoriesRepository.AllAsNoTracking()
@@ -308,13 +314,13 @@
 
         public InputEditMovieViewModel GetMovieForEdit(int movieId)
         {
-           var movieArtists = this.moviesRepository.All()
-                .Where(x => x.Id == movieId)
-                .Select(x => x.Artists
-                              .Select(y => y.Artist.Name)
-                              .ToList()
-                        )
-                .FirstOrDefault();
+            //var movieArtists = this.moviesRepository.All()
+            //     .Where(x => x.Id == movieId)
+            //     .Select(x => x.Artists
+            //                   .Select(y => y.Artist.Name)
+            //                   .ToList()
+            //             )
+            //     .FirstOrDefault();
 
             var movieCategories = this.moviesRepository.All()
                             .Where(x => x.Id == movieId)
@@ -337,8 +343,8 @@
                                 ImdbRating = x.ImdbRating,
                                 Storyline = x.Storyline,
                                 Director = x.Director.Name,
-                                Artists=movieArtists,
-                                Categories=movieCategories,
+                                //Artists = movieArtists,
+                                Categories = movieCategories,
                             })
                             .FirstOrDefault();
 

@@ -79,7 +79,7 @@
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             await this.moviesService.AddFilmToUserCollectionAsync(userId, movieId);
-            return this.Redirect("/Movies/All");
+            return this.RedirectToAction("All");
         }
 
         [Authorize]
@@ -103,14 +103,14 @@
             //var test = this.HttpContext.User.Identity.Name;
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             await this.moviesService.RemoveFromCollectionAsync(userId, movieId);
-            return this.Redirect("/Movies/Collection");
+            return this.RedirectToAction("Collection");
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Delete(int movieId)
         {
             await this.moviesService.DeleteMovieAsync(movieId);
-            return this.Redirect("/Movies/All");
+            return this.RedirectToAction("All");
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -126,7 +126,7 @@
         //public async Task<IActionResult> Edit(int movieId, InputCreateMovieViewModel model)
         //{
         //    await this.moviesService.EditMovieAsync(movieId, model);
-        //    return this.Redirect("/Movies/All");
+        //    return this.RedirectToAction("All");
         //}
 
         //public IActionResult AllMoviesInCategory(string category)
@@ -145,7 +145,5 @@
 
         //    return this.View(viewModel);
         //}
-
-
-    }
+  }
 }

@@ -13,7 +13,7 @@
         public InputCreateMovieViewModel()
         {
             this.Artists = new HashSet<MovieArtistInputModel>();
-            this.Categories = new HashSet<MoviesCategoryInputModel>();
+            this.Categories = new HashSet<string>();
         }
 
         [Required]
@@ -22,9 +22,6 @@
 
         [CurrentYearMaxValue(1800)]
         public int Year { get; set; }
-
-        //[Display(Name="Category")]
-        //public int CategoryId { get; set; }
 
         [Range(1, 10 * 60)]
         public int Runtime { get; set; }
@@ -52,12 +49,12 @@
         public string Director { get; set; }
 
         [Range(1, 10.0)]
-        [Display(Name= "Imdb Rating")]
+        [Display(Name = "Imdb Rating")]
         public double ImdbRating { get; set; }
 
         public ICollection<MovieArtistInputModel> Artists { get; set; }
 
-        public ICollection<MoviesCategoryInputModel> Categories { get; set; }
+        public ICollection<string> Categories { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
     }

@@ -31,10 +31,7 @@ for details on configuring this project to bundle and minify static web assets. 
     }
 
         #navigationBar ul li {
-            /* list-style-image:url('~/img/category.png');*/
             display: inline-block;
-           
-            /* transition: 0.8s all;*/
         }
 
 #searchButton {
@@ -51,33 +48,20 @@ for details on configuring this project to bundle and minify static web assets. 
     #categoryMenu li {
         line-height: 22px;
     }
-/*nav-item dropdown {
-    list-style-image:url('~/img/category.png');
-    display: inline-block;
-    transition: 0.8s all;
-}*/
-/*#navigationBar ul li:hover {
-    background-color: #f39d1a;
-}*/
-/*#navigationBar ul li a {
-    text-decoration: none;
-    color: #ffffff;*/
-/*padding: 30px;*/
-/*}*/
-/*#allMoviesTitle {*/
-   /* background-color: black;*/
-    /*font-size: 18px;*/
-    /*border-style: double;*/
-    /*border-color: #df691a;*/
-    /*padding: 2px,2px,2px,2px;*/
-/*}*/
 
-#cardMovie {
+#cardArtist {
+    height: 290px;
     width: 190px;
-    height: 340px;
     background-color: black;
-    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
-    /*transition: 0.3s;*/
+    border-radius: 8px; /* 5px rounded corners */
+    border-color: #25055a;
+    justify-content: center;
+    padding: 5px,5px,5px,5px;
+}
+#cardMovie {
+    height: 340px;
+    width: 190px;
+    background-color: black;
     border-radius: 8px; /* 5px rounded corners */
     border-color: #25055a;
     justify-content: center;
@@ -90,6 +74,23 @@ for details on configuring this project to bundle and minify static web assets. 
     border-radius: 8px 8px 8px 8px;
     padding: 1px,1px,1px,1px;
 }
+#cardArtistImage {
+    height: 210px;
+    width: 185px;
+    border-radius: 8px 8px 8px 8px;
+    padding: 1px,1px,1px,1px;
+}
+
+#artistCardBody {
+    background-color: black;
+    border-radius: 0 0 8px 8px;
+    font-size: 13px;
+}
+#artistCardFooter {
+    background-color: black;
+    border-radius: 0 0 8px 8px;
+    font-size: 13px;
+}
 
 #movieCardBody {
     height: 120px;
@@ -100,17 +101,12 @@ for details on configuring this project to bundle and minify static web assets. 
     #movieCardBody p {
         color: #df691a;
     }
-#paggination {
-    background-clip:content-box;
-}
+
 
 #movieDetails {
     width: 80%;
     border-style: double;
     border-color: white;
-    /*border-width: 2px;
-    border-color: black;*/
-    /* background-color: rgba(0, 0, 0, 0.7);*/
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 8px;
@@ -153,6 +149,17 @@ for details on configuring this project to bundle and minify static web assets. 
     font-weight: bold;
 }
 
+#detailArtistCard {
+    width:160px;
+    height:220px;
+    background-color:black;
+
+}
+
+#detailArtistPhoto {
+    width: 150px;
+    height: 170px;
+}
 
 ol.breadcrumb {
     padding: 10px 16px;
@@ -191,6 +198,15 @@ nav a {
     bottom: 5px;
     right: 5px;
     background-color: firebrick;
+    color: white;
+    font-size: 16px;
+}
+
+#editButtonForArtist {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #1b6ec2;
     color: white;
     font-size: 16px;
 }

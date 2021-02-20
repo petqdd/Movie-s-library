@@ -1,12 +1,13 @@
 ﻿namespace MovieLibrary.Web.Controllers
 {
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
+    using MovieLibrary.Common;
     using MovieLibrary.Web.Services;
     using MovieLibrary.Web.ViewModels.Categories;
 
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class CategoriesController : BaseController
     {
         private readonly ICategoriesService categoriesService;
@@ -36,7 +37,7 @@
                     return this.Redirect("/");
                 }
 
-                return this.Redirect("/Categories/Error");
+                return this.RedirectToAction("Error");
             }
         }
 
@@ -70,10 +71,10 @@
                 if (!this.categoriesService.IsExisting(model.Name))
                 {
                     await this.categoriesService.EditCategoryAsync(category, model);
-                    return this.Redirect("/Categories/All");
+                    return this.RedirectToAction("All");
                 }
 
-                return this.Redirect("/Categories/Error");
+                return this.RedirectToAction("Error");
             }
         }
     }

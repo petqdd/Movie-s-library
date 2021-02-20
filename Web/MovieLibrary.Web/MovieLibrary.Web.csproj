@@ -11,23 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Artists\**" />
-    <Compile Remove="Views\Comments\**" />
     <Compile Remove="Views\Ratings\**" />
     <Compile Remove="Views\Search\**" />
     <Compile Remove="Views\Users\**" />
-    <Content Remove="Views\Artists\**" />
-    <Content Remove="Views\Comments\**" />
     <Content Remove="Views\Ratings\**" />
     <Content Remove="Views\Search\**" />
     <Content Remove="Views\Users\**" />
-    <EmbeddedResource Remove="Views\Artists\**" />
-    <EmbeddedResource Remove="Views\Comments\**" />
     <EmbeddedResource Remove="Views\Ratings\**" />
     <EmbeddedResource Remove="Views\Search\**" />
     <EmbeddedResource Remove="Views\Users\**" />
-    <None Remove="Views\Artists\**" />
-    <None Remove="Views\Comments\**" />
     <None Remove="Views\Ratings\**" />
     <None Remove="Views\Search\**" />
     <None Remove="Views\Users\**" />
@@ -40,6 +32,13 @@
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\Artists\Add.cshtml" />
+    <None Include="Views\Artists\All.cshtml" />
+    <None Include="Views\Artists\Detail.cshtml" />
+    <None Include="Views\Artists\Edit.cshtml" />
+    <None Include="Views\Comments\All.cshtml" />
+    <None Include="Views\Comments\AllComments.cshtml" />
+    <None Include="Views\Comments\CreateComment.cshtml" />
     <None Include="Views\GatherMovies\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
