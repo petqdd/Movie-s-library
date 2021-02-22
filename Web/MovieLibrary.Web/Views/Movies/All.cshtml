@@ -4,23 +4,18 @@
 @{
     this.ViewData["Title"] = $"All movies";
 }
-@*<script src="https://kit.fontawesome.com/7bda27f782.js" crossorigin="anonymous"></script>*@
-
-    <fieldset class="border border-white text-md-left" style="color:white">
+<fieldset class="border border-white text-md-left" style="color:white">
 
         <legend style="width:auto;padding:10px;">
             <span>@ViewData["Title"]</span>
         </legend>
-        @*<div class="row" id="allMoviesTitle">
-            <span>@ViewData["Title"]</span>
-        </div>*@
-
-        @*@if (Model.Movies.Count() == 0)
+   
+        @if (Model.Movies.Count() == 0)
         {
             <br />
             <h4><i> There are no movies in this category. </i></h4>
             <br />
-        }*@
+        }
         <div class="container text-center">
             <div class="row gx-5 justify-content-around">
                 @foreach (var movie in Model.Movies)
@@ -31,13 +26,13 @@
                     <div class="card-group p-1">
                         <div class="card" id="cardMovie">
                             <div class="img-fluid ">
-                                <a href="/Movies/Details?movieId=@movie.Id">
+                                <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">
                                     <img class="card-img-top" src=@movie.PosterPath alt="Film image" id="cardImage">
                                 </a>
                                 @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                                 {
-                                    <a id="deleteButton" href="/Movies/Delete?movieId=@movie.Id" class="btn btn-danger btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Remove movie"><i class="far fa-trash-alt"></i></a>
-                                    <a id="editButton" href="/Movies/Edit?movieId=@movie.Id" class="btn btn-primary btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Edit movie"><i class="far fa-edit"></i></a>
+                                    <a id="deleteButton" asp-controller="Movies" asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-danger btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Remove movie"><i class="far fa-trash-alt"></i></a>
+                                    <a id="editButton" asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.Id"  class="btn btn-primary btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Edit movie"><i class="far fa-edit"></i></a>
                                 }
                             </div>
                             <div class="card-body text-white" id="movieCardBody">

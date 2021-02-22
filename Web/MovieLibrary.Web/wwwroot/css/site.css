@@ -175,7 +175,9 @@ ol.breadcrumb {
     background-color: black;
     height: 700px;
 }
-
+#info-list li{
+float:right;
+}
 
 .btn-primary {
     color: #fff;

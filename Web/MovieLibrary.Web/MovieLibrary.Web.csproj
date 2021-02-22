@@ -33,12 +33,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Artists\Add.cshtml" />
-    <None Include="Views\Artists\All.cshtml" />
-    <None Include="Views\Artists\Detail.cshtml" />
     <None Include="Views\Artists\Edit.cshtml" />
     <None Include="Views\Comments\All.cshtml" />
     <None Include="Views\Comments\AllComments.cshtml" />
-    <None Include="Views\Comments\CreateComment.cshtml" />
+    <None Include="Views\Comments\Create.cshtml" />
     <None Include="Views\GatherMovies\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />

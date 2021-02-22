@@ -55,7 +55,7 @@
             var viewModel = new AllMoviesViewModel
             {
                 Movies = this.moviesService.GetAllMovies<OutputMovieViewModel>(id, ItemPerPage),
-                MoviesCount = this.moviesService.GetMoviesCount(),
+                Count = this.moviesService.GetMoviesCount(),
                 ItemsPerPage = ItemPerPage,
                 PageNumber = id,
             };
@@ -63,22 +63,21 @@
         }
 
         [Authorize]
-        public IActionResult Details(int movieId)
+        public IActionResult Details(int id)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var viewModel = this.moviesService.Details(movieId);
+            var viewModel = this.moviesService.Details(id);
             viewModel.CollectIsNotAvailable = this.moviesService.IsMovieCollected(viewModel.Id, userId);
 
             return this.View(viewModel);
         }
 
         [Authorize]
-        //ToDo Administrator can not add to collection
-        public async Task<IActionResult> AddToCollection(int movieId)
+        public async Task<IActionResult> AddToCollection(int id)
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            await this.moviesService.AddFilmToUserCollectionAsync(userId, movieId);
+            await this.moviesService.AddFilmToUserCollectionAsync(userId, id);
             return this.RedirectToAction("All");
         }
 
@@ -90,7 +89,7 @@
             var viewModel = new AllMoviesViewModel
             {
                 Movies = this.moviesService.GetAllMoviesInMyCollection(userId, id, ItemPerPage),
-                MoviesCount = this.moviesService.GetMoviesCountInCollection(userId),
+                Count = this.moviesService.GetMoviesCountInCollection(userId),
                 ItemsPerPage = ItemPerPage,
                 PageNumber = id,
             };
@@ -98,26 +97,26 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> RemoveFromCollection(int movieId)
+        public async Task<IActionResult> RemoveFromCollection(int id)
         {
             //var test = this.HttpContext.User.Identity.Name;
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            await this.moviesService.RemoveFromCollectionAsync(userId, movieId);
+            await this.moviesService.RemoveFromCollectionAsync(userId, id);
             return this.RedirectToAction("Collection");
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Delete(int movieId)
+        public async Task<IActionResult> Delete(int id)
         {
-            await this.moviesService.DeleteMovieAsync(movieId);
+            await this.moviesService.DeleteMovieAsync(id);
             return this.RedirectToAction("All");
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpGet]
-        public IActionResult Edit(int movieId)
+        public IActionResult Edit(int id)
         {
-            var viewModel = this.moviesService.GetMovieForEdit(movieId);
+            var viewModel = this.moviesService.GetMovieForEdit(id);
             return this.View(viewModel);
         }
 
