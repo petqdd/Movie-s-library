@@ -124,8 +124,15 @@
         //[HttpPost]
         //public async Task<IActionResult> Edit(int movieId, InputCreateMovieViewModel model)
         //{
-        //    await this.moviesService.EditMovieAsync(movieId, model);
-        //    return this.RedirectToAction("All");
+        //    if (!this.ModelState.IsValid)
+        //    {
+        //        return this.View();
+        //    }
+        //    else
+        //    {
+        //        await this.moviesService.EditMovieAsync(movieId, model);
+        //        return this.RedirectToAction("All");
+        //    }
         //}
 
         //public IActionResult AllMoviesInCategory(string category)
@@ -144,5 +151,5 @@
 
         //    return this.View(viewModel);
         //}
-  }
+    }
 }
