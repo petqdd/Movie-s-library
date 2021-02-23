@@ -9,6 +9,5 @@
     {
         public IEnumerable<OutputMovieViewModel> Movies { get; set; }
 
-        //public string Category { get; set; }
     }
 }

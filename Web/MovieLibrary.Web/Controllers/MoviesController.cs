@@ -14,13 +14,11 @@
     {
         private readonly IMoviesService moviesService;
         private readonly ICategoriesService categoriesService;
-        //private readonly IUsersService usersService;
 
         public MoviesController(IMoviesService moviesService, ICategoriesService categoriesService /*IUsersService usersService*/)
         {
             this.moviesService = moviesService;
             this.categoriesService = categoriesService;
-            //this.usersService = usersService;
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -135,21 +133,41 @@
         //    }
         //}
 
-        //public IActionResult AllMoviesInCategory(string category)
-        //{
-        //    var userId = this.GetUserId();
-        //    var viewModel = new AllMoviesViewModel
-        //    {
-        //        Movies = this.moviesService.GetAllMoviesInCategory(category),
-        //        Category = category,
-        //    };
-        //    foreach (var model in viewModel.Movies)
-        //    {
-        //        model.CollectIsNotAvailable = this.moviesService.IsMovieCollected(model.Id, userId);
-        //        //model.UserRating = this.moviesService.CalculateTotalUserRating(model.Id);
-        //    }
+        [Authorize]
+        public IActionResult AllMoviesInCategory(string category, int id = 1)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            const int ItemPerPage = 15;
+            var viewModel = new AllMoviesInCategoryViewModel
+            {
+                Movies = this.moviesService.GetAllMoviesInCategory(category, id, ItemPerPage),
+                Category = category,
+                Count = this.moviesService.GetMoviesCountInCategory(category),
+                ItemsPerPage = ItemPerPage,
+                PageNumber = id,
+            };
+            foreach (var model in viewModel.Movies)
+            {
+                model.CollectIsNotAvailable = this.moviesService.IsMovieCollected(model.Id, userId);
+                //model.UserRating = this.moviesService.CalculateTotalUserRating(model.Id);
+            }
 
-        //    return this.View(viewModel);
-        //}
+            return this.View(viewModel);
+        }
+
+        public IActionResult Top15Movies()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var viewModel = new AllMoviesViewModel
+            {
+                Movies = this.moviesService.GetTop15MovieImdb(),
+            };
+            foreach (var movie in viewModel.Movies)
+            {
+                movie.CollectIsNotAvailable = this.moviesService.IsMovieCollected(movie.Id, userId);
+            }
+
+            return this.View(viewModel);
+        }
     }
 }

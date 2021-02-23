@@ -1,29 +1,32 @@
 ﻿@model MovieLibrary.Web.ViewModels.Categories.AllCategoriesViewModel
 @using MovieLibrary.Common
+@{
+    ViewData["Title"] = "All Categories";
+ }
+<h4 class="text-left">
+@ViewData["Title"]
+</h4>
+<br/>
 <div class="container text-center">
-    <fieldset class="border border-white">
-        <legend style="width:auto;padding:10px;">
-            All Categories
-        </legend>
-        <table class="table table-bordered" style="background-color:black;">
-            <thead>
-                <tr class="table-dark table-bordered ">
-                    <th scope="col"></th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Film's count</th>
-                    <th scope="col"></th>
+        <table class="table table-bordered border-white">
+            <thead >
+                <tr class="table-dark table-bordered " style="opacity:0.7;">
+                    <th scope="col" style="border-color:white"></th>
+                    <th scope="col" style="border-color:white">Category</th>
+                    <th scope="col" style="border-color:white">Movies count</th>
+                    <th scope="col" style="border-color:white"></th>
                 </tr>
             </thead>
             @foreach (var model in Model.Categories)
             {
-                <tbody class="table-bordered border-white">
-                    <tr>
-                        <th scope="row"><i class="fab fa-slack"></i></th>
-                        <td>@(model.Name)</td>
-                        <td>@(model.FilmCount)</td>
+                <tbody class="table-bordered">
+                    <tr class="border-white">
+                        <th scope="row" style="border-color:white"><i class="fab fa-slack"></i></th>
+                        <td  style="border-color:white">@(model.Name)</td>
+                        <td  style="border-color:white">@(model.MoviesCount)</td>
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
-                            <td>
+                            <td  style="border-color:white">
                                 <a asp-controller="Categories" asp-action="Edit" asp-route-id="@(model.Name)" class="btn btn-primary rounded-pill">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
@@ -33,7 +36,6 @@
                 </tbody>
             }
         </table>
-    </fieldset>
 </div>
 @section Path{
     <ol class="breadcrumb">

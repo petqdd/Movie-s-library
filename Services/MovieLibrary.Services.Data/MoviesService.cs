@@ -8,9 +8,8 @@
     using MovieLibrary.Data.Common.Repositories;
     using MovieLibrary.Data.Models;
     using MovieLibrary.Services.Mapping;
-    using MovieLibrary.Web.ViewModels.Artists;
-    using MovieLibrary.Web.ViewModels.Categories;
     using MovieLibrary.Web.ViewModels.Movies;
+   
 
     public class MoviesService : IMoviesService
     {
@@ -388,49 +387,78 @@
         //    await this.moviesRepository.SaveChangesAsync();
         //}
 
+        public ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category, int page, int itemPerPage)
+        {
+            var movies = this.moviesRepository
+                             .AllAsNoTracking()
+                             .Where(x => x.Categories.Select(x => x.Category.Name).Contains(category))
+                             .OrderByDescending(x => x.Id)
+                             .Skip((page - 1) * itemPerPage)
+                             .Take(itemPerPage)
+                             .Select(x => new OutputMovieViewModel
+                             {
+                                 Id = x.Id,
+                                 Name = x.Name,
+                                 Year = x.Year,
+                                 PosterPath = x.PosterPath,
+                                 //Runtime = x.Runtime,
+                                 //ImdbRating = x.ImdbRating,
+                                 //TrailerUrl = x.TrailerUrl,
+                                 //Storyline = x.Storyline,
+                                 //Categories = x.Categories.Select(x => x.Category.Name).ToList(),
+                                 //UserRating = CalculateUserRating(x.Id, this.moviesRatingsRepository),
+                             })
+                             .ToList();
+            if (category == "all")
+            {
+                movies = this.moviesRepository
+                             .AllAsNoTracking()
+                             .OrderByDescending(x => x.Id)
+                             .Skip((page - 1) * itemPerPage)
+                             .Take(itemPerPage)
+                             .Select(x => new OutputMovieViewModel
+                             {
+                                 Id = x.Id,
+                                 Name = x.Name,
+                                 Year = x.Year,
+                                 PosterPath = x.PosterPath,
+                                 //Runtime = x.Runtime,
+                                 //ImdbRating = x.ImdbRating,
+                                 //TrailerUrl = x.TrailerUrl,
+                                 //Storyline = x.Storyline,
+                                 //Categories = x.Categories.Select(x => x.Category.Name).ToList(),
+                                 //UserRating = x.UserRating,
+                             })
+                             .ToList();
+            }
 
+            return movies;
+        }
 
-        //public ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category)
-        //{
-        //    var movies = this.moviesRepository
-        //                     .AllAsNoTracking()
-        //                     .Where(x => x.Categories.Select(x => x.Category.Name).Contains(category))
-        //                     .Select(x => new OutputMovieViewModel
-        //                     {
-        //                         Id = x.Id,
-        //                         Name = x.Name,
-        //                         Year = x.Year,
-        //                         //Runtime = x.Runtime,
-        //                         //ImdbRating = x.ImdbRating,
-        //                         //TrailerUrl = x.TrailerUrl,
-        //                         //PosterPath = x.PosterPath,
-        //                         //Storyline = x.Storyline,
-        //                         //Categories = x.Categories.Select(x => x.Category.Name).ToList(),
-        //                         //UserRating = CalculateUserRating(x.Id, this.moviesRatingsRepository),
-        //                     })
-        //                     .ToList();
-        //    if (category == "all")
-        //    {
-        //        movies = this.moviesRepository
-        //                     .AllAsNoTracking()
-        //                     .Select(x => new OutputMovieViewModel
-        //                     {
-        //                         Id = x.Id,
-        //                         Name = x.Name,
-        //                         Year = x.Year,
-        //                         //Runtime = x.Runtime,
-        //                         //ImdbRating = x.ImdbRating,
-        //                         //TrailerUrl = x.TrailerUrl,
-        //                         //PosterPath = x.PosterPath,
-        //                         //Storyline = x.Storyline,
-        //                         //Categories = x.Categories.Select(x => x.Category.Name).ToList(),
-        //                         //UserRating = x.UserRating,
-        //                     })
-        //                     .ToList();
-        //    }
+        public int GetMoviesCountInCategory(string category)
+        {
+            int count = this.moviesCategoriesRepository.AllAsNoTracking()
+                    .Where(x => x.Category.Name == category)
+                    .Count();
+            return count;
+        }
 
-        //    return movies;
-        //}
+        public ICollection<OutputMovieViewModel> GetTop15MovieImdb()
+        {
+            var movies = this.moviesRepository.AllAsNoTracking()
+                    .Where(x => x.IsDeleted == false)
+                    .OrderByDescending(x => x.ImdbRating)
+                    .Take(15)
+                    .Select(x => new OutputMovieViewModel
+                    {
+                        Name = x.Name,
+                        Year = x.Year,
+                        PosterPath = x.PosterPath,
+                        Id = x.Id,
+                    })
+                    .ToList();
+            return movies;
+        }
 
         //public bool IsMovieExisting(string movieName)
         //{

@@ -31,7 +31,7 @@
 
         //public double UserRating { get; set; }
 
-        //public bool CollectIsNotAvailable { get; set; }
+        public bool CollectIsNotAvailable { get; set; }
 
         public ICollection<string> Categories { get; set; }
 

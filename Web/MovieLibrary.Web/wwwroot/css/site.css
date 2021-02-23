@@ -40,6 +40,9 @@ for details on configuring this project to bundle and minify static web assets. 
 #dropdownButton {
     color: #df691a;
 }
+#top15Button {
+    color: #df691a;
+}
 
 #categoryMenu {
     background-color: black;
@@ -73,6 +76,16 @@ for details on configuring this project to bundle and minify static web assets. 
     width: 185px;
     border-radius: 8px 8px 8px 8px;
     padding: 1px,1px,1px,1px;
+}
+
+#rank {
+position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: firebrick;
+    color: white;
+    font-size: 16px;
+
 }
 #cardArtistImage {
     height: 210px;

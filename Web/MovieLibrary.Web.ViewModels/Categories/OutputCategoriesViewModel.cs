@@ -4,6 +4,7 @@
     {
         public string Name { get; set; }
 
-        public int FilmCount { get; set; }
+        public int MoviesCount { get; set; }
+
     }
 }

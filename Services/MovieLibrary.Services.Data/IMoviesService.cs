@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using MovieLibrary.Web.ViewModels.Movies;
+    
 
     public interface IMoviesService
     {
@@ -14,6 +15,8 @@
         int GetMoviesCount();
 
         int GetMoviesCountInCollection(string userId);
+
+        int GetMoviesCountInCategory(string category);
 
         //double CalculateTotalUserRating(int movieId);
 
@@ -35,6 +38,8 @@
 
         ICollection<OutputMovieViewModel> GetAllMoviesInMyCollection(string userId, int page, int itemPerPage);
 
-        //ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category);
+        ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category, int page, int itemPerPage);
+
+        ICollection<OutputMovieViewModel> GetTop15MovieImdb();
     }
 }

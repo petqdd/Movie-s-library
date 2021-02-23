@@ -44,7 +44,7 @@
                                  .Select(x => new OutputCategoriesViewModel
                                  {
                                      Name = x.Name,
-                                     FilmCount = this.moviesCategoriesRepository
+                                     MoviesCount = this.moviesCategoriesRepository
                                                       .AllAsNoTracking()
                                                       .Where(y => y.Category.Name == x.Name)
                                                       .Count(),
