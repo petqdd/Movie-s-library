@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     using MovieLibrary.Web.ViewModels.Movies;
-    
 
     public interface IMoviesService
     {
@@ -18,10 +17,6 @@
 
         int GetMoviesCountInCategory(string category);
 
-        //double CalculateTotalUserRating(int movieId);
-
-        // bool IsMovieExisting(string movieName);
-
         bool IsMovieCollected(int movieId, string userId);
 
         DetailsMovieViewModel Details(int movieId);
@@ -34,12 +29,18 @@
 
         InputEditMovieViewModel GetMovieForEdit(int movieId);
 
-        //Task EditMovieAsync(int movieId, InputCreateMovieViewModel model);
+        Task EditMovieAsync(int movieId, InputEditMovieViewModel model);
 
         ICollection<OutputMovieViewModel> GetAllMoviesInMyCollection(string userId, int page, int itemPerPage);
 
         ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category, int page, int itemPerPage);
 
+        //IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsArtists(int movieId);
+
         ICollection<OutputMovieViewModel> GetTop15MovieImdb();
+
+        //double CalculateTotalUserRating(int movieId);
+
+        // bool IsMovieExisting(string movieName);
     }
 }

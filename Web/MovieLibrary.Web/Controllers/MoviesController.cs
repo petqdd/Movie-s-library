@@ -115,23 +115,34 @@
         public IActionResult Edit(int id)
         {
             var viewModel = this.moviesService.GetMovieForEdit(id);
+            viewModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+            //viewModel.ArtistsItems = this.moviesService.GetAllAsKeyValuePairsArtists(id);
             return this.View(viewModel);
         }
 
-        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(int movieId, InputCreateMovieViewModel model)
-        //{
-        //    if (!this.ModelState.IsValid)
-        //    {
-        //        return this.View();
-        //    }
-        //    else
-        //    {
-        //        await this.moviesService.EditMovieAsync(movieId, model);
-        //        return this.RedirectToAction("All");
-        //    }
-        //}
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, InputEditMovieViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var viewModel = model;
+                viewModel.CategoriesItems=this.categoriesService.GetAllAsKeyValuePairs();
+                return this.View(viewModel);
+            }
+            else
+            {
+                if (model.Categories.Count == 0)
+                {
+                    var viewModel = model;
+                    viewModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                    return this.View(viewModel);
+                }
+
+                await this.moviesService.EditMovieAsync(id, model);
+                return this.RedirectToAction("All");
+            }
+        }
 
         [Authorize]
         public IActionResult AllMoviesInCategory(string category, int id = 1)

@@ -48,7 +48,7 @@ for details on configuring this project to bundle and minify static web assets. 
     background-color: black;
 }
 
-    #categoryMenu li {
+#categoryMenu li {
         line-height: 22px;
     }
 
@@ -163,30 +163,34 @@ position: absolute;
 }
 
 #detailArtistCard {
-    width:160px;
-    height:220px;
-    background-color:black;
-
+    width: 155px;
+    height: 230px;
+    background-color: black;
+    border-radius: 8px 8px 0px 0px;
 }
-
 #detailArtistPhoto {
     width: 150px;
     height: 170px;
+    border-radius: 8px 8px 0px 0px;
+}
+#detailArtistPhotoTitle {
+    width: 150px;
+    height: 60px;
 }
 
-ol.breadcrumb {
-    padding: 10px 16px;
-    list-style: none;
-    background-color: transparent;
-}
+    ol.breadcrumb {
+        padding: 10px 16px;
+        list-style: none;
+        background-color: transparent;
+    }
 
 #movieDetails .card-body {
     background-color: #25055a;
 }
 
 #movieDetails .card-footer {
-    background-color: black;
-    height: 700px;
+    background-color:black;
+    height: 770px;
 }
 #info-list li{
 float:right;

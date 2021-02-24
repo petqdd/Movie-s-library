@@ -9,7 +9,6 @@
     using MovieLibrary.Data.Models;
     using MovieLibrary.Services.Mapping;
     using MovieLibrary.Web.ViewModels.Movies;
-   
 
     public class MoviesService : IMoviesService
     {
@@ -73,7 +72,6 @@
                     await this.directorsRepository.AddAsync(newDirector);
                     await this.directorsRepository.SaveChangesAsync();
                     movie.Director.Id = newDirector.Id;
-                    //movie.Director = this.directorsRepository.AllAsNoTracking().Where(x => x.Name == model.Director).FirstOrDefault();
                 }
                 else
                 {
@@ -104,27 +102,19 @@
                     await this.moviesArtistsRepository.SaveChangesAsync();
                     var id = movieArtist.Id;
                 }
-                //TODO To understand why model.Categories=0
+
                 foreach (var category in model.Categories)
                 {
-                    //var currentCategory = this.categoriesRepository
-                    //                        .AllAsNoTracking()
-                    //                        .FirstOrDefault(x => x.Id == category.CategoryId);
-                    //if (currentCategory == null)
-                    //{
-                    //    currentCategory = new Category { Name = category.CategoryName };
-                    //    await this.categoriesRepository.AddAsync(currentCategory);
-                    //    await this.categoriesRepository.SaveChangesAsync();
-                    //    var categoryId = currentCategory.Id;
-                    //}
-
-                    //var movieCategory = new MoviesCategory
-                    //{
-                    //    MovieId = movie.Id,
-                    //    CategoryId = currentCategory.Id,
-                    //};
-                    //await this.moviesCategoriesRepository.AddAsync(movieCategory);
-                    //await this.moviesCategoriesRepository.SaveChangesAsync();
+                    var currentCategory = this.categoriesRepository
+                                            .AllAsNoTracking()
+                                            .FirstOrDefault(x => x.Id == int.Parse(category));
+                    var movieCategory = new MoviesCategory
+                    {
+                        MovieId = movie.Id,
+                        CategoryId = currentCategory.Id,
+                    };
+                    await this.moviesCategoriesRepository.AddAsync(movieCategory);
+                    await this.moviesCategoriesRepository.SaveChangesAsync();
                 }
             }
         }
@@ -153,16 +143,6 @@
                              //    Categories = x.Categories.Select(x => x.Category.Name).ToList(),
                              //})
                              .ToList();
-            //foreach (var movie in movies)
-            //{
-            //    var currentMovie = this.moviesRepository
-            //                           .AllAsNoTracking()
-            //                           .Where(x => x.Id == movie.Id)
-            //                           .FirstOrDefault();
-
-            //    currentMovie.UserRating = movie.UserRating;
-            //}
-
             this.moviesRepository.SaveChangesAsync();
             return movies;
         }
@@ -241,11 +221,6 @@
 
         public async Task AddFilmToUserCollectionAsync(string userId, int movieId)
         {
-            //if (this.usersMoviesRepository.All().Any(x => x.MovieId == movieId && x.UserId == userId))
-            //{
-            //    return;
-            //}
-
             var userMovie = new UsersMovie
             {
                 MovieId = movieId,
@@ -313,79 +288,70 @@
 
         public InputEditMovieViewModel GetMovieForEdit(int movieId)
         {
-            //var movieArtists = this.moviesRepository.All()
-            //     .Where(x => x.Id == movieId)
-            //     .Select(x => x.Artists
-            //                   .Select(y => y.Artist.Name)
-            //                   .ToList()
-            //             )
-            //     .FirstOrDefault();
-
-            var movieCategories = this.moviesRepository.All()
-                            .Where(x => x.Id == movieId)
-                            .Select(x => x.Categories
-                                        .Select(y => y.Category.Name)
-                                        .ToList())
-                            .FirstOrDefault();
-
             var movie = this.moviesRepository
-                            .AllAsNoTracking()
-                            .Where(x => x.Id == movieId)
-                            .Select(x => new InputEditMovieViewModel
-                            {
-                                Name = x.Name,
-                                Year = x.Year,
-                                Runtime = x.Runtime,
-                                PosterPath = x.PosterPath,
-                                SecondPosterPath = x.SecondPosterPath,
-                                TrailerUrl = x.TrailerUrl,
-                                ImdbRating = x.ImdbRating,
-                                Storyline = x.Storyline,
-                                Director = x.Director.Name,
-                                //Artists = movieArtists,
-                                Categories = movieCategories,
-                            })
-                            .FirstOrDefault();
-
-            //var artists = this.moviesRepository.AllAsNoTracking()
-            //    .Where(x => x.Id == movieId)
-            //    .Select(x => x.Artists.Select(y => new MovieArtistInputModel
-            //    {
-            //        Name = y.Artist.Name,
-            //    }).ToList())
-            //    .FirstOrDefault();
-
-            //movie.Artists = artists;
-
-            //var categories = this.moviesRepository.AllAsNoTracking()
-            //    .Where(x => x.Id == movieId)
-            //    .Select(x => x.Categories.Select(y => new MoviesCategoryInputModel
-            //    {
-            //        CategoryName = y.Category.Name,
-            //        CategoryId = y.CategoryId,
-            //    }).ToList())
-            //    .FirstOrDefault();
-            //movie.Categories = categories;
-
+                                         .AllAsNoTracking()
+                                         .Where(x => x.Id == movieId)
+                                         .Select(x => new InputEditMovieViewModel
+                                         {
+                                             Id = x.Id,
+                                             Name = x.Name,
+                                             Year = x.Year,
+                                             Runtime = x.Runtime,
+                                             PosterPath = x.PosterPath,
+                                             SecondPosterPath = x.SecondPosterPath,
+                                             TrailerUrl = x.TrailerUrl,
+                                             ImdbRating = x.ImdbRating,
+                                             Storyline = x.Storyline,
+                                             Director = x.Director.Name,
+                                         })
+                                         .FirstOrDefault();
             return movie;
         }
 
-        //public async Task EditMovieAsync(int movieId, InputCreateMovieViewModel model)
-        //{
-        //    var movie = this.moviesRepository
-        //                    .AllAsNoTracking()
-        //                    .Where(x => x.Id == movieId)
-        //                    .FirstOrDefault();
-        //    movie.Name = model.Name;
-        //    movie.Year = model.Year;
-        //    movie.Runtime = model.Runtime;
-        //    movie.PosterPath = model.PosterPath;
-        //    movie.TrailerUrl = model.TrailerUrl;
-        //    movie.ImdbRating = model.ImdbRating;
-        //    movie.Storyline = model.Storyline;
-        //    this.moviesRepository.Update(movie);
-        //    await this.moviesRepository.SaveChangesAsync();
-        //}
+        public async Task EditMovieAsync(int id, InputEditMovieViewModel model)
+        {
+            var movie = this.moviesRepository
+                            .AllAsNoTracking()
+                            .Where(x => x.Id == id)
+                            .FirstOrDefault();
+            movie.Name = model.Name;
+            movie.Year = model.Year;
+            movie.Runtime = model.Runtime;
+            movie.PosterPath = model.PosterPath;
+            movie.SecondPosterPath = model.SecondPosterPath;
+            movie.TrailerUrl = model.TrailerUrl;
+            movie.ImdbRating = model.ImdbRating;
+            movie.Storyline = model.Storyline;
+            this.moviesRepository.Update(movie);
+            await this.moviesRepository.SaveChangesAsync();
+
+            var existingMovieCategoryIds = this.moviesCategoriesRepository.AllAsNoTracking()
+                .Where(x => x.MovieId == model.Id)
+                .Select(x => x.Id)
+                .ToArray();
+
+            for (int i = 0; i < existingMovieCategoryIds.Length; i++)
+            {
+                var currentMovieCategoryForDelete = this.moviesCategoriesRepository
+                   .AllAsNoTracking()
+                   .Where(x => x.Id == existingMovieCategoryIds[i])
+                   .FirstOrDefault();
+                this.moviesCategoriesRepository.Delete(currentMovieCategoryForDelete);
+                await this.moviesCategoriesRepository.SaveChangesAsync();
+            }
+
+            foreach (var category in model.Categories)
+            {
+                var currentMovieCategory = new MoviesCategory
+                {
+                    MovieId = model.Id,
+                    CategoryId = int.Parse(category),
+                };
+
+                await this.moviesCategoriesRepository.AddAsync(currentMovieCategory);
+                await this.moviesCategoriesRepository.SaveChangesAsync();
+            }
+        }
 
         public ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category, int page, int itemPerPage)
         {
@@ -490,6 +456,21 @@
 
         //    var userRating = Math.Round(usersVoteSum / usersVoteCont, 1);
         //    return userRating;
+        //}
+
+
+        //public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsArtists(int movieId)
+        //{
+        //    return this.moviesArtisRepository.All()
+        //        .Where(x => x.MovieId == movieId)
+        //                                    .Select(x => new
+        //                                    {
+        //                                        Id = x.ArtistId,
+        //                                        Name = x.Artist.Name,
+        //                                    })
+        //                                    .OrderBy(x => x.Name)
+        //                                    .ToList()
+        //                                    .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
         //}
     }
 }
