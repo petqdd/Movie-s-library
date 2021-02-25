@@ -1,13 +1,11 @@
-﻿namespace MovieLibrary.Web.Views.ViewModels
+﻿namespace MovieLibrary.Web.ViewModels.Movies
 {
     using System.Collections.Generic;
-
-    using MovieLibrary.Web.ViewModels;
-    using MovieLibrary.Web.ViewModels.Movies;
 
     public class AllMoviesViewModel : PagingViewModel
     {
         public IEnumerable<OutputMovieViewModel> Movies { get; set; }
 
+        public string SearchingResult { get; set; }
     }
 }

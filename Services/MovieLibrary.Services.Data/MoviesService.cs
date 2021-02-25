@@ -458,7 +458,6 @@
         //    return userRating;
         //}
 
-
         //public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsArtists(int movieId)
         //{
         //    return this.moviesArtisRepository.All()

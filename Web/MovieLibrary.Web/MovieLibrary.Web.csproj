@@ -12,21 +12,18 @@
 
   <ItemGroup>
     <Compile Remove="Views\Ratings\**" />
-    <Compile Remove="Views\Search\**" />
     <Compile Remove="Views\Users\**" />
     <Content Remove="Views\Ratings\**" />
-    <Content Remove="Views\Search\**" />
     <Content Remove="Views\Users\**" />
     <EmbeddedResource Remove="Views\Ratings\**" />
-    <EmbeddedResource Remove="Views\Search\**" />
     <EmbeddedResource Remove="Views\Users\**" />
     <None Remove="Views\Ratings\**" />
-    <None Remove="Views\Search\**" />
     <None Remove="Views\Users\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Views\GatherMovies\Index.cshtml" />
+    <Content Remove="Views\Search\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
@@ -40,6 +37,7 @@
     <None Include="Views\GatherMovies\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Search\Search.cshtml" />
     <None Include="Views\Shared\Components\CategoriesOfMovie\Default.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />

@@ -3,13 +3,12 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
+
     using MovieLibrary.Data.Common.Repositories;
     using MovieLibrary.Data.Models;
     using MovieLibrary.Services.Data;
-
     using MovieLibrary.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

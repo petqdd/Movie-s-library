@@ -127,7 +127,7 @@
             if (!this.ModelState.IsValid)
             {
                 var viewModel = model;
-                viewModel.CategoriesItems=this.categoriesService.GetAllAsKeyValuePairs();
+                viewModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
                 return this.View(viewModel);
             }
             else

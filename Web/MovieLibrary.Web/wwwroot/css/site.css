@@ -62,7 +62,7 @@ for details on configuring this project to bundle and minify static web assets. 
     padding: 5px,5px,5px,5px;
 }
 #cardMovie {
-    height: 340px;
+   /* height: 340px;*/
     width: 190px;
     background-color: black;
     border-radius: 8px; /* 5px rounded corners */
@@ -106,7 +106,7 @@ position: absolute;
 }
 
 #movieCardBody {
-    height: 120px;
+    height: 170px;
     width: 185px;
     background-color: black;
     border-radius: 0 0 8px 8px;

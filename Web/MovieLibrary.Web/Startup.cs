@@ -74,7 +74,7 @@
             //services.AddTransient<IRatingsService, RatingsService>();
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IImdbScraperService, ImdbScraperService>();
-            //services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<ISearchService, SearchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

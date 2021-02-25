@@ -1,8 +1,10 @@
 ﻿namespace MovieLibrary.Web.Controllers
 {
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
     using MovieLibrary.Common;
     using MovieLibrary.Web.Services;
     using MovieLibrary.Web.ViewModels.Categories;

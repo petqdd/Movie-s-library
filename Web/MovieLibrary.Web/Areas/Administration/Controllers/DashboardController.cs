@@ -1,9 +1,9 @@
 ﻿namespace MovieLibrary.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
     using MovieLibrary.Services.Data;
     using MovieLibrary.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {
