@@ -33,14 +33,14 @@
             <a class="navbar-brand" asp-area="" asp-action="Index" asp-controller="Home">Home</a>
 
             @*<button class="navbar-toggler collapsed"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarNavDropdown-7"
-                    aria-controls="navbarNavDropdown-7"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>*@
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNavDropdown-7"
+                        aria-controls="navbarNavDropdown-7"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>*@
 
             @*<ul>*@
             <partial name="_LoginPartial" />
@@ -51,30 +51,28 @@
         </nav>
     </div>
     @RenderSection("Path", false)
-    <div class="container" id="body">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @this.RenderBody()
-        </main>
-    </div>
-
-    @*@if (this.SignInManager.IsSignedIn(this.User))
+    <div class="container-fluid" id="body">
+        @*<div class="row col-md-12">*@
+        @if (this.SignInManager.IsSignedIn(this.User))
         {
-            <div class="col-sm-2 text-center border border-white" style="background-color:black">
+            <vc:newest-movies-view-components>
+            </vc:newest-movies-view-components>
+            <br />
+        }
+        @*</div>*@
+        <div class="row">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="col-md-10 ">
+                @this.RenderBody()
+            </main>
+            <div class="col-md-2 " style="background-color:black">
                 <br />
-                <h4><b>Top 5 newest movies</b></h4>
-                <br />
-                <vc:newest-movies-view-components>
-                </vc:newest-movies-view-components>
-
-                <hr class="bg-white" /><br />
-                <h4><b>Top 5 most rated movies</b></h4>
-                <br />
-                <vc:top-rated-movies-view-components>
-                </vc:top-rated-movies-view-components>
+                <div>
+                </div>
+                @*Todo content*@
             </div>
-        }*@
-
+        </div>
+    </div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - Petya Dankova made with <i class="fas fa-heart text-danger"></i>

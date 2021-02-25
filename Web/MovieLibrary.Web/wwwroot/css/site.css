@@ -7,7 +7,7 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 #body {
-    width: 80%;
+    width: 100%;
 }
 
 #navInfoMovie {
@@ -21,13 +21,11 @@ for details on configuring this project to bundle and minify static web assets. 
     height: 100px;
     background-color: rgba(0, 0, 0, 0.5);
     line-height: 100px;
-    
 }
 
     #navigationBar ul {
         float: right;
         margin-right: 30px;
-       
     }
 
         #navigationBar ul li {
@@ -37,9 +35,11 @@ for details on configuring this project to bundle and minify static web assets. 
 #searchButton {
     color: #df691a;
 }
+
 #dropdownButton {
     color: #df691a;
 }
+
 #top15Button {
     color: #df691a;
 }
@@ -48,7 +48,7 @@ for details on configuring this project to bundle and minify static web assets. 
     background-color: black;
 }
 
-#categoryMenu li {
+    #categoryMenu li {
         line-height: 22px;
     }
 
@@ -61,9 +61,10 @@ for details on configuring this project to bundle and minify static web assets. 
     justify-content: center;
     padding: 5px,5px,5px,5px;
 }
+
 #cardMovie {
-   /* height: 340px;*/
-    width: 190px;
+    /* height: 340px;*/
+    width: 210px;
     background-color: black;
     border-radius: 8px; /* 5px rounded corners */
     border-color: #25055a;
@@ -73,20 +74,60 @@ for details on configuring this project to bundle and minify static web assets. 
 
 #cardImage {
     height: 220px;
-    width: 185px;
+    width: 205px;
     border-radius: 8px 8px 8px 8px;
     padding: 1px,1px,1px,1px;
 }
+#movieCardBody {
+    height: 140px;
+    width: 205px;
+    background-color: black;
+    border-radius: 0 0 8px 8px;
+}
+
+    #movieCardBody p {
+        color: #df691a;
+    }
+
+
+#multi-item-example {
+    
+}
+
+#caroselCard {
+    /* height: 340px;*/
+    width: 230px;
+    background-color: black;
+    border-radius: 8px; /* 5px rounded corners */
+    border-color: #25055a;
+    justify-content: center;
+    padding: 5px,5px,5px,5px;
+}
+
+#caroselImage {
+    height: 260px;
+    width: 225px;
+    border-radius: 8px 8px 8px 8px;
+    padding: 1px,1px,1px,1px;
+   
+}
+
+#caroselTitle {
+    height: 100px;
+    width: 225px;
+    text-align: center;
+}
+
 
 #rank {
-position: absolute;
+    position: absolute;
     top: 5px;
     right: 5px;
     background-color: firebrick;
     color: white;
     font-size: 16px;
-
 }
+
 #cardArtistImage {
     height: 210px;
     width: 185px;
@@ -99,21 +140,13 @@ position: absolute;
     border-radius: 0 0 8px 8px;
     font-size: 13px;
 }
+
 #artistCardFooter {
     background-color: black;
     border-radius: 0 0 8px 8px;
     font-size: 13px;
 }
 
-#movieCardBody {
-    height: 170px;
-    width: 185px;
-    background-color: black;
-    border-radius: 0 0 8px 8px;
-}
-    #movieCardBody p {
-        color: #df691a;
-    }
 
 
 #movieDetails {
@@ -168,32 +201,35 @@ position: absolute;
     background-color: black;
     border-radius: 8px 8px 0px 0px;
 }
+
 #detailArtistPhoto {
     width: 150px;
     height: 170px;
     border-radius: 8px 8px 0px 0px;
 }
+
 #detailArtistPhotoTitle {
     width: 150px;
     height: 60px;
 }
 
-    ol.breadcrumb {
-        padding: 10px 16px;
-        list-style: none;
-        background-color: transparent;
-    }
+ol.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: transparent;
+}
 
 #movieDetails .card-body {
     background-color: #25055a;
 }
 
 #movieDetails .card-footer {
-    background-color:black;
+    background-color: black;
     height: 770px;
 }
-#info-list li{
-float:right;
+
+#info-list li {
+    float: right;
 }
 
 .btn-primary {

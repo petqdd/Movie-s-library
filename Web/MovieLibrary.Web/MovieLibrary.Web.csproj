@@ -39,6 +39,7 @@
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Search\Search.cshtml" />
     <None Include="Views\Shared\Components\CategoriesOfMovie\Default.cshtml" />
+    <None Include="Views\Shared\Components\NewestMoviesViewComponents\Default.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
