@@ -6,8 +6,24 @@ for details on configuring this project to bundle and minify static web assets. 
     font-family: Verdana;
 }
 
+#comments {
+position:absolute;
+top:483px;
+left:340px;
+}
+ul {
+margin-top:5px;
+margin-left:10px;
+
+}
+hr {
+    background-color:white;
+    /*height: 1px;*/
+}
+
 #body {
     width: 100%;
+    align-content: center
 }
 
 #navInfoMovie {
@@ -51,16 +67,6 @@ for details on configuring this project to bundle and minify static web assets. 
     #categoryMenu li {
         line-height: 22px;
     }
-
-#cardArtist {
-    height: 290px;
-    width: 190px;
-    background-color: black;
-    border-radius: 8px; /* 5px rounded corners */
-    border-color: #25055a;
-    justify-content: center;
-    padding: 5px,5px,5px,5px;
-}
 
 #cardMovie {
     /* height: 340px;*/
@@ -128,9 +134,19 @@ for details on configuring this project to bundle and minify static web assets. 
     font-size: 16px;
 }
 
+#cardArtist {
+    height: 290px;
+    width: 220px;
+    background-color: black;
+    border-radius: 8px; /* 5px rounded corners */
+    border-color: #25055a;
+    justify-content: center;
+    padding: 5px,5px,5px,5px;
+}
+
 #cardArtistImage {
     height: 210px;
-    width: 185px;
+    width: 215px;
     border-radius: 8px 8px 8px 8px;
     padding: 1px,1px,1px,1px;
 }
@@ -150,7 +166,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 
 #movieDetails {
-    width: 80%;
+    width: 100%;
     border-style: double;
     border-color: white;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -196,20 +212,20 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 #detailArtistCard {
-    width: 155px;
+    width: 175px;
     height: 230px;
     background-color: black;
     border-radius: 8px 8px 0px 0px;
 }
 
 #detailArtistPhoto {
-    width: 150px;
+    width: 170px;
     height: 170px;
     border-radius: 8px 8px 0px 0px;
 }
 
 #detailArtistPhotoTitle {
-    width: 150px;
+    width: 170px;
     height: 60px;
 }
 

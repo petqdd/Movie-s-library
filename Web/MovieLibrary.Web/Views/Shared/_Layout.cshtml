@@ -51,28 +51,28 @@
         </nav>
     </div>
     @RenderSection("Path", false)
-    <div class="container-fluid" id="body">
-        @*<div class="row col-md-12">*@
-        @if (this.SignInManager.IsSignedIn(this.User))
-        {
-            <vc:newest-movies-view-components>
-            </vc:newest-movies-view-components>
-            <br />
-        }
-        @*</div>*@
-        <div class="row">
-            <partial name="_CookieConsentPartial" />
-            <main role="main" class="col-md-10 ">
-                @this.RenderBody()
-            </main>
-            <div class="col-md-2 " style="background-color:black">
-                <br />
-                <div>
-                </div>
-                @*Todo content*@
-            </div>
+<div class="container-fluid" id="body">
+    <div class="row col-md-12">
+        @*@if (this.SignInManager.IsSignedIn(this.User))
+            {*@
+        <vc:random-movies-view-components>
+        </vc:random-movies-view-components>
+        @*}*@
+    </div>
+    <hr/>
+    <div class="row">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="col-md-10 ">
+            @this.RenderBody()
+        </main>
+        <br/>
+        <br/>
+        <div class="col-md-2 border border-top-0 border-bottom-0" id="rightViewComponent">
+            <vc:last-movies-view-components>
+            </vc:last-movies-view-components>
         </div>
     </div>
+</div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - Petya Dankova made with <i class="fas fa-heart text-danger"></i>

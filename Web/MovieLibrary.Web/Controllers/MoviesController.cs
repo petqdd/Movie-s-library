@@ -140,7 +140,7 @@
                 }
 
                 await this.moviesService.EditMovieAsync(id, model);
-                return this.RedirectToAction("All");
+                return this.Redirect($"/Movies/Details/{id}");
             }
         }
 

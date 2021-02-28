@@ -2,14 +2,16 @@
 @using MovieLibrary.Common
 @{
     ViewData["Title"] = "All Categories";
- }
-<h4 class="text-left">
-@ViewData["Title"]
-</h4>
-<br/>
-<div class="container text-center">
+}
+<fieldset class="border border-white text-md-center" style="color:white">
+
+    <legend style="width:auto;padding:10px;">
+        <span>@ViewData["Title"]</span>
+    </legend>
+    <br />
+    <div class="container text-center">
         <table class="table table-bordered border-white">
-            <thead >
+            <thead>
                 <tr class="table-dark table-bordered " style="opacity:0.7;">
                     <th scope="col" style="border-color:white"></th>
                     <th scope="col" style="border-color:white">Category</th>
@@ -22,12 +24,12 @@
                 <tbody class="table-bordered">
                     <tr class="border-white">
                         <th scope="row" style="border-color:white"><i class="fab fa-slack"></i></th>
-                        <td  style="border-color:white">@(model.Name)</td>
-                        <td  style="border-color:white">@(model.MoviesCount)</td>
+                        <td style="border-color:white">@(model.Name)</td>
+                        <td style="border-color:white">@(model.MoviesCount)</td>
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
-                            <td  style="border-color:white">
-                                <a asp-controller="Categories" asp-action="Edit" asp-route-id="@(model.Name)" class="btn btn-primary rounded-pill">
+                            <td style="border-color:white">
+                                <a asp-controller="Categories" asp-action="Edit" asp-route-category="@(model.Name)" class="btn btn-primary rounded-pill">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                             </td>
@@ -36,7 +38,8 @@
                 </tbody>
             }
         </table>
-</div>
+    </div>
+</fieldset>
 @section Path{
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>

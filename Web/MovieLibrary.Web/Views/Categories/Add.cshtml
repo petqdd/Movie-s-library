@@ -8,7 +8,6 @@
         <legend style="width:auto;padding:10px;">
             @this.ViewData["Title"]
         </legend>
-        <hr />
         <form class="form-horizontal" method="post">
             <div class="mb-3 row">
                 <label class="col-form-label col-sm-2" asp-for="Name">Category Name</label>
@@ -28,8 +27,16 @@
     </fieldset>
     <br />
 </div>
-<vc:categories-of-movie>
-</vc:categories-of-movie>
+@*<div class="justify-content-center">
+    <vc:categories-of-movie>
+    </vc:categories-of-movie>
+</div>*@
+<div  class="row col-md-3 offset-9">
+
+        <vc:categories-of-movie>
+        </vc:categories-of-movie>
+
+</div>
 @section Path{
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
