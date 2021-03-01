@@ -38,6 +38,8 @@
 
         public bool CollectIsNotAvailable { get; set; }
 
+        public double AverageRating { get; set; }
+
         public ICollection<Artist> Artists { get; set; }
 
         public string SearchingResult { get; set; }

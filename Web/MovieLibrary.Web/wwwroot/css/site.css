@@ -5,11 +5,16 @@ for details on configuring this project to bundle and minify static web assets. 
     padding: 0;
     font-family: Verdana;
 }
-
-#comments {
+#voteElement {
 position:absolute;
-top:483px;
-left:340px;
+top:250px;
+left:180px;
+
+}
+#comments {
+    position: absolute;
+    top: 483px;
+    left: 340px;
 }
 ul {
 margin-top:5px;

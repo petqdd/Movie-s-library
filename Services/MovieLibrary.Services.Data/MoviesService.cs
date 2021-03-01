@@ -7,6 +7,7 @@
 
     using MovieLibrary.Data.Common.Repositories;
     using MovieLibrary.Data.Models;
+    using MovieLibrary.Services.Data;
     using MovieLibrary.Services.Mapping;
     using MovieLibrary.Web.ViewModels.Movies;
 
@@ -21,6 +22,7 @@
         private readonly IRepository<MoviesRatings> moviesRatingsRepository;
         private readonly IRepository<MoviesCategory> moviesCategoriesRepository;
         private readonly IRepository<MoviesArtist> moviesArtisRepository;
+        private readonly IRatingsService ratingsService;
 
         public MoviesService(
             IDeletableEntityRepository<Movie> moviesRepository,
@@ -31,7 +33,8 @@
             IRepository<MoviesArtist> moviesArtistsRepository,
             IRepository<MoviesRatings> moviesRatingsRepository,
             IRepository<MoviesCategory> moviesCategoriesRepository,
-            IRepository<MoviesArtist> moviesArtisRepository)
+            IRepository<MoviesArtist> moviesArtisRepository, 
+            IRatingsService ratingsService)
         {
             this.moviesRepository = moviesRepository;
             this.artistsRepository = artistsRepository;
@@ -42,6 +45,7 @@
             this.moviesRatingsRepository = moviesRatingsRepository;
             this.moviesCategoriesRepository = moviesCategoriesRepository;
             this.moviesArtisRepository = moviesArtisRepository;
+            this.ratingsService = ratingsService;
         }
 
         public async Task CreateMovieAsync(InputCreateMovieViewModel model)
@@ -194,6 +198,7 @@
                                               .Where(x => x.Id == movie.DirectorId)
                                               .Select(x => x.Name)
                                               .FirstOrDefault();
+            details.AverageRating = this.ratingsService.CalculateUserRating(movieId);
 
             var currentArtists = this.moviesArtisRepository.AllAsNoTracking()
                             .Where(x => x.MovieId == details.Id)
@@ -438,25 +443,7 @@
         //    return CalculateUserRating(movieId, this.moviesRatingsRepository);
         //}
 
-        //private static double CalculateUserRating(int movieId, IRepository<MoviesRatings> moviesRatingsRepository)
-        //{
-        //    int usersVoteCont = moviesRatingsRepository
-        //                          .AllAsNoTracking()
-        //                          .Where(x => x.MovieId == movieId)
-        //                          .Count();
-        //    double usersVoteSum = moviesRatingsRepository
-        //                            .AllAsNoTracking()
-        //                            .Where(x => x.MovieId == movieId)
-        //                            .Sum(x => x.Rating.Vote);
-
-        //    if (usersVoteCont == 0)
-        //    {
-        //        return 0;
-        //    }
-
-        //    var userRating = Math.Round(usersVoteSum / usersVoteCont, 1);
-        //    return userRating;
-        //}
+        
 
         //public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsArtists(int movieId)
         //{
