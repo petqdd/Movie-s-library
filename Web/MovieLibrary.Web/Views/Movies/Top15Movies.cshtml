@@ -1,0 +1,67 @@
+﻿
+@using MovieLibrary.Common
+@model MovieLibrary.Web.ViewModels.Movies.AllMoviesViewModel
+@{
+    this.ViewData["Title"] = $"Top 15 Movies Imdb";
+    var i = 1;
+}
+<fieldset class="border border-white text-md-left" style="color:white">
+
+    <legend style="width:auto;padding:10px;">
+        <span>@ViewData["Title"]</span>
+    </legend>
+
+    <div class="container text-center">
+        <div class="row gx-5 justify-content-start">
+            @foreach (var movie in Model.Movies)
+            {
+                <div class="card-group p-2">
+                    <div class="card" id="cardMovie">
+                        <div class="img-fluid ">
+                            <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">
+                                <img class="card-img-top" src=@movie.PosterPath alt="Film image" id="cardImage">
+                            </a>
+                            <a class="btn btn-danger btn-icon rounded-pill" id="rank">@(i++)</a>
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                            {
+                                <a id="deleteButton" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Remove movie"><i class="far fa-trash-alt"></i></a>
+                                <a id="editButton" asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-primary btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Edit movie"><i class="far fa-edit"></i></a>
+                            }
+                        </div>
+                        <div class="card-body text-white" id="movieCardBody">
+                            <p class="card-text">
+                                @movie.Name (@movie.Year)
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <i class="fas fa-trash-alt"></i>
+                            </div>
+                            <div class="modal-body">
+                                Do you want to delete movie?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <a asp-controller="Movies" asp-action="Delete" asp-route-id="@movie.Id" type="button" class="btn btn-danger btn-icon rounded-pill">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <hr />
+    </div>
+</fieldset>
+
+
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Top15 IMDb Movies</li>
+    </ol>
+}

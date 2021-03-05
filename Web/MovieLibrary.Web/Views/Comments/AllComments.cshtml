@@ -1,0 +1,100 @@
+﻿@model MovieLibrary.Web.ViewModels.Comments.OutputAllCommentsViewModel
+@using MovieLibrary.Common
+@{
+    ViewData["Title"] = "Comments";
+    if (ViewData["MovieId"] == null || ViewData["MovieId"] == 0 as object)
+    {
+        ViewData["MovieId"] = Model.MovieId;
+    }
+}
+<br />
+<div class="text-center">
+    <a asp-controller="Comments" asp-action="Create" asp-route-id="@Model.MovieId" class="btn btn-primary rounded-pill" style="align-content:center">
+        <i class="far fa-comment-dots"></i> Add Comment
+    </a>
+</div>
+<br />
+@*<h4>@ViewData["Title"]</h4>*@
+<fieldset class="border border-white text-md-center">
+    <legend style="width:auto;padding:10px;">
+        @ViewData["Title"]
+    </legend>
+    <div class="container text-center">
+        @if (@Model.Comments.Count() == 0)
+        {
+            <br />
+            <h4><i>There are no comments yet. Be the first to comment! </i></h4>
+            <br />
+        }
+
+        @foreach (var model in Model.Comments)
+        {
+            <div class="card-comment border border-white" id="cardComment">
+                <div class="card-header text-left">
+                    <p style="width:1000px; height:10px;">On  @(model.CreatedDate.ToString("dd-MM-yyyy")) - @(model.UserEmail) posted comment</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @{
+                            var userPhoto = string.Empty;
+                            if (model.UserPhoto == null)
+                            {
+                                userPhoto = "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
+                            }
+                            else
+                            {
+                                userPhoto = model.UserPhoto;
+                            }
+                        }
+                        <div class="col-md-2 text-left">
+                            <img class="img rounded-0" style="width:100px; height:100px" src="@userPhoto" alt="User Photo">
+                        </div>
+                        <div class="col-sm-7 text-left">
+
+                            @(model.CommentContent)
+                        </div>
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <div class="col-sm-3">
+                                <button class="btn btn-primary rounded-pill" data-toggle="modal" data-target="#confirm-delete">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <div class="modal-body">
+                            Do you want to delete comment?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <a href="/Comments/Delete?commentId=@(model.CommentId)&movieId=@(Model.MovieId)" type="button" class="btn btn-primary">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @if (@Model.Comments.Count() != 0)
+    {
+        <partial name="_PagingPartialComments" model="@Model" />
+    }
+</fieldset>
+
+@*</div>*@
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Movies" asp-action="All">Movies</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Movies" asp-action="Details" asp-route-id="@Model.MovieId">Detail</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Comments</li>
+    </ol>
+}

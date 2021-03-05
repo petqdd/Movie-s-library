@@ -1,0 +1,54 @@
+﻿
+@using MovieLibrary.Common
+@model MovieLibrary.Web.ViewModels.Movies.AllMoviesViewModel
+@{
+    this.ViewData["Title"] = $"All movies in my collection";
+}
+
+<fieldset class="border border-white text-md-left" style="color:white">
+
+    <legend style="width:auto;padding:10px;">
+        <span>@ViewData["Title"]</span>
+    </legend>
+
+    @if (Model.Movies.Count() == 0)
+    {
+        <br />
+        <h4><i> There are no movies in this category. </i></h4>
+        <br />
+    }
+    <div class="container text-center">
+        <div class="row gx-5 justify-content-start">
+            @foreach (var movie in Model.Movies)
+            {
+                //List<string> categories = movie.Categories.ToList();
+                //string categoriesAsString = string.Join(", ", categories);
+
+                <div class="card-group p-2">
+                    <div class="card" id="cardMovie">
+                        <div class="img-fluid ">
+                            <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">
+                                <img class="card-img-top" src=@movie.PosterPath alt="Film image" id="cardImage">
+                            </a>
+                        </div>
+                        <div class="card-body text-white" id="movieCardBody">
+                            <p class="card-text">
+                                @movie.Name (@movie.Year)
+                            </p>
+                        </div>
+                    </div>
+                </div> 
+            }
+        </div>
+        <hr />
+        <partial name="_PagingPartialInCollection" model="@Model" />
+    </div>
+</fieldset>
+
+
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Movies</li>
+    </ol>
+}
