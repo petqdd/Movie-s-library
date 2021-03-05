@@ -1,0 +1,122 @@
+﻿@model MovieLibrary.Web.Views.ViewModels.RandomMoviesViewModel
+@{
+    var newMovies = Model.Movies.ToArray();
+}
+@*<div class="container-fluid">*@
+
+
+    @*<hr class="my-4">*@
+
+    <!--Carousel Wrapper-->
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel" >
+
+        <!--Controls-->
+
+        @*<a class="carousel-control-prev" href="#multi-item-example" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#multi-item-example" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>*@
+
+        <!--/.Controls
+            <!--Indicators-->
+        <ol class="carousel-indicators">
+            <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+            <li data-target="#multi-item-example" data-slide-to="1"></li>
+            <li data-target="#multi-item-example" data-slide-to="2"></li>
+        </ol>
+        <!--/.Indicators-->
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+            <!--First slide-->
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card-group mb-md-2" id="caroselCard">
+                            <a asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[0].Id">
+                                <img class="card-img-top" src="@newMovies[0].PosterPath" alt="Card image cap" id="caroselImage">
+                            </a>
+                            <div class="card-body" id="caroselTitle">
+                                <h6 class="card-title">@(newMovies[0].Name) (@newMovies[0].Year)</h6>
+                            </div>
+                        </div>
+                    </div>
+                    @for (int i = 1; i < 6; i++)
+                    {
+                        <div class="col-md-2 clearfix d-none d-md-block">
+                            <div class="card-group mb-md-2" id="caroselCard">
+                                <a asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[i].Id">
+                                    <img class="card-img-top" src="@newMovies[i].PosterPath" alt="Card image cap" id="caroselImage">
+                                </a>
+                                <div class="card-body" id="caroselTitle">
+                                    <h6 class="card-title">@(newMovies[i].Name) (@newMovies[i].Year)</h6>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!--/.First slide-->
+            <!--Second slide-->
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card-group mb-md-2" id="caroselCard">
+                            <a asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[6].Id">
+                                <img class="card-img-top" src="@newMovies[6].PosterPath" alt="Card image cap" id="caroselImage">
+                            </a>
+                            <div class="card-body" id="caroselTitle">
+                                <h6 class="card-title">@(newMovies[6].Name) (@newMovies[6].Year)</h6>
+                            </div>
+                        </div>
+                    </div>
+                    @for (int i = 7; i < 12; i++)
+                    {
+                        <div class="col-md-2 clearfix d-none d-md-block">
+                            <div class="card-group mb-md-2" id="caroselCard">
+                                <a asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[i].Id">
+                                    <img class="card-img-top" src="@newMovies[i].PosterPath" alt="Card image cap" id="caroselImage">
+                                </a>
+                                <div class="card-body" id="caroselTitle">
+                                    <h6 class="card-title">@(newMovies[i].Name) (@newMovies[i].Year)</h6>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!--/.Second slide-->
+            <!--Third slide-->
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card-group mb-md-2" id="caroselCard">
+                            <a asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[12].Id">
+                                <img class="card-img-top" src="@newMovies[12].PosterPath" alt="Card image cap" id="caroselImage">
+                            </a>
+                            <div class="card-body" id="caroselTitle">
+                                <h6 class="card-title">@(newMovies[12].Name) (@newMovies[12].Year)</h6>
+                            </div>
+                        </div>
+                    </div>
+                    @for (int i = 13; i < 18; i++)
+                    {
+                        <div class="col-md-2 clearfix d-none d-md-block">
+                            <div class="card-group mb-md-2" id="caroselCard">
+                                <a asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[i].Id">
+                                    <img class="card-img-top" src="@newMovies[i].PosterPath" alt="Card image cap" id="caroselImage">
+                                </a>
+                                <div class="card-body" id="caroselTitle">
+                                    <h6 class="card-title">@(newMovies[i].Name) (@newMovies[i].Year)</h6>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+@*</div>*@
+

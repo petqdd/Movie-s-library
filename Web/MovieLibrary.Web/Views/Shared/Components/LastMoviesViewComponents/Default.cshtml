@@ -1,0 +1,15 @@
+﻿@model MovieLibrary.Web.Views.ViewModels.LastMoviesViewModel
+<h4 style="color:white">Last movies:</h4>
+<p>
+    <ul class="list" style="color: #f3520b" >
+        @foreach (var movie in Model.Movies)
+        {
+            <li>
+                <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id" style="color: #f3520b">
+                    @movie.Name (@movie.Year)
+                </a>
+
+            </li>
+        }
+    </ul>
+</p>
