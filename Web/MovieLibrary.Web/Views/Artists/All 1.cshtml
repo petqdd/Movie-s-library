@@ -1,0 +1,71 @@
+﻿@model MovieLibrary.Web.ViewModels.Artists.AllArtistsViewModel
+@using MovieLibrary.Common
+@{
+    this.ViewData["Title"] = "All artists";
+    var sortedArtists = Model.Artists.OrderBy(x => x.Name).ToList();
+}
+<fieldset class="border border-white text-md-left" style="color:white">
+
+    <legend style="width:auto;padding:10px;">
+        <span>@ViewData["Title"]</span>
+    </legend>
+    <div class="container text-center">
+        <div class="row gx-5 justify-content-around">
+            @foreach (var artist in sortedArtists)
+            {
+            var name=artist.Name;
+            <div class="card-group p-1">
+                <div class="card" id="cardArtist">
+                    <div class="img-fluid">
+                        @if (artist.PhotoUrl == null)
+                            {
+                        <img class="card-img-top" src="~/img/5.jpeg" alt="Photo image" id="cardArtistImage">
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                                {
+                        <a id="editButtonForArtist" asp-controller="Artists" asp-action="Edit" asp-route-id="@name" class="btn btn-primary btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Edit artist">
+                            <i class="far fa-edit"></i>
+                        </a>
+                                }
+                            }
+                            else
+                            {
+                        <img class="card-img-top" src="@artist.PhotoUrl" alt="Photo image" id="cardArtistImage">
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                                {
+                        <a id="editButtonForArtist" asp-controller="Artists" asp-action="Edit" asp-route-id="@name" class="btn btn-primary btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Edit artist">
+                            <i class="far fa-edit"></i>
+                        </a>
+                                }
+                            }
+                    </div>
+                    <div class="card-body text-white" id="artistCardBody">
+                        <p class="card-text">
+                            @artist.Name
+                        </p>
+                    </div>
+                    <div class="card-footer text-white" id="artistCardFooter">
+
+                        @if (artist.BiographyUrl == null)
+                            {
+                        <a href="https://www.google.com" target="_blank" class="stretched-link text-success" style="position:relative;">Biography</a>
+                            }
+                            else
+                            {
+                        <a href="@artist.BiographyUrl" target="_blank" class="stretched-link text-success" style="position:relative;">Biography</a>
+                            }
+
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        <hr />
+        <partial name="_PagingPartialArtists" model="@Model" />
+    </div>
+</fieldset>
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Artists</li>
+    </ol>
+}

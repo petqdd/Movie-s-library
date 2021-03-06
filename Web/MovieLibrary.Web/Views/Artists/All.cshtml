@@ -4,6 +4,14 @@
     this.ViewData["Title"] = "All artists";
     var sortedArtists = Model.Artists.OrderBy(x => x.Name).ToList();
 }
+
+@if (this.TempData.ContainsKey("Message"))
+{
+<div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    @TempData["Message"]
+</div>
+}
 <fieldset class="border border-white text-md-center" style="color:white">
 
     <legend style="width:auto;padding:10px;">
@@ -31,7 +39,7 @@
                                 <img class="card-img-top" src="@artist.PhotoUrl" alt="Photo image" id="cardArtistImage">
                                 @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                                 {
-                                    <a id="editButtonForArtist" href="/Artists/Edit?artist=@artist.Name"  class="btn btn-primary btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Edit artist">
+                                    <a id="editButtonForArtist" href="/Artists/Edit?artist=@artist.Name" class="btn btn-primary btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Edit artist">
                                         <i class="far fa-edit"></i>
                                     </a>
                                 }

@@ -1,0 +1,226 @@
+﻿@using MovieLibrary.Common
+@model MovieLibrary.Web.ViewModels.Movies.DetailsMovieViewModel
+
+<br />
+<div class="col-md-10 offset-1">
+    <div class="card" id="movieDetails">
+        <div class="card-header" id="secondPoster" style="background-image:url(@Model.SecondPosterUrl );" alt="Background">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <img src="@Model.PosterUrl" id="poster">
+                </div>
+                <div class="col-12 col-md-8 " id="contentMovie">
+                    <div class="row">
+                        <div class="title col-12 col-md-11">
+                            <h3 class="mb-0 "><b>@Model.Name</b> </h3>
+                            <h3><b>(@Model.Year)</b></h3>
+                        </div>
+                        @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            if (Model.CollectIsNotAvailable == false)
+                            {
+                                <div class="collect">
+                                    <a asp-controller="Movies" asp-action="AddToCollection" asp-route-id="@Model.Id" class="btn btn-danger btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Add movie in collection "><i class="fas fa-heart"></i></a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="collect">
+                                    <a data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Remove movie from collection "><i class="far fa-trash-alt"></i></a>
+                                </div>
+                            }
+                            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </div>
+                                        <div class="modal-body">
+                                            Do you want to delete movie?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            <a asp-controller="Movies" asp-action="RemoveFromCollection" asp-route-id="@Model.Id" type="button" class="btn btn-danger btn-icon rounded-pill">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div id="voteElement">
+                        <p class="text-right" style="color:darkorange;font-size:30px;">Rate movie</p>
+                        @*@for (int i = (int)Math.Round(@Model.AverageRating)+1; i <= 10; i++)
+                        {
+                            for (int k = 1; k < (int)Math.Round(@Model.AverageRating); k++)
+                            {
+                                <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="k"></span>
+                            }
+                            <span class="fa fa-star" style="font-size:25px;" data-vote="i"></span>
+                        }*@
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="1"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="2"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="3"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="4"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="5"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="6"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="7"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="8"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="9"></span>
+                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="10"></span>
+                        <span id="averageRatingValue" style="color:darkorange;font-size:25px;">@Model.AverageRating.ToString("0.0")</span><span style="color:darkorange;font-size:25px;"> / 10</span>
+
+                    </div>
+                    <div class="info" id="contentInfo">
+                        <span style="color:deepskyblue;padding-right:2em">
+                            <i class="fas fa-list"></i> @Model.Categories
+                        </span>
+                        <span style="color:chartreuse;padding-right:2em">
+                            <i class="far fa-clock"></i> @Model.Runtime min
+                        </span>
+                        <span style="color:darkorange">
+                            <img style="vertical-align: middle; margin-left:15px;" src="~/img/imdbicon.png"> @Model.ImdbRating <i class="fas fa-star"></i>
+                        </span>
+                        <p style="color:darkviolet"> Director: @Model.Director</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body" id="infoNavbar">
+            <div class="row">
+                <ul class="nav nav-tabs card-header-tabs" id="info-list" role="tablist">
+                    <li class="nav-item" style="padding-left:1em;">
+                        <a class="nav-link active" href="#storyline" role="tab" aria-controls="storyline" aria-selected="true"><i class="fas fa-book-open"></i> Storyline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#trailer" role="tab" aria-controls="trailer" aria-selected="false"><i class="fas fa-video"></i> Trailer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#actors" role="tab" aria-controls="actors" aria-selected="false"><i class="far fa-id-badge"></i> Actors</a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a class="nav-link" href="#comments" role="tab" aria-controls="comments" aria-selected="false"><i class="far fa-comment-dots"></i> Comments</a>
+                        </li>*@
+                </ul>
+                <p id="comments">
+                    <a class="btn" asp-controller="Comments" asp-action="AllComments" asp-route-id="@Model.Id"><i class="far fa-comment-dots"></i> Comments</a>
+                </p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="tab-content mt-3">
+                <div class="tab-pane active" id="storyline" role="tabpanel">
+                    <p class="card-text">@Model.Storyline</p>
+                </div>
+
+                <div class="tab-pane" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
+                    <iframe width="940" height="550"
+                            src="@Model.TrailerUrl">
+                    </iframe>
+                </div>
+
+                <div class="tab-pane" id="actors" role="tabpanel" aria-labelledby="actors-tab">
+                    <div class="row gx-5">
+                        @foreach (var artist in Model.Artists)
+                        {
+                            <div class="card-group p-2">
+                                <div class="artist card p-1" id="detailArtistCard">
+                                    @if (artist.PhotoUrl == null)
+                                    {
+                                        <a href="https://www.google.com" target="_blank">
+                                            <img class="card-img-top" src="~/img/5.jpeg" alt="ArtistPhoto" id="detailArtistPhoto">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        if (artist.BiographyUrl != null)
+                                        {
+                                            <a href="@artist.BiographyUrl" target="_blank">
+                                                <img class="card-img-top" src="@artist.PhotoUrl" alt="ArtistPhoto" id="detailArtistPhoto">
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="https://www.google.com" target="_blank">
+                                                <img class="card-img-top" src="@artist.PhotoUrl" alt="ArtistPhoto" id="detailArtistPhoto">
+                                            </a>
+                                        }
+                                    }
+                                    <div class="card-body text-center" style="background-color: #25055a;font-size:11px;" id="detailArtistPhotoTitle">
+                                        <p> @artist.Name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form method="post" id="antiForgeryForm"></form>
+@section Scripts {
+    <script>
+        $("span[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var movieId = @Model.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { movieId: movieId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Ratings",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageRatingValue').html(data.averageRating.toFixed(1));
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
+    </script>
+
+
+    <script>
+        $('#info-list a').on('click', function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    </script>
+}
+@*<script>
+            $("li[data-vote]").each(function (el) {
+                $(this).click(function () {
+                    var value = $(this).attr("data-vote");
+                    var recipeId = @Model.Id;
+                    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                    var data = { recipeId: recipeId, value: value };
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/Votes",
+                        data: JSON.stringify(data),
+                        headers: {
+                            'X-CSRF-TOKEN': antiForgeryToken
+                        },
+                        success: function (data) {
+                            $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                        },
+                        contentType: 'application/json',
+                    });
+                })
+            });
+    </script>*@
+
+
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Movies" asp-action="All">Movies</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detail</li>
+    </ol>
+}
+

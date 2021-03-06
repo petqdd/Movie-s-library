@@ -42,6 +42,7 @@
                     await this.artistService.CreateArtistAsync(model);
                 }
 
+                this.TempData["Message"] = "Artist added successfully!";
                 return this.RedirectToAction("All");
             }
         }

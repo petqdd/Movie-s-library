@@ -5,8 +5,7 @@
 
     using MovieLibrary.Data.Common.Repositories;
     using MovieLibrary.Data.Models;
-    using MovieLibrary.Web.ViewModels.Users;
-
+  
     public class UsersService : IUsersService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;

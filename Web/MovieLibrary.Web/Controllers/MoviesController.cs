@@ -8,7 +8,6 @@
     using MovieLibrary.Common;
     using MovieLibrary.Web.Services;
     using MovieLibrary.Web.ViewModels.Movies;
-    using MovieLibrary.Web.Views.ViewModels;
 
     public class MoviesController : BaseController
     {

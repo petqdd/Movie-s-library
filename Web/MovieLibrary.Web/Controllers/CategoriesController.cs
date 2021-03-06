@@ -36,16 +36,13 @@
                 if (!this.categoriesService.IsExisting(category.Name))
                 {
                     await this.categoriesService.CreateCategoryAsync(category);
-                    return this.Redirect("/");
+                    this.TempData["Message"] = "Category added successfully!";
+                    return this.RedirectToAction("All");
                 }
 
-                return this.RedirectToAction("Error");
+                this.TempData["Message"] = "Category already exist!";
+                return this.View();
             }
-        }
-
-        public IActionResult Error()
-        {
-            return this.View();
         }
 
         public IActionResult All()
@@ -73,10 +70,12 @@
                 if (!this.categoriesService.IsExisting(model.Name))
                 {
                     await this.categoriesService.EditCategoryAsync(category, model);
+                    this.TempData["Message"] = "Category edited successfully!";
                     return this.RedirectToAction("All");
                 }
 
-                return this.RedirectToAction("Error");
+                this.TempData["Message"] = "Category already exist!";
+                return this.RedirectToAction("All");
             }
         }
     }

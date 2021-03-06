@@ -1,0 +1,128 @@
+﻿@model MovieLibrary.Web.ViewModels.Comments.OutputAllComentsAndMoviesViewModel
+@using MovieLibrary.Common
+@{
+    ViewData["Title"] = "All comments for all movies";
+}
+<fieldset class="border border-white text-md-center">
+    <legend style="width:auto;padding:10px;">
+        @ViewData["Title"]
+    </legend>
+    <br />
+    <div class="container text-center">
+        @if (@Model.Comments.Count() == 0)
+        {
+            <br />
+            <h4><i>There are no comments yet. Be the first to comment! </i></h4>
+            <br />
+        }
+
+        @foreach (var model in Model.Comments)
+        {
+            <div class="card-comment border border-white" id="cardComment">
+                <div class="card-header text-left">
+                    <p style="width:1000px; height:10px;">On  @(model.CreatedDate.ToString("dd-MM-yyyy")) - @(model.UserEmail)  posted comment for Movie : @(model.MovieName)</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @{
+                            var userPhoto = string.Empty;
+                            if (model.UserPhoto == null)
+                            {
+                                userPhoto = "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
+                            }
+                            else
+                            {
+                                userPhoto = model.UserPhoto;
+                            }
+                        }
+                        <div class="col-md-2 text-left">
+                            <img class="img rounded-0" style="width:100px; height:100px" src="@userPhoto" alt="User Photo">
+                        </div>
+                        <div class="col-sm-7 text-left">
+
+                            @(model.CommentContent)
+                        </div>
+
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <div class="col-sm-3">
+                                <button class="btn btn-danger rounded-pill" data-toggle="modal" data-target="#confirm-delete">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br />
+            @*<div class="row" style="width:1000px; height:10px;">
+                    <div class="col-sm-12 text-left">
+                        On  @(model.CreatedDate.ToString("dd-MM-yyyy")) - @(model.UserEmail)  posted comment for Movie : @(model.MovieName)
+                    </div>
+                </div>
+                <div class="row" style="width:1000px; height:80px;">
+                    @{
+                        var userPhoto = string.Empty;
+                        if (model.UserPhoto == null)
+                        {
+                            userPhoto = "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
+                        }
+                        else
+                        {
+                            userPhoto = model.UserPhoto;
+                        }
+                    }
+                    <div class="col-sm-2 text-left">
+                        <img class="img rounded-0" style="width:100px; height:100px" src="@userPhoto" alt="User Photo">
+                    </div>
+                    <div class="col-sm-6 text-left">
+
+                        @(model.CommentContent)
+                    </div>
+
+                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <div class="col-sm-2">
+                            <a href="/Comments/Delete?commentId=@(model.CommentId)&movieId=@(model.MovieId)" class="btn btn-primary rounded-pill">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        </div>
+                    }
+
+                </div>
+                <hr />*@
+            <!-- Modal -->
+            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <div class="modal-body">
+                            Do you want to delete comment?
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post">
+                                <button type="button" class="btn btn-default rounded-pill" data-dismiss="modal">Cancel</button>
+                                <a asp-controller="Comments" asp-action="Delete" asp-route-commentId="@(model.CommentId)" asp-route-movieId="@(model.MovieId)" type="button" class="btn btn-danger rounded-pill">Delete</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    @if (@Model.Comments.Count() != 0)
+    {
+        <partial name="_PagingPartial" model="@Model" />
+    }
+</fieldset>
+
+
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Movies" asp-action="All">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">All Comments for all movies</li>
+    </ol>
+}

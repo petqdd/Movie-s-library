@@ -3,16 +3,23 @@
 <head>
     <meta charset="utf-8" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+ 
+    <link rel="stylesheet" href="~/css/lazy.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />. 
 
 </head>
 <body>
     @model MovieLibrary.Web.ViewModels.Movies.InputCreateMovieViewModel
-    @{ this.ViewData["Title"] = "Add new movie";
+    @{ Layout = null;
+        this.ViewData["Title"] = "Add new movie";
         var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 
     }
@@ -89,15 +96,15 @@
                 <div class="mb-3 row">
                     <label asp-for="Categories" class="col-form-label col-sm-2"></label>
                     <div class="col-sm-8">
-                        <select class="selectpicker" multiple="multiple">
-                            <optgroup label="Categories:">
+                        <select class="selectpicker" id="selectpicker" multiple="multiple">
+                            @*<optgroup label="Categories:">*@
                                 @foreach (var item in categoryItems)
                                 {
                                     var value = item.Value;
                                     var label = item.Text;
                                     <option value="@value">@label</option>
                                 }
-                            </optgroup>
+                            @*</optgroup>*@
                         </select>
                         <span asp-validation-for="Categories" class="text-danger"></span>
                     </div>
@@ -110,7 +117,7 @@
                 <div class="form-group">
                     <div class="d-flex justify-content-center">
                         <button type="submit" id="submit" class="btn btn-primary rounded-pill">Submit</button>
-                        <a class="btn btn-primary rounded-pill" href="/Movies/All" role="button">Cancel</a>
+                        <a class="btn btn-primary rounded-pill" asp-controller="Movies" asp-action="All" role="button">Cancel</a>
                     </div>
                 </div>
 
@@ -128,18 +135,19 @@
             }
         </script>
 
-        <script>
-            $('select').selectpicker();
-
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#selectpicker').multiselect();
+            });
         </script>
     }
 
-    @section Path{
+    @*@section Path{
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/Movies/All">Movies</a></li>
             <li class="breadcrumb-item active" aria-current="page">Add New Movie</li>
         </ol>
-    }
-    </body>
+    }*@
+</body>
 </html>
