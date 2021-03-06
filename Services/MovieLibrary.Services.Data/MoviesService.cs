@@ -75,7 +75,7 @@
                     var newDirector = new Director { Name = model.Director };
                     await this.directorsRepository.AddAsync(newDirector);
                     await this.directorsRepository.SaveChangesAsync();
-                    movie.Director.Id = newDirector.Id;
+                    movie.DirectorId = newDirector.Id;
                 }
                 else
                 {

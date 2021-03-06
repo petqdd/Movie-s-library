@@ -13,8 +13,8 @@ left:180px;
 }
 #comments {
     position: absolute;
-    top: 483px;
-    left: 340px;
+    top: 469px;
+    left: 350px;
 }
 ul {
 margin-top:5px;
@@ -75,7 +75,7 @@ hr {
 
 #cardMovie {
     /* height: 340px;*/
-    width: 210px;
+    width: 212px;
     background-color: black;
     border-radius: 8px; /* 5px rounded corners */
     border-color: #25055a;
@@ -100,10 +100,6 @@ hr {
         color: #df691a;
     }
 
-
-#multi-item-example {
-    
-}
 
 #caroselCard {
     /* height: 340px;*/
@@ -217,20 +213,20 @@ hr {
 }
 
 #detailArtistCard {
-    width: 175px;
+    width: 170px;
     height: 230px;
     background-color: black;
     border-radius: 8px 8px 0px 0px;
 }
 
 #detailArtistPhoto {
-    width: 170px;
+    width: 165px;
     height: 170px;
     border-radius: 8px 8px 0px 0px;
 }
 
 #detailArtistPhotoTitle {
-    width: 170px;
+    width: 165px;
     height: 60px;
 }
 

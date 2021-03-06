@@ -1,6 +1,12 @@
 ﻿@using MovieLibrary.Common
 @model MovieLibrary.Web.ViewModels.Movies.DetailsMovieViewModel
-
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @TempData["Message"]
+    </div>
+}
 <br />
 <div class="col-md-10 offset-1">
     <div class="card" id="movieDetails">
@@ -47,29 +53,32 @@
                             </div>
                         }
                     </div>
-                    <div id="voteElement">
-                        <p class="text-right" style="color:darkorange;font-size:30px;">Rate movie</p>
-                        @*@for (int i = (int)Math.Round(@Model.AverageRating)+1; i <= 10; i++)
-                        {
-                            for (int k = 1; k < (int)Math.Round(@Model.AverageRating); k++)
-                            {
-                                <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="k"></span>
-                            }
-                            <span class="fa fa-star" style="font-size:25px;" data-vote="i"></span>
-                        }*@
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="1"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="2"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="3"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="4"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="5"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="6"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="7"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="8"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="9"></span>
-                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="10"></span>
-                        <span id="averageRatingValue" style="color:darkorange;font-size:25px;">@Model.AverageRating.ToString("0.0")</span><span style="color:darkorange;font-size:25px;"> / 10</span>
+                    @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <div id="voteElement">
+                            <p class="text-right" style="color:darkorange;font-size:30px;">Rate movie</p>
+                            @*@for (int i = (int)Math.Round(@Model.AverageRating)+1; i <= 10; i++)
+                                {
+                                    for (int k = 1; k < (int)Math.Round(@Model.AverageRating); k++)
+                                    {
+                                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="k"></span>
+                                    }
+                                    <span class="fa fa-star" style="font-size:25px;" data-vote="i"></span>
+                                }*@
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="1"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="2"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="3"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="4"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="5"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="6"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="7"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="8"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="9"></span>
+                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="10"></span>
+                            <span id="averageRatingValue" style="color:darkorange;font-size:25px;">@Model.AverageRating.ToString("0.0")</span><span style="color:darkorange;font-size:25px;"> / 10</span>
 
-                    </div>
+                        </div>
+                    }
                     <div class="info" id="contentInfo">
                         <span style="color:deepskyblue;padding-right:2em">
                             <i class="fas fa-list"></i> @Model.Categories

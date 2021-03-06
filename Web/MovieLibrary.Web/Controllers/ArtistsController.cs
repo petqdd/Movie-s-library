@@ -80,6 +80,7 @@
             else
             {
                 await this.artistService.EditArtistAsync(artist, model);
+                this.TempData["Message"] = "Artist edited successfully!";
                 return this.RedirectToAction("All");
             }
         }

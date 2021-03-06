@@ -41,6 +41,7 @@
             else
             {
                 await this.moviesService.CreateMovieAsync(model);
+                this.TempData["Message"] = "Movie added successfully!";
                 return this.RedirectToAction("All");
             }
         }
@@ -139,6 +140,7 @@
                 }
 
                 await this.moviesService.EditMovieAsync(id, model);
+                this.TempData["Message"] = "Movie edited successfully!";
                 return this.Redirect($"/Movies/Details/{id}");
             }
         }
