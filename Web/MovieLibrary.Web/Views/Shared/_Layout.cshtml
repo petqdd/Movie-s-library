@@ -5,9 +5,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="keywords" content="movie,library,film,category,imdb,collection"/>
+    <meta name="description" content="Movie's library is a big library for movies. Find ratings,comments and reviews for a lot of movies.Create collection,enjoy and fun"/>
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -26,6 +28,7 @@
 
 </head>
 <body>
+    <partial name="_CookieConsentPartial" />
     <div id="main">
         <nav id="navigationBar">
             <img src="/logo/1.png" alt="logo" style="width:180px;height:120px;">
@@ -51,28 +54,28 @@
         </nav>
     </div>
     @RenderSection("Path", false)
-<div class="container-fluid" id="body">
-    <div class="row col-md-12">
-        @*@if (this.SignInManager.IsSignedIn(this.User))
-            {*@
-        <vc:random-movies-view-components>
-        </vc:random-movies-view-components>
-        @*}*@
-    </div>
-    <hr/>
-    <div class="row">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="col-md-10 ">
-            @this.RenderBody()
-        </main>
-        <br/>
-        <br/>
-        <div class="col-md-2 border border-top-0 border-bottom-0" id="rightViewComponent">
-            <vc:last-movies-view-components>
-            </vc:last-movies-view-components>
+    <div class="container-fluid" id="body">
+        <div class="row col-md-12">
+            @*@if (this.SignInManager.IsSignedIn(this.User))
+                {*@
+            <vc:random-movies-view-components>
+            </vc:random-movies-view-components>
+            @*}*@
+        </div>
+        <hr />
+        <div class="row">
+            @*<partial name="_CookieConsentPartial" />*@
+            <main role="main" class="col-md-10 ">
+                @this.RenderBody()
+            </main>
+            <br />
+            <br />
+            <div class="col-md-2 border border-top-0 border-bottom-0" id="rightViewComponent">
+                <vc:last-movies-view-components>
+                </vc:last-movies-view-components>
+            </div>
         </div>
     </div>
-</div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - Petya Dankova made with <i class="fas fa-heart text-danger"></i>

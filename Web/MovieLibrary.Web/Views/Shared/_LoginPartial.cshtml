@@ -72,7 +72,11 @@
                 </button>
                 <ul class="dropdown-menu " id="categoryMenu">
                     <li>
-                        <a class="nav-link " asp-controller="Users" asp-action="Profile" title="Settings"><b>Add profile picture</b></a>
+                        <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>My profile</b></a>
+                        @*<a class="text-white" href="/Users/Profile"> Settings</a>*@
+                    </li>
+                    <li>
+                        <a class="nav-link " asp-controller="Users" asp-action="Profile" title="AddPhoto"><b>Add profile picture</b></a>
                         @*<a class="text-white" href="/Users/Profile"> Settings</a>*@
                     </li>
                     <li>
