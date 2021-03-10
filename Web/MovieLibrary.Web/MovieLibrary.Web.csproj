@@ -13,13 +13,9 @@
 
   <ItemGroup>
     <Compile Remove="Views\Ratings\**" />
-    <Compile Remove="Views\Users\**" />
     <Content Remove="Views\Ratings\**" />
-    <Content Remove="Views\Users\**" />
     <EmbeddedResource Remove="Views\Ratings\**" />
-    <EmbeddedResource Remove="Views\Users\**" />
     <None Remove="Views\Ratings\**" />
-    <None Remove="Views\Users\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +43,7 @@
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Users\Profile.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
