@@ -97,7 +97,6 @@
         [Authorize]
         public async Task<IActionResult> RemoveFromCollection(int id)
         {
-            //var test = this.HttpContext.User.Identity.Name;
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             await this.moviesService.RemoveFromCollectionAsync(userId, id);
             return this.RedirectToAction("Collection");
@@ -116,7 +115,6 @@
         {
             var viewModel = this.moviesService.GetMovieForEdit(id);
             viewModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
-            //viewModel.ArtistsItems = this.moviesService.GetAllAsKeyValuePairsArtists(id);
             return this.View(viewModel);
         }
 
@@ -161,7 +159,6 @@
             foreach (var model in viewModel.Movies)
             {
                 model.CollectIsNotAvailable = this.moviesService.IsMovieCollected(model.Id, userId);
-                //model.UserRating = this.moviesService.CalculateTotalUserRating(model.Id);
             }
 
             return this.View(viewModel);

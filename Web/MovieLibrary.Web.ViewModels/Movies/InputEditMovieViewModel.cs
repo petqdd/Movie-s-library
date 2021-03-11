@@ -1,16 +1,14 @@
 ﻿namespace MovieLibrary.Web.ViewModels.Movies
 {
     using System.Collections.Generic;
-
     using System.ComponentModel.DataAnnotations;
-    using MovieLibrary.Data.Models;
+
     using MovieLibrary.Web.ValidationsAttribute;
 
     public class InputEditMovieViewModel
     {
         public InputEditMovieViewModel()
         {
-            //this.Artists = new HashSet<string>();
             this.Categories = new HashSet<string>();
         }
 
@@ -51,8 +49,6 @@
         [Range(1, 10.0)]
         [Display(Name = "Imdb Rating")]
         public double ImdbRating { get; set; }
-
-        //public ICollection<string> Artists { get; set; }
 
         public ICollection<string> Categories { get; set; }
 

@@ -65,7 +65,6 @@
                     .FirstOrDefault();
 
                 currentUserRating.RatingId = ratingId;
-                
                 this.usersRatingsRepository.Update(currentUserRating);
                 await this.usersRatingsRepository.SaveChangesAsync();
 

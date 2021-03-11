@@ -35,12 +35,6 @@
 
         ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category, int page, int itemPerPage);
 
-        //IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsArtists(int movieId);
-
         ICollection<OutputMovieViewModel> GetTop15MovieImdb();
-
-        //double CalculateTotalUserRating(int movieId);
-
-        // bool IsMovieExisting(string movieName);
     }
 }

@@ -15,17 +15,20 @@
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IRepository<MoviesComment> moviesCommentsRepository;
         private readonly IRepository<UsersComment> usersCommentsRepository;
+        private readonly IRepository<Photo> photosRepository;
 
         public CommentService(
             IDeletableEntityRepository<Comment> commentsRepository,
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IRepository<MoviesComment> moviesCommentsRepository,
-            IRepository<UsersComment> usersCommentsRepository)
+            IRepository<UsersComment> usersCommentsRepository,
+            IRepository<Photo> photosRepository)
         {
             this.commentsRepository = commentsRepository;
             this.usersRepository = usersRepository;
             this.moviesCommentsRepository = moviesCommentsRepository;
             this.usersCommentsRepository = usersCommentsRepository;
+            this.photosRepository = photosRepository;
         }
 
         public async Task CreateCommentAsync(InputCommentViewModel model, string userId)
@@ -87,13 +90,13 @@
                                     .Where(x => x.Id == userId)
                                     .Select(x => x.Email)
                                     .FirstOrDefault();
-                //var userPhoto = this.usersRepository
-                //                    .AllAsNoTracking()
-                //                    .Where(x => x.Id == userId)
-                //                    .Select(x => x.Photo)
-                //                    .FirstOrDefault();
+                var userPhoto = this.photosRepository
+                                    .AllAsNoTracking()
+                                    .Where(x => x.UserId == userId)
+                                    .Select(x => x.RemotePhotoUrl)
+                                    .FirstOrDefault();
                 comment.UserEmail = userEmail;
-                //comment.UserPhoto = userPhoto;
+                comment.UserPhoto = userPhoto;
             }
 
             return comments;
@@ -134,13 +137,13 @@
                                     .Where(x => x.Id == userId)
                                     .Select(x => x.Email)
                                     .FirstOrDefault();
-                //var userPhoto = this.usersRepository
-                //                    .AllAsNoTracking()
-                //                    .Where(x => x.Id == userId)
-                //                    .Select(x => x.Photo)
-                //                    .FirstOrDefault();
+                var userPhoto = this.photosRepository
+                                    .AllAsNoTracking()
+                                    .Where(x => x.UserId == userId)
+                                    .Select(x => x.RemotePhotoUrl)
+                                    .FirstOrDefault();
                 comment.UserEmail = userEmail;
-                //comment.UserPhoto = userPhoto;
+                comment.UserPhoto = userPhoto;
             }
 
             return comments;

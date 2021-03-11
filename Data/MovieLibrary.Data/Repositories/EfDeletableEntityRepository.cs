@@ -3,10 +3,10 @@
     using System;
     using System.Linq;
 
-    using MovieLibrary.Data.Common.Models;
-    using MovieLibrary.Data.Common.Repositories; 
-
     using Microsoft.EntityFrameworkCore;
+
+    using MovieLibrary.Data.Common.Models;
+    using MovieLibrary.Data.Common.Repositories;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity

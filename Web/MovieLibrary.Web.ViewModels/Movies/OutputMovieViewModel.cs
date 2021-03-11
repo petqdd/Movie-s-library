@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using AutoMapper;
+
     using MovieLibrary.Data.Models;
     using MovieLibrary.Services.Mapping;
 
@@ -20,16 +22,6 @@
         public int Year { get; set; }
 
         public string PosterPath { get; set; }
-
-        //public int Runtime { get; set; }
-
-        //public string TrailerUrl { get; set; }
-
-        //public string Storyline { get; set; }
-
-        //public double ImdbRating { get; set; }
-
-        //public double UserRating { get; set; }
 
         public bool CollectIsNotAvailable { get; set; }
 

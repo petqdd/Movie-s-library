@@ -183,7 +183,6 @@
 
         private async Task<int> GetOrCreateDirectorAsync(string director)
         {
-
             Director currentDirector = this.directorsRepository
                                             .All()
                                             .FirstOrDefault(x => x.Name == director);
@@ -316,9 +315,8 @@
             movie.Director = document.QuerySelectorAll("#title-overview-widget > div.plot_summary_wrapper > div.plot_summary > div:nth-child(2) > a")
                 .Select(x => x.TextContent)
                 .FirstOrDefault();
-            
+
             return movie;
         }
-
     }
 }

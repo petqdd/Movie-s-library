@@ -32,7 +32,7 @@
 
             Directory.CreateDirectory($"{imagePath}/images/users/");
 
-            var extension = Path.GetExtension(model.Photo.FileName).TrimStart('.'); ;
+            var extension = Path.GetExtension(model.Photo.FileName).TrimStart('.');
             if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
             {
                 throw new Exception($"Invalid image extension {extension}");
@@ -41,40 +41,25 @@
             var existingPhoto = this.photosRepository.AllAsNoTracking()
                                                      .Where(x => x.UserId == user.Id)
                                                      .FirstOrDefault();
-            if (existingPhoto == null)
+            if (existingPhoto != null)
             {
-                var photo = new Photo
-                {
-                    UserId = user.Id,
-                    Extension = extension,
-                };
-
-                var physicalPath = $"{imagePath}/images/users/{photo.Id}.{extension}";
-                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-                await model.Photo.CopyToAsync(fileStream);
-
-                photo.RemotePhotoUrl = physicalPath;
-                await this.photosRepository.AddAsync(photo);
+                this.photosRepository.Delete(existingPhoto);
                 await this.photosRepository.SaveChangesAsync();
             }
-            else
-            {
-                 this.photosRepository.Delete(existingPhoto);
-                await this.photosRepository.SaveChangesAsync();
 
-                var photo = new Photo
-                {
-                    UserId = user.Id,
-                    Extension = extension,
-                };
-                existingPhoto.Id = photo.Id;
-                var physicalPath = $"{imagePath}/images/users/{existingPhoto.Id}.{extension}";
-                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-                await model.Photo.CopyToAsync(fileStream);
-                existingPhoto.RemotePhotoUrl = physicalPath;
-                await this.photosRepository.AddAsync(existingPhoto);
-                await this.photosRepository.SaveChangesAsync();
-            }
+            var photo = new Photo
+            {
+                UserId = user.Id,
+                Extension = extension,
+            };
+
+            var physicalPath = $"{imagePath}/images/users/{photo.Id}.{extension}";
+            using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
+            await model.Photo.CopyToAsync(fileStream);
+
+            photo.RemotePhotoUrl = $"/images/users/{photo.Id}.{extension}";
+            await this.photosRepository.AddAsync(photo);
+            await this.photosRepository.SaveChangesAsync();
         }
     }
 }

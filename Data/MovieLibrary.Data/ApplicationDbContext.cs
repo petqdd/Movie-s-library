@@ -75,28 +75,6 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // Needed for Identity models configuration
-
-            //base.OnModelCreating(builder);
-
-            //builder.Entity<UsersComment>()
-            //   .HasKey(x => new { x.UserId, x.CommentId });
-
-            //builder.Entity<MoviesComment>()
-            //  .HasKey(x => new { x.MovieId, x.CommentId });
-
-            //builder.Entity<UsersMovie>()
-            //  .HasKey(x => new { x.UserId, x.MovieId });
-
-            //builder.Entity<MoviesArtist>()
-            //    .HasKey(x => new { x.MovieId, x.ArtistId });
-
-            //builder.Entity<MoviesRatings>()
-            //    .HasKey(x => new { x.MovieId, x.RatingId });
-
-            //builder.Entity<UsersRatings>()
-            //    .HasKey(x => new { x.UserId, x.RatingId });
-
             base.OnModelCreating(builder);
 
             this.ConfigureUserIdentityRelations(builder);

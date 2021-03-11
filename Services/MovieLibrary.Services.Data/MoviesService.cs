@@ -19,7 +19,6 @@
         private readonly IDeletableEntityRepository<Director> directorsRepository;
         private readonly IRepository<UsersMovie> usersMoviesRepository;
         private readonly IRepository<MoviesArtist> moviesArtistsRepository;
-        private readonly IRepository<MoviesRatings> moviesRatingsRepository;
         private readonly IRepository<MoviesCategory> moviesCategoriesRepository;
         private readonly IRepository<MoviesArtist> moviesArtisRepository;
         private readonly IRatingsService ratingsService;
@@ -31,9 +30,8 @@
             IDeletableEntityRepository<Director> directorsRepository,
             IRepository<UsersMovie> usersMoviesRepository,
             IRepository<MoviesArtist> moviesArtistsRepository,
-            IRepository<MoviesRatings> moviesRatingsRepository,
             IRepository<MoviesCategory> moviesCategoriesRepository,
-            IRepository<MoviesArtist> moviesArtisRepository, 
+            IRepository<MoviesArtist> moviesArtisRepository,
             IRatingsService ratingsService)
         {
             this.moviesRepository = moviesRepository;
@@ -42,7 +40,6 @@
             this.directorsRepository = directorsRepository;
             this.usersMoviesRepository = usersMoviesRepository;
             this.moviesArtistsRepository = moviesArtistsRepository;
-            this.moviesRatingsRepository = moviesRatingsRepository;
             this.moviesCategoriesRepository = moviesCategoriesRepository;
             this.moviesArtisRepository = moviesArtisRepository;
             this.ratingsService = ratingsService;
@@ -268,13 +265,6 @@
                                  Name = x.Movie.Name,
                                  Year = x.Movie.Year,
                                  PosterPath = x.Movie.PosterPath,
-                                 //Runtime = x.Movie.Runtime,
-                                 //Runtime = x.Movie.Runtime,
-                                 //ImdbRating = x.Movie.ImdbRating,
-                                 //TrailerUrl = x.Movie.TrailerUrl, 
-                                 //Storyline = x.Movie.Storyline,
-                                 //Categories = x.Movie.Categories.Select(x => x.Category.Name).ToList(),
-                                 //UserRating = CalculateUserRating(x.MovieId, this.moviesRatingsRepository),
                              })
                              .ToList();
             return movies;
@@ -372,12 +362,6 @@
                                  Name = x.Name,
                                  Year = x.Year,
                                  PosterPath = x.PosterPath,
-                                 //Runtime = x.Runtime,
-                                 //ImdbRating = x.ImdbRating,
-                                 //TrailerUrl = x.TrailerUrl,
-                                 //Storyline = x.Storyline,
-                                 //Categories = x.Categories.Select(x => x.Category.Name).ToList(),
-                                 //UserRating = CalculateUserRating(x.Id, this.moviesRatingsRepository),
                              })
                              .ToList();
             if (category == "all")
@@ -393,12 +377,6 @@
                                  Name = x.Name,
                                  Year = x.Year,
                                  PosterPath = x.PosterPath,
-                                 //Runtime = x.Runtime,
-                                 //ImdbRating = x.ImdbRating,
-                                 //TrailerUrl = x.TrailerUrl,
-                                 //Storyline = x.Storyline,
-                                 //Categories = x.Categories.Select(x => x.Category.Name).ToList(),
-                                 //UserRating = x.UserRating,
                              })
                              .ToList();
             }
@@ -430,33 +408,5 @@
                     .ToList();
             return movies;
         }
-
-        //public bool IsMovieExisting(string movieName)
-        //{
-        //    return this.moviesRepository
-        //               .AllAsNoTracking()
-        //               .Any(x => x.Name == movieName);
-        //}
-
-        //public double CalculateTotalUserRating(int movieId)
-        //{
-        //    return CalculateUserRating(movieId, this.moviesRatingsRepository);
-        //}
-
-        
-
-        //public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairsArtists(int movieId)
-        //{
-        //    return this.moviesArtisRepository.All()
-        //        .Where(x => x.MovieId == movieId)
-        //                                    .Select(x => new
-        //                                    {
-        //                                        Id = x.ArtistId,
-        //                                        Name = x.Artist.Name,
-        //                                    })
-        //                                    .OrderBy(x => x.Name)
-        //                                    .ToList()
-        //                                    .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
-        //}
     }
 }

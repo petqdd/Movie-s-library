@@ -9,7 +9,6 @@
         public DetailsMovieViewModel()
         {
             this.Artists = new HashSet<Artist>();
-            //this.Categories = new HashSet<Category>();
         }
 
         public int Id { get; set; }

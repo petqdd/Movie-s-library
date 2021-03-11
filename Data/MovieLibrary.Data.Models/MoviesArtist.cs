@@ -2,7 +2,6 @@
 {
     using MovieLibrary.Data.Common.Models;
 
-
     public class MoviesArtist : BaseModel<int>
     {
         public int MovieId { get; set; }

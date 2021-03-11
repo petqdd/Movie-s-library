@@ -9,6 +9,5 @@
         Task SetVoteAsync(InputCreateRatingViewModel model);
 
         double CalculateUserRating(int movieId);
-        //bool IsUserVote(OutputRatingsViewModel model, string userId);
     }
 }

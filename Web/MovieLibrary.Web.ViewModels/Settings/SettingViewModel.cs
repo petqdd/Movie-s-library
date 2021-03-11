@@ -1,9 +1,9 @@
 ﻿namespace MovieLibrary.Web.ViewModels.Settings
 {
+    using AutoMapper;
+
     using MovieLibrary.Data.Models;
     using MovieLibrary.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

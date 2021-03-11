@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MovieLibrary.Web.ViewModels.Ratings
+﻿namespace MovieLibrary.Web.ViewModels.Ratings
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class PostRatingInputModel
     {
         public int MovieId { get; set; }

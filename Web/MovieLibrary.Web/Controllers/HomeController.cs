@@ -1,8 +1,10 @@
 ﻿namespace MovieLibrary.Web.Controllers
 {
     using System.Diagnostics;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+
     using MovieLibrary.Data.Models;
     using MovieLibrary.Web.ViewModels;
 
