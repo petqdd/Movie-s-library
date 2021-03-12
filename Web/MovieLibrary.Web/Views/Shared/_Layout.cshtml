@@ -20,11 +20,8 @@
 
 
     <link rel="stylesheet" href="~/bootstrap.min.css" asp-append-version="true" />
-    @*<link rel="stylesheet" href="~/css/lazy.css" asp-append-version="true" />*@
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-
-
 
 </head>
 <body>
@@ -34,37 +31,19 @@
             <img src="/logo/1.png" alt="logo" style="width:180px;height:120px;">
 
             <a class="navbar-brand" asp-area="" asp-action="Index" asp-controller="Home">Home</a>
-
-            @*<button class="navbar-toggler collapsed"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarNavDropdown-7"
-                        aria-controls="navbarNavDropdown-7"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>*@
-
-            @*<ul>*@
             <partial name="_LoginPartial" />
-            @*@RenderSection("Register", required: false)
-                @RenderSection("Login", required: false)*@
-            @*</ul>*@
-
+           
         </nav>
     </div>
     @RenderSection("Path", false)
     <div class="container-fluid" id="body">
         <div class="row col-md-12">
-            @*@if (this.SignInManager.IsSignedIn(this.User))
-                {*@
+           
             <vc:random-movies-view-components>
             </vc:random-movies-view-components>
-            @*}*@
         </div>
         <hr />
         <div class="row">
-            @*<partial name="_CookieConsentPartial" />*@
             <main role="main" class="col-md-10 ">
                 @this.RenderBody()
             </main>
@@ -82,20 +61,12 @@
         </div>
     </footer>
 
-
-
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="~/lib/popper/popper.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-
-    @*<script src="~/js/lazy.js" asp-append-version="true"></script>*@
     <script src="~/js/site.min.js" asp-append-version="true"></script>
-
-
-
-
 
     @await this.RenderSectionAsync("Scripts", required: false)
 

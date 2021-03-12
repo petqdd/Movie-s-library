@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\MovieLibrary.Data.Models\MovieLibrary.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\MovieLibrary.Data\MovieLibrary.Data.csproj" />
     <ProjectReference Include="..\..\Services\MovieLibrary.Services.Data\MovieLibrary.Services.Data.csproj" />
   </ItemGroup>
