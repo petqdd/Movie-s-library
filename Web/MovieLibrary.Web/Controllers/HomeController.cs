@@ -1,5 +1,6 @@
 ﻿namespace MovieLibrary.Web.Controllers
 {
+    using System;
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Identity;
@@ -39,5 +40,10 @@
             return this.View(
                 new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
+
+        [HttpGet("robots.txt")]
+        [ResponseCache(Duration = 86400, Location = ResponseCacheLocation.Any)]
+        public IActionResult RobotsTxt() =>
+            this.Content("User-agent: *" + Environment.NewLine + "Disallow:");
     }
 }
