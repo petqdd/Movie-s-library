@@ -31,14 +31,15 @@
             <img src="/logo/1.png" alt="logo" style="width:180px;height:120px;">
 
             <a class="navbar-brand" asp-area="" asp-action="Index" asp-controller="Home">Home</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Chat">Live chat</a>
             <partial name="_LoginPartial" />
-           
+
         </nav>
     </div>
     @RenderSection("Path", false)
     <div class="container-fluid" id="body">
         <div class="row col-md-12">
-           
+
             <vc:random-movies-view-components>
             </vc:random-movies-view-components>
         </div>
@@ -62,6 +63,7 @@
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="~/lib/popper/popper.min.js" asp-append-version="true"></script>

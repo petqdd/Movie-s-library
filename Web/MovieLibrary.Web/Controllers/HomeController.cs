@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,12 @@
         }
 
         public IActionResult Privacy()
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        public IActionResult Chat()
         {
             return this.View();
         }

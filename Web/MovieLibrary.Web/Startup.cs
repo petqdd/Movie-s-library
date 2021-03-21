@@ -21,6 +21,7 @@
     using MovieLibrary.Services.Data;
     using MovieLibrary.Services.Mapping;
     using MovieLibrary.Services.Messaging;
+    using MovieLibrary.Web.Hubs;
     using MovieLibrary.Web.Services;
     using MovieLibrary.Web.ViewModels;
 
@@ -49,6 +50,7 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
+            services.AddSignalR();
             services.AddControllersWithViews(
                 options =>
                     {
@@ -116,6 +118,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<ChatHub>("/chat");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
