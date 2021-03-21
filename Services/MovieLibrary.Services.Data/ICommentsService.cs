@@ -18,5 +18,7 @@
         int GetCommentsCount(int id);
 
         int GetAllCommentsCount();
+
+        bool CheckForОbsceneWords(string content);
     }
 }

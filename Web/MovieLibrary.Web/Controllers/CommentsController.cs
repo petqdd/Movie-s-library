@@ -38,9 +38,21 @@
             }
             else
             {
-                var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                await this.commentsService.CreateCommentAsync(model, userId);
-                return this.Redirect($"/Comments/AllComments?id={model.Id}");
+                if (this.commentsService.CheckForОbsceneWords(model.Content) == false)
+                {
+                    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    await this.commentsService.CreateCommentAsync(model, userId);
+                    return this.Redirect($"/Comments/AllComments?id={model.Id}");
+                }
+                else
+                {
+                    this.TempData["Message"] = "Your comment contents obscene words!";
+                    var viewModel = new InputCommentViewModel
+                    {
+                        Id = model.Id,
+                    };
+                    return this.View(viewModel);
+                }
             }
         }
 

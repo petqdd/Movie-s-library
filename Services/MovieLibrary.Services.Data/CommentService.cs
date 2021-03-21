@@ -176,5 +176,18 @@
             this.commentsRepository.Delete(comment);
             await this.commentsRepository.SaveChangesAsync();
         }
+
+        public bool CheckForОbsceneWords(string content)
+        {
+            var obsceneWords = new[] { "fuck", "fuck you", "shit", "piss off", "dick head", "asshole", "son of a bitch", "bitch", "bastard", "damm", "bollocks", "bugger", "bloody hell", "choad", "crikey", "rubbish", "shag", "wanker", "taking the piss", "twat", "bloody oath", "get stuffed", "bugger me", "fair suck of the sav", "nigger", "negro" };
+            foreach (var word in obsceneWords)
+            {
+                if (content.ToLower().Contains(word))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
