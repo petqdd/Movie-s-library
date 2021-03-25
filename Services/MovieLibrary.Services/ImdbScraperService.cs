@@ -12,6 +12,7 @@
     using MovieLibrary.Data.Common.Repositories;
     using MovieLibrary.Data.Models;
     using MovieLibrary.Services.Models;
+    using MovieLibrary.Web.ViewModels.Movies;
 
     public class ImdbScraperService : IImdbScraperService
     {
@@ -42,7 +43,7 @@
             this.moviesCategoriesRepository = moviesCategoriesRepository;
         }
 
-        public async Task PopulateDbWithMovies()
+        public async Task PopulateDbWithMovies(InputMovieForDbViewModel model)
         {
             var concurentBag = new ConcurrentBag<MovieDto>();
             //Parallel.For(0111161, movieCount, (i) =>
@@ -54,8 +55,8 @@
             //    }
             //    catch { }
             //});
-            var numbers = new List<int>();
-            numbers.Add(4857264);
+            //var numbers = new List<int>();
+            //numbers.Add(4857264);
             //numbers.Add(114709);
             //numbers.Add(86879);
             //numbers.Add(361748);
@@ -70,14 +71,16 @@
             //numbers.Add(74352);
             //numbers.Add(93058);
             //numbers.Add(45152);
-            foreach (var number in numbers)
+            foreach (var number in model.MovieIds)
             {
                 try
             {
                 var movie = this.GetMovieInfo(number);
                 concurentBag.Add(movie);
             }
-            catch { }
+            catch
+                {
+                }
             }
 
             foreach (var movie in concurentBag)

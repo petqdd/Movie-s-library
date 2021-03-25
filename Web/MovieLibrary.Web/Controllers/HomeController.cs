@@ -2,13 +2,11 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    using MovieLibrary.Common;
     using MovieLibrary.Data.Models;
     using MovieLibrary.Services;
     using MovieLibrary.Web.ViewModels;
@@ -44,20 +42,6 @@
         public IActionResult Chat()
         {
             return this.View();
-        }
-
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult>AddDb()
-        {
-            return this.View();
-        }
-
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> ScraperDb()
-        {
-            await this.imdbScraperService.PopulateDbWithMovies();
-            this.TempData["Message"] = "You successful added data for movies!";
-            return this.RedirectToPage("/Movies/All");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,10 +1,11 @@
 ﻿namespace MovieLibrary.Services
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using MovieLibrary.Web.ViewModels.Movies;
 
     public interface IImdbScraperService
     {
-        Task PopulateDbWithMovies();
+        Task PopulateDbWithMovies(InputMovieForDbViewModel model);
     }
 }

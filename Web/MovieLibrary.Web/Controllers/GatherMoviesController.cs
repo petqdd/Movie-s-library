@@ -2,8 +2,12 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
+    using MovieLibrary.Common;
     using MovieLibrary.Services;
+    using MovieLibrary.Web.ViewModels.Movies;
 
     public class GatherMoviesController : BaseController
     {
@@ -14,15 +18,28 @@
             this.imdbScraperService = imdbScraperService;
         }
 
-        public IActionResult Index()
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpGet]
+        public IActionResult AddDb()
         {
-            return this.View();
+            var viewModel = new InputMovieForDbViewModel();
+            return this.View(viewModel);
         }
 
-        public async Task<IActionResult> Add()
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [HttpPost]
+        public async Task<IActionResult> AddDb(InputMovieForDbViewModel model)
         {
-            await this.imdbScraperService.PopulateDbWithMovies();
-            return this.View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+            else
+            {
+                await this.imdbScraperService.PopulateDbWithMovies(model);
+                this.TempData["Message"] = "You successful added data for movies!";
+                return this.Redirect("/Movies/All");
+            }
         }
     }
 }

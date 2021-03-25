@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Content Remove="Views\Artists\All 1.cshtml" />
-    <Content Remove="Views\GatherMovies\Index.cshtml" />
     <Content Remove="Views\Movies\Add2 2.cshtml" />
     <Content Remove="Views\Search\Search.cshtml" />
   </ItemGroup>
@@ -34,7 +33,6 @@
     <None Include="Views\Comments\All.cshtml" />
     <None Include="Views\Comments\AllComments.cshtml" />
     <None Include="Views\Comments\Create.cshtml" />
-    <None Include="Views\GatherMovies\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Search\Search.cshtml" />

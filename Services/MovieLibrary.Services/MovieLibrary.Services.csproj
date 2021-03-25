@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MovieLibrary.Data.Models\MovieLibrary.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\MovieLibrary.Web.ViewModels\MovieLibrary.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
