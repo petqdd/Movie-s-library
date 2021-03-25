@@ -55,20 +55,21 @@
             //    catch { }
             //});
             var numbers = new List<int>();
-            numbers.Add(114709);
-            numbers.Add(86879);
-            numbers.Add(361748);
-            numbers.Add(86190);
-            numbers.Add(119217);
-            numbers.Add(105236);
-            numbers.Add(62622);
-            numbers.Add(180093);
-            numbers.Add(52357);
-            numbers.Add(338013);
-            numbers.Add(33467);
-            numbers.Add(74352);
-            numbers.Add(93058);
-            numbers.Add(45152);
+            numbers.Add(4857264);
+            //numbers.Add(114709);
+            //numbers.Add(86879);
+            //numbers.Add(361748);
+            //numbers.Add(86190);
+            //numbers.Add(119217);
+            //numbers.Add(105236);
+            //numbers.Add(62622);
+            //numbers.Add(180093);
+            //numbers.Add(52357);
+            //numbers.Add(338013);
+            //numbers.Add(33467);
+            //numbers.Add(74352);
+            //numbers.Add(93058);
+            //numbers.Add(45152);
             foreach (var number in numbers)
             {
                 try
@@ -308,8 +309,9 @@
             movie.Storyline = storylineInfo[0].TrimStart();
 
             //trailer
-            var trailerInfo = document.QuerySelector("#title-overview-widget > div.vital > div.slate_wrapper > div.slate > a").GetAttribute("href");
-            movie.TrailerUrl = "https://www.imdb.com" + trailerInfo;
+            //var trailerInfo = document.QuerySelector("#title-overview-widget > div.vital > div.slate_wrapper > div.slate > a").GetAttribute("href");
+            //movie.TrailerUrl = "https://www.imdb.com" + trailerInfo;
+            movie.TrailerUrl = string.Empty;
 
             //director
             movie.Director = document.QuerySelectorAll("#title-overview-widget > div.plot_summary_wrapper > div.plot_summary > div:nth-child(2) > a")

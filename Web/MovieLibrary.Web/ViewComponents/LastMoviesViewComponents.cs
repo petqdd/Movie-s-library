@@ -27,7 +27,7 @@
                                     Id = x.Id,
                                     Name = x.Name,
                                     Year = x.Year,
-                                    CreatedDate = x.CreatedDate,
+                                    CreatedDate = x.CreatedOn,
                                 })
                                 .OrderByDescending(x => x.CreatedDate)
                                 .Take(15)
