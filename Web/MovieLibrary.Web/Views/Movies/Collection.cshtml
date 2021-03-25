@@ -2,10 +2,10 @@
 @using MovieLibrary.Common
 @model MovieLibrary.Web.ViewModels.Movies.AllMoviesViewModel
 @{
-    this.ViewData["Title"] = $"All movies in my collection";
+    this.ViewData["Title"] = "All movies in my collection";
 }
 
-<fieldset class="border border-white text-md-left" style="color:white">
+<fieldset class="border border-white text-sm-left" style="color:white">
 
     <legend style="width:auto;padding:10px;">
         <span>@ViewData["Title"]</span>
@@ -21,10 +21,7 @@
         <div class="row gx-5 justify-content-start">
             @foreach (var movie in Model.Movies)
             {
-                //List<string> categories = movie.Categories.ToList();
-                //string categoriesAsString = string.Join(", ", categories);
-
-                <div class="card-group p-2">
+               <div class="card-group p-2">
                     <div class="card" id="cardMovie">
                         <div class="img-fluid ">
                             <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">

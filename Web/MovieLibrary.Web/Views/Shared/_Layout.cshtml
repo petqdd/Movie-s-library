@@ -38,19 +38,19 @@
     </div>
     @RenderSection("Path", false)
     <div class="container-fluid" id="body">
-        <div class="row col-md-12">
+        <div class="row col-sm-12">
 
             <vc:random-movies-view-components>
             </vc:random-movies-view-components>
         </div>
         <hr />
         <div class="row">
-            <main role="main" class="col-md-10 ">
+            <main role="main" class="col-sm-10 ">
                 @this.RenderBody()
             </main>
             <br />
             <br />
-            <div class="col-md-2 border border-top-0 border-bottom-0" id="rightViewComponent">
+            <div class="col-sm-2 border border-top-0 border-bottom-0" id="rightViewComponent">
                 <vc:last-movies-view-components>
                 </vc:last-movies-view-components>
             </div>

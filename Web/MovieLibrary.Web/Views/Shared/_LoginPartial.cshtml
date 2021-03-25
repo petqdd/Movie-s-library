@@ -9,13 +9,11 @@
         <li class="nav-item">
             <a asp-controller="Movies" asp-action="Top15Movies" class="btn" type="button" id="top15Button">
                 <b> <i class="fas fa-film"></i> Top15 IMDb</b>
-                @*<span class="caret"></span>*@
             </a>
         </li>
         <li class="nav-item">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="dropdownButton">
                 <b>  <i class="fas fa-film"></i>Movies</b>
-                @*<span class="caret"></span>*@
             </button>
             <ul class="dropdown-menu" id="categoryMenu">
                 <li>
@@ -73,15 +71,12 @@
                 <ul class="dropdown-menu " id="categoryMenu">
                     <li>
                         <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>My profile</b></a>
-                        @*<a class="text-white" href="/Users/Profile"> Settings</a>*@
                     </li>
                     <li>
-                        <a class="nav-link " asp-controller="Users" asp-action="Profile" title="AddPhoto"><b>Add profile picture</b></a>
-                        @*<a class="text-white" href="/Users/Profile"> Settings</a>*@
+                        <a class="nav-link " asp-area="" asp-controller="Users" asp-action="Profile" title="AddPhoto"><b>Add profile picture</b></a>
                     </li>
                     <li>
-                        <a class="nav-link " asp-controller="Movies" asp-action="Collection" title="Collection"><b>MyCollection</b></a>
-                        @*<a class="text-white" href="/Movies/Collection"> MyCollection</a>*@
+                        <a class="nav-link "asp-area="" asp-controller="Movies" asp-action="Collection" title="Collection"><b>MyCollection</b></a>
                     </li>
                 </ul>
             </li>

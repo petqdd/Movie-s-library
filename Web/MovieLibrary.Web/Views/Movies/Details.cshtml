@@ -8,16 +8,16 @@
     </div>
 }
 <br />
-<div class="col-md-10 offset-1">
+<div class="col-sm-10 offset-1">
     <div class="card" id="movieDetails">
         <div class="card-header" id="secondPoster" style="background-image:url(@Model.SecondPosterUrl );" alt="Background">
             <div class="row">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-sm-4">
                     <img src="@Model.PosterUrl" id="poster">
                 </div>
-                <div class="col-12 col-md-8 " id="contentMovie">
+                <div class="col-12 col-sm-8 " id="contentMovie">
                     <div class="row">
-                        <div class="title col-12 col-md-11">
+                        <div class="title col-12 col-sm-11">
                             <h3 class="mb-0 " style="color:darkorange"><b>@Model.Name</b> </h3>
                             <h3 style="color:darkorange"><b>(@Model.Year)</b></h3>
                         </div>
@@ -57,14 +57,6 @@
                     {
                         <div id="voteElement">
                             <p class="text-right" style="color:darkorange;font-size:30px;">Rate movie</p>
-                            @*@for (int i = (int)Math.Round(@Model.AverageRating)+1; i <= 10; i++)
-                                {
-                                    for (int k = 1; k < (int)Math.Round(@Model.AverageRating); k++)
-                                    {
-                                        <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="k"></span>
-                                    }
-                                    <span class="fa fa-star" style="font-size:25px;" data-vote="i"></span>
-                                }*@
                             <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="1"></span>
                             <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="2"></span>
                             <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="3"></span>
@@ -76,7 +68,6 @@
                             <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="9"></span>
                             <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="10"></span>
                             <span id="averageRatingValue" style="color:darkorange;font-size:25px;">@Model.AverageRating.ToString("0.0")</span><span style="color:darkorange;font-size:25px;"> / 10</span>
-
                         </div>
                     }
                     <div class="info" id="contentInfo">
@@ -108,9 +99,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#actors" role="tab" aria-controls="actors" aria-selected="false"><i class="far fa-id-badge"></i> Actors</a>
                     </li>
-                    @*<li class="nav-item">
-                            <a class="nav-link" href="#comments" role="tab" aria-controls="comments" aria-selected="false"><i class="far fa-comment-dots"></i> Comments</a>
-                        </li>*@
                 </ul>
                 <p id="comments">
                     <a class="btn" asp-controller="Comments" asp-action="AllComments" asp-route-id="@Model.Id"><i class="far fa-comment-dots"></i> Comments</a>
@@ -201,29 +189,6 @@
         })
     </script>
 }
-@*<script>
-            $("li[data-vote]").each(function (el) {
-                $(this).click(function () {
-                    var value = $(this).attr("data-vote");
-                    var recipeId = @Model.Id;
-                    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-                    var data = { recipeId: recipeId, value: value };
-                    $.ajax({
-                        type: "POST",
-                        url: "/api/Votes",
-                        data: JSON.stringify(data),
-                        headers: {
-                            'X-CSRF-TOKEN': antiForgeryToken
-                        },
-                        success: function (data) {
-                            $('#averageVoteValue').html(data.averageVote.toFixed(1));
-                        },
-                        contentType: 'application/json',
-                    });
-                })
-            });
-    </script>*@
-
 
 @section Path{
     <ol class="breadcrumb">

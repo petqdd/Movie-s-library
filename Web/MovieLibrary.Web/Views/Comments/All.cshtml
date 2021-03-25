@@ -35,7 +35,7 @@
                                 userPhoto = model.UserPhoto;
                             }
                         }
-                        <div class="col-md-2 text-left">
+                        <div class="col-sm-2 text-left">
                             <img class="img rounded-0" style="width:100px; height:100px" src="@userPhoto" alt="User Photo">
                         </div>
                         <div class="col-sm-7 text-left">
@@ -55,42 +55,7 @@
                 </div>
             </div>
             <br />
-            @*<div class="row" style="width:1000px; height:10px;">
-                    <div class="col-sm-12 text-left">
-                        On  @(model.CreatedDate.ToString("dd-MM-yyyy")) - @(model.UserEmail)  posted comment for Movie : @(model.MovieName)
-                    </div>
-                </div>
-                <div class="row" style="width:1000px; height:80px;">
-                    @{
-                        var userPhoto = string.Empty;
-                        if (model.UserPhoto == null)
-                        {
-                            userPhoto = "https://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
-                        }
-                        else
-                        {
-                            userPhoto = model.UserPhoto;
-                        }
-                    }
-                    <div class="col-sm-2 text-left">
-                        <img class="img rounded-0" style="width:100px; height:100px" src="@userPhoto" alt="User Photo">
-                    </div>
-                    <div class="col-sm-6 text-left">
-
-                        @(model.CommentContent)
-                    </div>
-
-                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                    {
-                        <div class="col-sm-2">
-                            <a href="/Comments/Delete?commentId=@(model.CommentId)&movieId=@(model.MovieId)" class="btn btn-primary rounded-pill">
-                                <i class="fas fa-trash-alt"></i> Delete
-                            </a>
-                        </div>
-                    }
-
-                </div>
-                <hr />*@
+            
             <!-- Modal -->
             <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

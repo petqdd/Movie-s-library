@@ -9,6 +9,7 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
     <NoWin32Manifest>true</NoWin32Manifest>
+    <ApplicationInsightsResourceId>/subscriptions/659263e8-de69-49eb-8722-d704718546d5/resourceGroups/MoviesLibrary/providers/microsoft.insights/components/movieslib</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,6 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.1" />

@@ -2,22 +2,10 @@
 @{
     var newMovies = Model.Movies.ToArray();
 }
-@*<div class="container-fluid">*@
-
-
-    @*<hr class="my-4">*@
-
-    <!--Carousel Wrapper-->
+@if (newMovies.Length > 0)
+{
+<!--Carousel Wrapper-->
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel" >
-
-        <!--Controls-->
-
-        @*<a class="carousel-control-prev" href="#multi-item-example" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#multi-item-example" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>*@
 
         <!--/.Controls
             <!--Indicators-->
@@ -32,8 +20,8 @@
             <!--First slide-->
             <div class="carousel-item active">
                 <div class="row">
-                    <div class="col-md-2">
-                        <div class="card-group mb-md-2" id="caroselCard">
+                    <div class="col-sm-2">
+                        <div class="card-group mb-sm-2" id="caroselCard">
                             <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[0].Id">
                                 <img class="card-img-top" src="@newMovies[0].PosterPath" alt="Card image cap" id="caroselImage">
                             </a>
@@ -44,8 +32,8 @@
                     </div>
                     @for (int i = 1; i < 6; i++)
                     {
-                        <div class="col-md-2 clearfix d-none d-md-block">
-                            <div class="card-group mb-md-2" id="caroselCard">
+                        <div class="col-sm-2 clearfix d-none d-md-block">
+                            <div class="card-group mb-sm-2" id="caroselCard">
                                 <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[i].Id">
                                     <img class="card-img-top" src="@newMovies[i].PosterPath" alt="Card image cap" id="caroselImage">
                                 </a>
@@ -62,8 +50,8 @@
             <!--Second slide-->
             <div class="carousel-item">
                 <div class="row">
-                    <div class="col-md-2">
-                        <div class="card-group mb-md-2" id="caroselCard">
+                    <div class="col-sm-2">
+                        <div class="card-group mb-sm-2" id="caroselCard">
                             <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[6].Id">
                                 <img class="card-img-top" src="@newMovies[6].PosterPath" alt="Card image cap" id="caroselImage">
                             </a>
@@ -74,8 +62,8 @@
                     </div>
                     @for (int i = 7; i < 12; i++)
                     {
-                        <div class="col-md-2 clearfix d-none d-md-block">
-                            <div class="card-group mb-md-2" id="caroselCard">
+                        <div class="col-sm-2 clearfix d-none d-md-block">
+                            <div class="card-group mb-sm-2" id="caroselCard">
                                 <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[i].Id">
                                     <img class="card-img-top" src="@newMovies[i].PosterPath" alt="Card image cap" id="caroselImage">
                                 </a>
@@ -91,8 +79,8 @@
             <!--Third slide-->
             <div class="carousel-item">
                 <div class="row">
-                    <div class="col-md-2">
-                        <div class="card-group mb-md-2" id="caroselCard">
+                    <div class="col-sm-2">
+                        <div class="card-group mb-sm-2" id="caroselCard">
                             <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[12].Id">
                                 <img class="card-img-top" src="@newMovies[12].PosterPath" alt="Card image cap" id="caroselImage">
                             </a>
@@ -103,8 +91,8 @@
                     </div>
                     @for (int i = 13; i < 18; i++)
                     {
-                        <div class="col-md-2 clearfix d-none d-md-block">
-                            <div class="card-group mb-md-2" id="caroselCard">
+                        <div class="col-sm-2 clearfix d-none d-md-block">
+                            <div class="card-group mb-sm-2" id="caroselCard">
                                 <a asp-area="" asp-controller="Movies" asp-action="Details" asp-route-id="@newMovies[i].Id">
                                     <img class="card-img-top" src="@newMovies[i].PosterPath" alt="Card image cap" id="caroselImage">
                                 </a>
@@ -118,5 +106,5 @@
             </div>
         </div>
     </div>
-@*</div>*@
+}
 

@@ -5,7 +5,7 @@
     this.ViewData["Title"] = $"Top 15 Movies Imdb";
     var i = 1;
 }
-<fieldset class="border border-white text-md-left" style="color:white">
+<fieldset class="border border-white text-sm-left" style="color:white">
 
     <legend style="width:auto;padding:10px;">
         <span>@ViewData["Title"]</span>
@@ -15,7 +15,8 @@
         <div class="row gx-5 justify-content-start">
             @foreach (var movie in Model.Movies)
             {
-                <div class="card-group p-2">                    <div class="card" id="cardMovie">
+                <div class="card-group p-2">
+                    <div class="card" id="cardMovie">
                         <div class="img-fluid ">
                             <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">
                                 <img class="card-img-top" src=@movie.PosterPath alt="Film image" id="cardImage">
