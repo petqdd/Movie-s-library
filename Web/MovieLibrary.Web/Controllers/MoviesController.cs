@@ -76,7 +76,7 @@
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             await this.moviesService.AddFilmToUserCollectionAsync(userId, id);
-            return this.RedirectToAction("All");
+            return this.RedirectToAction("Collection");
         }
 
         [Authorize]

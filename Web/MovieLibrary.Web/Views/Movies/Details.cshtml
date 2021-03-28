@@ -12,26 +12,26 @@
     <div class="card" id="movieDetails">
         <div class="card-header" id="secondPoster" style="background-image:url(@Model.SecondPosterUrl );" alt="Background">
             <div class="row">
-                <div class="col-12 col-sm-4">
+                <div class=" col-sm-4">
                     <img src="@Model.PosterUrl" id="poster">
                 </div>
-                <div class="col-12 col-sm-8 " id="contentMovie">
+                <div class=" col-sm-8 " id="contentMovie">
                     <div class="row">
-                        <div class="title col-12 col-sm-11">
-                            <h3 class="mb-0 " style="color:darkorange"><b>@Model.Name</b> </h3>
-                            <h3 style="color:darkorange"><b>(@Model.Year)</b></h3>
+                        <div class="title col-sm-10">
+                            <h4 class="mb-0 " style="color:darkorange"><b>@Model.Name</b> </h4>
+                            <h4 style="color:darkorange"><b>(@Model.Year)</b></h4>
                         </div>
                         @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
                             if (Model.CollectIsNotAvailable == false)
                             {
-                                <div class="collect">
+                                <div class="collect col-sm-2 " id="collectToColletion">
                                     <a asp-controller="Movies" asp-action="AddToCollection" asp-route-id="@Model.Id" class="btn btn-danger btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Add movie in collection "><i class="fas fa-heart"></i></a>
                                 </div>
                             }
                             else
                             {
-                                <div class="collect">
+                                <div class="collect col-sm-1 " id="removeFromCollection">
                                     <a data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Remove movie from collection "><i class="far fa-trash-alt"></i></a>
                                 </div>
                             }
@@ -53,36 +53,42 @@
                             </div>
                         }
                     </div>
-                    @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                    {
-                        <div id="voteElement">
-                            <p class="text-right" style="color:darkorange;font-size:30px;">Rate movie</p>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="1"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="2"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="3"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="4"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="5"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="6"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="7"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="8"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="9"></span>
-                            <span class="fa fa-star" style="color:darkorange;font-size:25px;" data-vote="10"></span>
-                            <span id="averageRatingValue" style="color:darkorange;font-size:25px;">@Model.AverageRating.ToString("0.0")</span><span style="color:darkorange;font-size:25px;"> / 10</span>
-                        </div>
-                    }
-                    <div class="info" id="contentInfo">
-                        <span style="color:deepskyblue;padding-right:2em">
-                            <i class="fas fa-list"></i> @Model.Categories
-                        </span>
-                        <span style="color:chartreuse;padding-right:2em">
-                            <i class="far fa-clock"></i> @Model.Runtime min
-                        </span>
-                        <span style="color:darkorange">
-                            <img style="vertical-align: middle; margin-left:15px;" src="~/img/imdbicon.png"> @Model.ImdbRating <i class="fas fa-star"></i>
-                        </span>
-                        <p style="color:darkviolet"> Director: @Model.Director</p>
-                    </div>
 
+                    <div class="row" id="contentInfo">
+                        @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <div class="text-right">
+                                <span class="h5 " style="color:darkorange;padding-left:1em">Rate movie</span>
+                                <div class="row" id="voteElement">
+                                    <span class="h5 fa fa-star" style="color:darkorange;padding-left:8em;" data-vote="1"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="2"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="3"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="4"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="5"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="6"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="7"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="8"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="9"></span>
+                                    <span class="h5 fa fa-star" style="color:darkorange;" data-vote="10"></span>
+                                    <span class="h5" id="averageRatingValue" style="color:darkorange;">@Model.AverageRating.ToString("0.0")</span><span class="h5" style="color:darkorange;"> / 10</span>
+                                </div>
+                            </div>
+                        }
+                        <div class="info">
+                            <span style="color:deepskyblue;padding-right:1em;padding-left:1em">
+                                <i class="fas fa-list"></i> @Model.Categories
+                            </span>
+                            <span style="color:chartreuse;padding-right:1em">
+                                <i class="far fa-clock"></i> @Model.Runtime min
+                            </span>
+                            <span style="color:darkorange">
+                                <img style="vertical-align: middle; margin-left:10px;" src="~/img/imdbicon.png"> @Model.ImdbRating <i class="fas fa-star"></i>
+                            </span>
+                            <p style="color:darkviolet">
+                                Director: @Model.Director
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -112,7 +118,7 @@
                 </div>
 
                 <div class="tab-pane" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
-                    <iframe width="912" height="550"
+                    <iframe id="trailerFrame"
                             src="@Model.TrailerUrl">
                     </iframe>
                 </div>

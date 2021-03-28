@@ -5,24 +5,28 @@ for details on configuring this project to bundle and minify static web assets. 
     padding: 0;
     font-family: Verdana;
 }
-#voteElement {
-position:absolute;
-top:250px;
-left:180px;
 
-}
+/*#voteElement > .h4 {
+    position: relative;
+    display: inline-flex;
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
+
 #comments {
-    position: absolute;
-    top: 483px;
-    left: 350px;
+    position: relative;
+    top: 7px;
+    left: 10px;
 }
-ul {
-margin-top:5px;
-margin-left:10px;
 
+ul {
+    margin-top: 5px;
+    margin-left: 10px;
 }
+
 hr {
-    background-color:white;
+    background-color: white;
     /*height: 1px;*/
 }
 
@@ -75,7 +79,7 @@ hr {
 
 #cardMovie {
     /* height: 340px;*/
-    width: 212px;
+    width: 200px;
     background-color: black;
     border-radius: 8px; /* 5px rounded corners */
     border-color: #25055a;
@@ -85,13 +89,14 @@ hr {
 
 #cardImage {
     height: 220px;
-    width: 205px;
+    width: 195px;
     border-radius: 8px 8px 8px 8px;
     padding: 1px,1px,1px,1px;
 }
+
 #movieCardBody {
     height: 140px;
-    width: 205px;
+    width: 195px;
     background-color: black;
     border-radius: 0 0 8px 8px;
 }
@@ -103,7 +108,7 @@ hr {
 
 #caroselCard {
     /* height: 340px;*/
-    width: 230px;
+    width: 200px;
     background-color: black;
     border-radius: 8px; /* 5px rounded corners */
     border-color: #25055a;
@@ -113,15 +118,14 @@ hr {
 
 #caroselImage {
     height: 260px;
-    width: 225px;
+    width: 195px;
     border-radius: 8px 8px 8px 8px;
     padding: 1px,1px,1px,1px;
-   
 }
 
 #caroselTitle {
     height: 100px;
-    width: 225px;
+    width: 195px;
     text-align: center;
 }
 
@@ -136,8 +140,8 @@ hr {
 }
 
 #cardArtist {
-    height: 290px;
-    width: 220px;
+   /* height: 290px;*/
+    width: 200px;
     background-color: black;
     border-radius: 8px; /* 5px rounded corners */
     border-color: #25055a;
@@ -147,7 +151,7 @@ hr {
 
 #cardArtistImage {
     height: 210px;
-    width: 215px;
+    width: 195px;
     border-radius: 8px 8px 8px 8px;
     padding: 1px,1px,1px,1px;
 }
@@ -167,6 +171,7 @@ hr {
 
 
 #movieDetails {
+    resize: both;
     width: 100%;
     border-style: double;
     border-color: white;
@@ -176,7 +181,19 @@ hr {
     /* 5px rounded corners */
 }
 
+#collectToColletion {
+    position: relative;
+    resize: both;
+    /*right:10px;*/
+}
+
+#removeFromCollection {
+    position: relative;
+    resize: both;
+}
+
 #poster {
+    resize: both;
     width: 100%;
     border-style: solid;
     border-color: black;
@@ -184,20 +201,48 @@ hr {
 }
 
 #contentMovie {
+    position: relative;
+    resize: both;
     text-align: center;
+    resize: both;
 }
 
 #contentInfo {
-    position: absolute;
+    position: relative;
+    resize: both;
     background-color: Black;
     font-size: 16px;
     font-style: normal;
-    width: 100%;
-    height: 60px;
-    bottom: 0px;
+    /*height: 60px;*/
+    /*bottom: 10px;*/
     left: -5px;
-    padding: 5px;
+   /* padding: 5px;*/
     opacity: 0.9;
+    margin-top: 150px;
+}
+
+#voteElement {
+    resize: both;
+    position: relative;
+    /*margin-top: 68px;*/
+}
+
+#trailer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+#trailerFrame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 #contentMovie .title h3 {
@@ -247,6 +292,15 @@ ol.breadcrumb {
 
 #info-list li {
     float: right;
+    resize:both;
+}
+
+#infoNavbar {
+   resize:both;
+}
+
+#movieFooter {
+resize:both;
 }
 
 .btn-primary {

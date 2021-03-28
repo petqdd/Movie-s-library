@@ -8,18 +8,15 @@
     using Microsoft.AspNetCore.Mvc;
 
     using MovieLibrary.Data.Models;
-    using MovieLibrary.Services;
     using MovieLibrary.Web.ViewModels;
 
     public class HomeController : BaseController
     {
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IImdbScraperService imdbScraperService;
 
-        public HomeController(SignInManager<ApplicationUser> signInManager, IImdbScraperService imdbScraperService)
+        public HomeController(SignInManager<ApplicationUser> signInManager)
         {
             this.signInManager = signInManager;
-            this.imdbScraperService = imdbScraperService;
         }
 
         [HttpGet("/")]

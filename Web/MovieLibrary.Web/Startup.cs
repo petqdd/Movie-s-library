@@ -1,16 +1,18 @@
 ﻿namespace MovieLibrary.Web
 {
+    using System.Linq;
     using System.Reflection;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-
+    using MovieLibrary.Common;
     using MovieLibrary.Data;
     using MovieLibrary.Data.Common;
     using MovieLibrary.Data.Common.Repositories;
@@ -85,6 +87,23 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var userManager = app.ApplicationServices
+                                 .CreateScope()
+                                 .ServiceProvider
+                                 .GetRequiredService<UserManager<ApplicationUser>>();
+            if (!userManager.Users.Any(x => x.UserName == "admin@abv.bg"))
+            {
+                var newUser = new ApplicationUser
+                {
+                    UserName = "admin@abv.bg",
+                    Email = "admin@abv.bg",
+                    EmailConfirmed = true,
+                };
+
+                userManager.CreateAsync(newUser, "adminn").GetAwaiter().GetResult();
+                userManager.AddToRoleAsync(newUser, GlobalConstants.AdministratorRoleName);
+            }
+
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
