@@ -3,8 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-<ul>
-    @if (this.SignInManager.IsSignedIn(this.User))
+@if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
             <a asp-controller="Movies" asp-action="Top15Movies" class="btn" type="button" id="top15Button">
@@ -99,7 +98,7 @@
             <a class="nav-link btn btn-link " asp-area="Identity" asp-page="/Account/Login"><b><i class="fas fa-sign-in-alt"></i>Login</b></a>
         </li>
     }
-</ul>
-@*</div>*@
+
+
 
 

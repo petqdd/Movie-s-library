@@ -134,9 +134,6 @@
     <Content Update="wwwroot\favicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\img\category.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\img\imdbicon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
