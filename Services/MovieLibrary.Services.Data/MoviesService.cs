@@ -386,9 +386,21 @@
 
         public int GetMoviesCountInCategory(string category)
         {
-            int count = this.moviesCategoriesRepository.AllAsNoTracking()
-                    .Where(x => x.Category.Name == category)
-                    .Count();
+            int count = 0;
+            if (category == "all")
+            {
+                count = this.moviesCategoriesRepository
+                            .AllAsNoTracking()
+                            .Count();
+            }
+            else
+            {
+                count = this.moviesCategoriesRepository
+                            .AllAsNoTracking()
+                            .Where(x => x.Category.Name == category)
+                            .Count();
+            }
+
             return count;
         }
 

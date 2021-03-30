@@ -4,32 +4,36 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    using MovieLibrary.Data;
+    using MovieLibrary.Data.Common.Repositories;
+    using MovieLibrary.Data.Models;
     using MovieLibrary.Web.ViewModels.Categories;
     using MovieLibrary.Web.Views.ViewModels;
 
     [ViewComponent(Name = "CategoriesOfMovie")]
     public class CategoriesOfMovieViewComponent : ViewComponent
     {
-        private readonly ApplicationDbContext db;
+        private readonly IDeletableEntityRepository<Category> categoriesRepository;
 
-        public CategoriesOfMovieViewComponent(ApplicationDbContext db)
+        public CategoriesOfMovieViewComponent(IDeletableEntityRepository<Category> categoriesRepository)
         {
-            this.db = db;
+            this.categoriesRepository = categoriesRepository;
         }
 
         public IViewComponentResult Invoke()
         {
             var viewModel = new CategoriesOfMovieViewModel
             {
-                CategoriesMovies = this.db.Categories
-                               .Select(x => new OutputCategoriesViewModel
-                               {
-                                   Name = x.Name,
-                                   MoviesCount = x.Movies.Count,
-                               })
-                               .ToList(),
-                AllMoviesCount = this.db.Movies.Count(),
+                CategoriesMovies = this.categoriesRepository
+                                       .AllAsNoTracking()
+                                       .Select(x => new OutputCategoriesViewModel
+                                       {
+                                           Name = x.Name,
+                                           MoviesCount = x.Movies.Count,
+                                       })
+                                       .ToList(),
+                AllMoviesCount = this.categoriesRepository
+                                     .AllAsNoTracking()
+                                     .Count(),
             };
             return this.View(viewModel);
         }

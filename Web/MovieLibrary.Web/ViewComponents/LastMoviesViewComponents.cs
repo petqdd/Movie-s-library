@@ -4,34 +4,36 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    using MovieLibrary.Data;
+    using MovieLibrary.Data.Common.Repositories;
+    using MovieLibrary.Data.Models;
     using MovieLibrary.Web.ViewModels.Movies;
     using MovieLibrary.Web.Views.ViewModels;
 
     public class LastMoviesViewComponents : ViewComponent
     {
-        private readonly ApplicationDbContext db;
+        private readonly IDeletableEntityRepository<Movie> moviesRepository;
 
-        public LastMoviesViewComponents(ApplicationDbContext db)
+        public LastMoviesViewComponents(IDeletableEntityRepository<Movie> moviesRepository)
         {
-            this.db = db;
+            this.moviesRepository = moviesRepository;
         }
 
         public IViewComponentResult Invoke()
         {
             var viewModel = new LastMoviesViewModel
             {
-                Movies = this.db.Movies
-                                .Select(x => new OutputViewComponentViewModel
-                                {
-                                    Id = x.Id,
-                                    Name = x.Name,
-                                    Year = x.Year,
-                                    CreatedDate = x.CreatedOn,
-                                })
-                                .OrderByDescending(x => x.CreatedDate)
-                                .Take(15)
-                                .ToList(),
+                Movies = this.moviesRepository
+                             .AllAsNoTracking()
+                             .Select(x => new OutputViewComponentViewModel
+                             {
+                                 Id = x.Id,
+                                 Name = x.Name,
+                                 Year = x.Year,
+                                 CreatedDate = x.CreatedOn,
+                             })
+                             .OrderByDescending(x => x.CreatedDate)
+                             .Take(15)
+                             .ToList(),
             };
             return this.View(viewModel);
         }
