@@ -13,10 +13,12 @@
     public class CategoriesOfMovieViewComponent : ViewComponent
     {
         private readonly IDeletableEntityRepository<Category> categoriesRepository;
+        private readonly IDeletableEntityRepository<Movie> moviesRepository;
 
-        public CategoriesOfMovieViewComponent(IDeletableEntityRepository<Category> categoriesRepository)
+        public CategoriesOfMovieViewComponent(IDeletableEntityRepository<Category> categoriesRepository, IDeletableEntityRepository<Movie> moviesRepository)
         {
             this.categoriesRepository = categoriesRepository;
+            this.moviesRepository = moviesRepository;
         }
 
         public IViewComponentResult Invoke()
@@ -31,7 +33,7 @@
                                            MoviesCount = x.Movies.Count,
                                        })
                                        .ToList(),
-                AllMoviesCount = this.categoriesRepository
+                AllMoviesCount = this.moviesRepository
                                      .AllAsNoTracking()
                                      .Count(),
             };

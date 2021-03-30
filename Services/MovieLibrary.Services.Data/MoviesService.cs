@@ -350,38 +350,41 @@
 
         public ICollection<OutputMovieViewModel> GetAllMoviesInCategory(string category, int page, int itemPerPage)
         {
-            var movies = this.moviesRepository
-                             .AllAsNoTracking()
-                             .Where(x => x.Categories.Select(x => x.Category.Name).Contains(category))
-                             .OrderByDescending(x => x.Id)
-                             .Skip((page - 1) * itemPerPage)
-                             .Take(itemPerPage)
-                             .Select(x => new OutputMovieViewModel
-                             {
-                                 Id = x.Id,
-                                 Name = x.Name,
-                                 Year = x.Year,
-                                 PosterPath = x.PosterPath,
-                             })
-                             .ToList();
             if (category == "all")
             {
-                movies = this.moviesRepository
-                             .AllAsNoTracking()
-                             .OrderByDescending(x => x.Id)
-                             .Skip((page - 1) * itemPerPage)
-                             .Take(itemPerPage)
-                             .Select(x => new OutputMovieViewModel
-                             {
-                                 Id = x.Id,
-                                 Name = x.Name,
-                                 Year = x.Year,
-                                 PosterPath = x.PosterPath,
-                             })
-                             .ToList();
+                var movies = this.moviesRepository
+                                 .AllAsNoTracking()
+                                 .OrderByDescending(x => x.Id)
+                                 .Skip((page - 1) * itemPerPage)
+                                 .Take(itemPerPage)
+                                 .Select(x => new OutputMovieViewModel
+                                 {
+                                     Id = x.Id,
+                                     Name = x.Name,
+                                     Year = x.Year,
+                                     PosterPath = x.PosterPath,
+                                 })
+                                 .ToList();
+                return movies;
             }
-
-            return movies;
+            else
+            {
+                var movies = this.moviesRepository
+                                 .AllAsNoTracking()
+                                 .Where(x => x.Categories.Select(x => x.Category.Name).Contains(category))
+                                 .OrderByDescending(x => x.Id)
+                                 .Skip((page - 1) * itemPerPage)
+                                 .Take(itemPerPage)
+                                 .Select(x => new OutputMovieViewModel
+                                 {
+                                     Id = x.Id,
+                                     Name = x.Name,
+                                     Year = x.Year,
+                                     PosterPath = x.PosterPath,
+                                 })
+                                 .ToList();
+                return movies;
+            }
         }
 
         public int GetMoviesCountInCategory(string category)
@@ -389,7 +392,7 @@
             int count = 0;
             if (category == "all")
             {
-                count = this.moviesCategoriesRepository
+                count = this.moviesRepository
                             .AllAsNoTracking()
                             .Count();
             }
