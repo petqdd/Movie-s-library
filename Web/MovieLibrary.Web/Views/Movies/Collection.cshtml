@@ -21,12 +21,13 @@
         <div class="row gx-5 justify-content-start">
             @foreach (var movie in Model.Movies)
             {
-               <div class="card-group p-2">
+                <div class="card-group p-2">
                     <div class="card" id="cardMovie">
                         <div class="img-fluid ">
                             <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">
                                 <img class="card-img-top" src=@movie.PosterPath alt="Film image" id="cardImage">
                             </a>
+                            <a id="removeButton" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-icon rounded-pill" data-toggle="tooltip" data-placement="top" title="Remove movie"><i class="far fa-trash-alt"></i></a>
                         </div>
                         <div class="card-body text-white" id="movieCardBody">
                             <p class="card-text">
@@ -34,7 +35,23 @@
                             </p>
                         </div>
                     </div>
-                </div> 
+                </div>
+                <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <i class="fas fa-trash-alt"></i>
+                            </div>
+                            <div class="modal-body">
+                                Do you want to remove movie from your collection?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default rounded-pill" data-dismiss="modal">Cancel</button>
+                                <a asp-controller="Movies" asp-action="RemoveFromCollection" asp-route-id="@movie.Id" type="button" class="btn btn-danger btn-icon rounded-pill">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
         </div>
         <partial name="_PagingPartialInCollection" model="@Model" />

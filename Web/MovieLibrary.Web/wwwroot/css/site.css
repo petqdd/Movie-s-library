@@ -241,6 +241,10 @@ hr {
     position: relative;
 }
 
+#detailEditButton {
+    position: relative;
+}
+
 #poster {
     width: 100%;
     border-style: solid;
@@ -398,6 +402,24 @@ nav a {
     bottom: 5px;
     left: 5px;
     background-color: #1b6ec2;
+    color: white;
+    font-size: 16px;
+}
+
+#collectButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: firebrick;
+    color: white;
+    font-size: 16px;
+}
+
+#removeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: firebrick;
     color: white;
     font-size: 16px;
 }
