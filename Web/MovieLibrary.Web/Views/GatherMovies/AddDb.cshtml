@@ -1,0 +1,44 @@
+﻿@model MovieLibrary.Web.ViewModels.Movies.InputMovieForDbViewModel
+@{ this.ViewData["Title"] = "Add new movie in Db";
+}
+<div class="container text-center">
+    <fieldset class="border border-white">
+        <legend style="width:auto;padding:10px;">
+            @this.ViewData["Title"]
+        </legend>
+        <form class="form-horizontal" method="post">
+            <div id="IdsContainer">
+                <label asp-for="MovieIds">Add movie id from Imdb</label>
+                <a class="btn btn-success" onclick="AddMoreIds()">+</a>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" id="submit" class="btn btn-primary rounded-pill">Submit</button>
+                    <a class="btn btn-primary rounded-pill" asp-controller="Movies" asp-action="All" role="button">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>
+@*<div class="text-center">
+        <a class="button" asp-area="" asp-controller="Home" asp-action="ScraperDb">Add Data</a>
+    </div>*@
+@section Scripts {
+    <script>
+        var idIndex = 0;
+        function AddMoreIds() {
+            $("#IdsContainer").
+                append("<div class='row'><label class='col-form-label col-sm-2'>Id:</label><div class='col-sm-3'><input class='form-control' type='text' name='MovieIds[" + idIndex + "]' id='id' placeholder='Id...'></div></div>");
+            idIndex++;
+        }
+    </script>
+}
+
+@section Path{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Movies" asp-action="All">Movies</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add New Movie in Database</li>
+    </ol>
+}
