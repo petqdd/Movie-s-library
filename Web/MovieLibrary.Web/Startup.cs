@@ -51,7 +51,11 @@
                         options.CheckConsentNeeded = context => true;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
-
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "545061293561612";
+                options.AppSecret = "2cf52a04e4eec510e80d99a38cf26ef0";
+                });
             services.AddSignalR();
             services.AddControllersWithViews(
                 options =>
