@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace MovieLibrary.Services.Models
+﻿namespace MovieLibrary.Services.Models
 {
+    using System.Collections.Generic;
+
     public class MovieDto
     {
         public MovieDto()

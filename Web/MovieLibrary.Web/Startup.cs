@@ -20,13 +20,15 @@
     using MovieLibrary.Data.Repositories;
     using MovieLibrary.Data.Seeding;
     using MovieLibrary.Services;
+    using MovieLibrary.Services.Common;
     using MovieLibrary.Services.Data;
     using MovieLibrary.Services.Mapping;
     using MovieLibrary.Services.Messaging;
+    using MovieLibrary.Services.Models;
     using MovieLibrary.Web.Hubs;
     using MovieLibrary.Web.Services;
     using MovieLibrary.Web.ViewModels;
-
+    
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -69,6 +71,8 @@
                 options.HeaderName = "X-CSRF-TOKEN";
             });
             services.AddSingleton(this.configuration);
+            services.Configure<ReCaptchaSettings>(this.configuration.GetSection("GooglereCAPTCHA"));
+            services.AddTransient<ReCaptchaService>();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
