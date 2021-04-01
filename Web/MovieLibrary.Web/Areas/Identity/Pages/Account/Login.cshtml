@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-md-4">
         <section>
-            <form id="account" method="post">
+            <form asp-controller="Home" asp-action="Feedback" id="account" method="post">
                 <h4>Use a local account to log in.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -26,9 +26,9 @@
                     <input asp-for="Input.Password" class="form-control" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <input type="hidden" asp-for="Input.Token" />
-                @*<div class="g-recaptcha" data-sitekey="6Lf1uZcaAAAAAHmKdDRPX5Sasu9KXvFLfHx-MaHe"></div>
-                <br />*@
+                @*<input type="hidden" asp-for="Input.Token" />*@
+                <div class="g-recaptcha" data-sitekey="@ViewData["ReCaptchaKey"]"></div>
+                <br />
                 <div class="form-group">
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe">
@@ -88,6 +88,8 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.ReCAPTCHA_Site_Key"></script>
     <script>
             grecaptcha.ready(function() {
