@@ -55,8 +55,7 @@
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-                //[Required]
-            //public string Token { get; set; }
+            public string Token { get; set; }
 
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }

@@ -31,8 +31,6 @@
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
                         <input type="hidden" asp-for="Input.Token" />
-                        @*<div class="g-recaptcha" data-sitekey="6Lf1uZcaAAAAAHmKdDRPX5Sasu9KXvFLfHx-MaHe"></div>
-                            <br />*@
                         <div class="form-group">
                             <div class="checkbox">
                                 <label asp-for="Input.RememberMe">
@@ -93,8 +91,6 @@
 </div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
     <script src="https://www.google.com/recaptcha/api.js?render=@GoogleReCAPTCHA.Value.ReCAPTCHA_Site_Key"></script>
     <script>
             grecaptcha.ready(function() {
