@@ -6,7 +6,7 @@
 @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
-            <a asp-controller="Movies" asp-action="Top15Movies" class="btn" type="button" id="top15Button">
+            <a asp-area="" asp-controller="Movies" asp-action="Top15Movies" class="btn" type="button" id="top15Button">
                 <b> <i class="fas fa-film"></i> Top15 IMDb</b>
             </a>
         </li>
@@ -22,7 +22,7 @@
             </ul>
         </li>
         <li>
-            <form class="d-flex" asp-controller="Search" asp-action="Search" method="get">
+            <form class="d-flex" asp-area="" asp-controller="Search" asp-action="Search" method="get">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn=info" type="submit" id="searchButton"><i class="fas fa-search"></i></button>
             </form>
@@ -37,28 +37,31 @@
                 </button>
                 <ul class="dropdown-menu " id="categoryMenu">
                     <li>
-                        <a class="nav-link " asp-controller="Movies" asp-action="Add" title="AddMovie"><b>Add Movie</b></a>
+                        <a class="nav-link " asp-area="" asp-controller="Movies" asp-action="Add" title="AddMovie"><b>Add Movie</b></a>
                     </li>
                     <li>
-                        <a class="nav-link" asp-controller="Categories" asp-action="Add" title="AddCategory"><b>Add Category</b></a>
+                        <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="Add" title="AddCategory"><b>Add Category</b></a>
                     </li>
                     <li>
-                        <a class="nav-link " asp-controller="Artists" asp-action="Add" title="AddArtist"><b>Add Artist</b></a>
+                        <a class="nav-link " asp-area="" asp-controller="Artists" asp-action="Add" title="AddArtist"><b>Add Artist</b></a>
                     </li>
                     <li>
-                        <a class="nav-link" asp-controller="Movies" asp-action="All" title="AllMovie"><b>View All Movies</b></a>
+                        <a class="nav-link" asp-area="" asp-controller="Movies" asp-action="All" title="AllMovie"><b>View All Movies</b></a>
                     </li>
                     <li>
-                        <a class="nav-link" asp-controller="Categories" asp-action="All" title="AllCategory"><b>View All Categories</b></a>
+                        <a class="nav-link" asp-area="" asp-controller="Categories" asp-action="All" title="AllCategory"><b>View All Categories</b></a>
                     </li>
                     <li>
-                        <a class="nav-link" asp-controller="Artists" asp-action="All" title="AllArtist"><b>View All Artists</b></a>
+                        <a class="nav-link" asp-area="" asp-controller="Artists" asp-action="All" title="AllArtist"><b>View All Artists</b></a>
                     </li>
                     <li>
-                        <a class="nav-link " asp-controller="Comments" asp-action="All" title="AllArtist"><b>View All Comments</b></a>
+                        <a class="nav-link " asp-area="" asp-controller="Comments" asp-action="All" title="AllArtist"><b>View All Comments</b></a>
                     </li>
                     <li>
-                        <a class="nav-link " asp-controller="GatherMovies" asp-action="AddDb" title="AddDb"><b>AddDb</b></a>
+                        <a class="nav-link " asp-area="" asp-controller="GatherMovies" asp-action="AddDb" title="AddDb"><b>AddDb</b></a>
+                    </li>
+                    <li>
+                        <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><b>Settings</b></a>
                     </li>
                 </ul>
             </li>
