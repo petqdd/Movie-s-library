@@ -6,9 +6,9 @@
     {
         public bool Success { get; set; }
 
-        public double Score { get; set; }
+        //public double Score { get; set; }
 
-        public string Action { get; set; }
+        //public string Action { get; set; }
 
         public DateTime ChallangeTimeStamp { get; set; }
 
