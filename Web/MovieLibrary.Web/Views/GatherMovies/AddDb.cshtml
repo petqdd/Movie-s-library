@@ -8,9 +8,23 @@
         </legend>
         <form class="form-horizontal" method="post">
             <div id="IdsContainer">
-                <label asp-for="MovieIds">Add movie id from Imdb</label>
-                <a class="btn btn-success" onclick="AddMoreIds()">+</a>
+            <label asp-for="MovieIds">Add movie id from Imdb</label>
+            <a class="btn btn-success" onclick="AddMoreIds()">+</a>
+        </div>
+            @*<div class="mb-3 row">
+                <label asp-for="StartId" class="col-form-label col-sm-2">StartId:</label>
+                <div class="col-sm-8">
+                    <input asp-for="StartId" type="text" class="form-control" id="startId" placeholder="Enter start Id">
+                    <span asp-validation-for="StartId" class="text-danger"></span>
+                </div>
             </div>
+            <div class="mb-3 row">
+                <label asp-for="EndId" class="col-form-label col-sm-2">EndId:</label>
+                <div class="col-sm-8">
+                    <input asp-for="EndId" class="form-control" id="endId" placeholder="Enter end Id">
+                    <span asp-validation-for="EndId" class="text-danger"></span>
+                </div>
+            </div>*@
             <br />
             <div class="form-group">
                 <div class="d-flex justify-content-center">
@@ -21,9 +35,7 @@
         </form>
     </fieldset>
 </div>
-@*<div class="text-center">
-        <a class="button" asp-area="" asp-controller="Home" asp-action="ScraperDb">Add Data</a>
-    </div>*@
+
 @section Scripts {
     <script>
         var idIndex = 0;

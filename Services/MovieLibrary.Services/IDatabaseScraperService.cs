@@ -4,7 +4,7 @@
 
     using MovieLibrary.Web.ViewModels.Movies;
 
-    public interface IImdbScraperService
+    public interface IDatabaseScraperService
     {
         Task PopulateDbWithMovies(InputMovieForDbViewModel model);
     }

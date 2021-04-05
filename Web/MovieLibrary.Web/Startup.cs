@@ -88,7 +88,7 @@
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IRatingsService, RatingsService>();
             services.AddTransient<IArtistService, ArtistService>();
-            services.AddTransient<IImdbScraperService, ImdbScraperService>();
+            services.AddTransient<IDatabaseScraperService, DatabaseScraperService>();
             services.AddTransient<ISearchService, SearchService>();
         }
 
