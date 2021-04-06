@@ -79,7 +79,7 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
-            services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration.GetSection("SendGridKey").Value));
 
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMoviesService, MoviesService>();
@@ -99,16 +99,16 @@
                                  .CreateScope()
                                  .ServiceProvider
                                  .GetRequiredService<UserManager<ApplicationUser>>();
-            if (!userManager.Users.Any(x => x.UserName == "admin@abv.bg"))
+            if (!userManager.Users.Any(x => x.UserName == this.configuration["AdminCredentials:UserName"]))
             {
                 var newUser = new ApplicationUser
                 {
-                    UserName = "admin@abv.bg",
-                    Email = "admin@abv.bg",
+                    UserName = this.configuration["AdminCredentials:UserName"],
+                    Email = this.configuration["AdminCredentials:Email"],
                     EmailConfirmed = true,
                 };
 
-                userManager.CreateAsync(newUser, "adminn").GetAwaiter().GetResult();
+                userManager.CreateAsync(newUser, this.configuration["AdminCredentials:Password"]).GetAwaiter().GetResult();
                 userManager.AddToRoleAsync(newUser, GlobalConstants.AdministratorRoleName);
             }
 

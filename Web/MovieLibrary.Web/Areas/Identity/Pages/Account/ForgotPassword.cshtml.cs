@@ -10,6 +10,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
+    using Microsoft.Extensions.Configuration;
     using MovieLibrary.Data.Models;
     using MovieLibrary.Services.Messaging;
 
@@ -17,11 +18,16 @@
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IConfiguration configuration;
         private readonly SendGridEmailSender emailSender;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(
+            UserManager<ApplicationUser> userManager,
+            IEmailSender emailSender,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
+            this.configuration = configuration;
             this.emailSender = (SendGridEmailSender)emailSender;
         }
 
@@ -57,11 +63,11 @@
                     protocol: this.Request.Scheme);
 
                 await this.emailSender.SendEmailAsync(
-                    "movieslibrary777@gmail.com",
-                    "Admin",
-                    this.Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                   this.configuration["EmailSender:Email"],
+                   this.configuration["EmailSender:Name"],
+                   this.Input.Email,
+                   "Reset Password",
+                   $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                 return this.RedirectToPage("./ForgotPasswordConfirmation");
             }
