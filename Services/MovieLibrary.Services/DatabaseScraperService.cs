@@ -295,7 +295,7 @@
                 }
             }
 
-            string urlAddressForDirectorAndArtists = $"https://api.themoviedb.org/3/movie/{id}/credits?api_key=4377b7bce242b8c362afce3ecebe1306";
+            string urlAddressForDirectorAndArtists = $"https://api.themoviedb.org/3/movie/{id}/credits?api_key=API key Here";
             request = WebRequest.Create(urlAddressForDirectorAndArtists);
             response = request.GetResponse();
             using (Stream dataStream = response.GetResponseStream())
